@@ -15,7 +15,7 @@ import logging
 import requests
 import json
 
-from ..xs1 import api_constants
+from . import api_constants
 from .device.actuator.base import XS1Actuator
 from .device.actuator.switch import XS1Switch
 from .device.sensor.base import XS1Sensor

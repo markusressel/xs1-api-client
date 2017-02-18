@@ -1,5 +1,5 @@
 from .base import XS1Actuator
-from ....xs1 import api_constants
+from ... import api_constants
 
 class XS1Switch(XS1Actuator):
     """

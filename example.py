@@ -1,5 +1,5 @@
-from mr.xs1 import api as xs1api
-from mr.xs1 import api_constants
+from xs1_api_client import api as xs1api
+from xs1_api_client import api_constants
 
 api = xs1api.XS1() # Create an api object
 api.initialize('192.168.2.75', None, None) # initialize connection info (globally)
@@ -12,14 +12,16 @@ actuators = api.get_all_actuators()
 
 # print their name and current value
 for actuator in actuators:
-    print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.value()) + " " + str(actuator.unit()) + ")")
+    print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.value()) +  ")")
+    ##" " + str(actuator.unit()) +
 
 # receive a list of all sensors
 sensors = api.get_all_sensors()
 
 # print their name and current value
 for sensor in sensors:
-    print("Sensor " + str(sensor.id()) + ": " + sensor.name() + " (" + str(sensor.value()) + " " + str(sensor.unit()) + ")")
+    print("Sensor " + str(sensor.id()) + ": " + sensor.name() + " (" + str(sensor.value())  + ")")
+    ## + " " + str(sensor.unit())
 
 # set a new value for an actuator
 changing_actuator = actuators[0] # pick one from the retreived list

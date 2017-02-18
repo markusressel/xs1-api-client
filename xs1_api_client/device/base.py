@@ -1,4 +1,4 @@
-from ...xs1 import api_constants
+from .. import api_constants
 
 class XS1Device(object):
     """
