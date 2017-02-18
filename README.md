@@ -1,4 +1,4 @@
-# XS1-API
+# mr.xs1
 A python API for the ezControl XS1 Gateway.
 
 # How to use
