@@ -10,7 +10,7 @@ For a basic example have a look at the ```example.py``` file.
 If you need more info have a look at the documentation which should help.
 
 # License
-    XS1-API by Markus Ressel
+    xs1_api_client by Markus Ressel
     Copyright (C) 2017  Markus Ressel
 
     This program is free software: you can redistribute it and/or modify
