@@ -1,5 +1,5 @@
-# mr.xs1
-A python API for the ezControl XS1 Gateway.
+# xs1_api_client
+A python library for accessing the EZcontrol® XS1 Gateway API
 
 # How to use
 ## Installation
