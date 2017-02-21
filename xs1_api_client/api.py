@@ -31,7 +31,11 @@ class XS1:
     """This class is the main api interface that handles all communication with the XS1 gateway.
     """
 
-    def __init__(self, host, user, password):
+    def __init__(self):
+        """Creates a new api object"""
+
+    @staticmethod
+    def set_connection_info(host, user, password):
         """Initializes api and connection info.
 
         Keyword arguments:
@@ -46,9 +50,6 @@ class XS1:
         HOST = str(host)
         USER = str(user)
         PASSWORD = str(password)
-
-    def s(self):
-        pass
 
     @staticmethod
     def send_request(command, *parameters):
