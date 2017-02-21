@@ -8,7 +8,7 @@ setup(
     author='Markus Ressel',
     author_email='mail@markusressel.de',
     url='https://www.markusressel.de',
-    packages=['xs1_api_client']
+    packages=['xs1_api_client'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',

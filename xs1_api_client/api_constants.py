@@ -2,7 +2,7 @@
 XS1 HTTP Web API constants used to create GET request URLs and parse the JSON answer.
 """
 
-# URL Parameter
+"""URL Parameter"""
 URL_PARAM_USER = 'user='
 URL_PARAM_PASSWORD = 'pwd='
 URL_PARAM_COMMAND = 'cmd='
@@ -10,7 +10,7 @@ URL_PARAM_NUMBER = 'number='
 URL_PARAM_VALUE = 'value='
 URL_PARAM_FUNCTION = 'function='
 
-### XS1 Web API (HTTP) commands
+"""XS1 Web API (HTTP) commands"""
 COMMAND_GET_LIST_ACTUATORS = 'get_list_actuators'
 COMMAND_GET_LIST_SENSORS = 'get_list_sensors'
 COMMAND_GET_STATE_ACTUATOR = 'get_state_actuator'
@@ -19,7 +19,7 @@ COMMAND_GET_STATE_SENSOR = 'get_state_sensor'
 COMMAND_SET_STATE_ACTUATOR = 'set_state_actuator'
 COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
 
-### JSON API nodes
+"""JSON API nodes"""
 NODE_ACTUATOR = 'actuator'
 NODE_SENSOR = 'sensor'
 
@@ -39,7 +39,7 @@ VALUE_DISABLED = 'disabled'
 
 UNIT_BOOLEAN = 'boolean'
 
-### Device types
+"""Device types"""
 # actuator
 ACTUATOR_TYPE_SWITCH = 'switch'
 ACTUATOR_TYPE_DIMMER = 'dimmer'
