@@ -3,16 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-$project
-========
+xs1_api_client
+==============
 
-$project is a simple library for accessing actuators and sensors of the EZcontrol XS1 gateway.
-
-Look how easy it is to use:
-
-    import $project
-    # Get your stuff done
-    project.do_stuff()
+xs1_api_client is a simple library for accessing and modifying actuator and sensor data of the EZcontrol XS1 gateway.
 
 .. toctree::
    :maxdepth: 2
