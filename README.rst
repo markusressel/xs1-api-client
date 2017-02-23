@@ -1,7 +1,7 @@
 xs1\_api\_client
 ================
 
-A python library for accessing the EZcontrol® XS1 Gateway API
+A python library for accessing actuator and sensor data on the the EZcontrol® XS1 Gateway using their HTTP API.
 
 How to use
 ==========
@@ -15,8 +15,8 @@ coming weeks.
 Usage
 -----
 
-For a basic example have a look at the ``example.py`` file.
-If you need more info have a look at the `documentation <http://xs1-api-client.readthedocs.io/>`_ at which should help.
+For a basic example have a look at the `example.py <https://github.com/markusressel/xs1_api_client/blob/master/example.py>`_ file.
+If you need more info have a look at the `documentation <http://xs1-api-client.readthedocs.io/>`_ which should help.
 
 License
 =======

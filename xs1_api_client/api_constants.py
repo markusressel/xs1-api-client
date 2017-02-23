@@ -11,6 +11,8 @@ URL_PARAM_VALUE = 'value='
 URL_PARAM_FUNCTION = 'function='
 
 """XS1 Web API (HTTP) commands"""
+COMMAND_GET_PROTOCOL_INFO = 'get_protocol_info'
+COMMAND_GET_CONFIG_INFO = 'get_config_info'
 COMMAND_GET_LIST_ACTUATORS = 'get_list_actuators'
 COMMAND_GET_LIST_SENSORS = 'get_list_sensors'
 COMMAND_GET_STATE_ACTUATOR = 'get_state_actuator'
@@ -20,8 +22,25 @@ COMMAND_SET_STATE_ACTUATOR = 'set_state_actuator'
 COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
 
 """JSON API nodes"""
+NODE_VERSION = 'version'
+NODE_INFO = 'info'
 NODE_ACTUATOR = 'actuator'
 NODE_SENSOR = 'sensor'
+
+# device info nodes
+"""Hostname"""
+NODE_DEVICE_NAME = 'devicename'
+"""Hardware revision"""
+NODE_DEVICE_HARDWARE_VERSION = 'hardware'
+"""Bootloader version number"""
+NODE_DEVICE_BOOTLOADER_VERSION = 'bootloader'
+"""Firmware version number"""
+NODE_DEVICE_FIRMWARE_VERSION = 'firmware'
+"""Uptime in seconds"""
+NODE_DEVICE_UPTIME = 'uptime'
+"""MAC address"""
+NODE_DEVICE_MAC = 'mac'
+
 
 # inner nodes
 NODE_PARAM_ID = 'id'
@@ -33,6 +52,7 @@ NODE_PARAM_NEW_VALUE = 'newvalue'
 NODE_PARAM_UTIME = 'utime'
 NODE_PARAM_UNIT = 'unit'
 NODE_PARAM_FUNCTION = 'function'
+NODE_PARAM_DESCRIPTION = 'dsc'
 
 # node values
 VALUE_DISABLED = 'disabled'

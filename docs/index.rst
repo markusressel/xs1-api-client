@@ -5,16 +5,10 @@
 
 .. include:: ../README.rst
 
+Content:
+========
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-       /source/xs1_api_client
-       /source/modules
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+          source/xs1_api_client

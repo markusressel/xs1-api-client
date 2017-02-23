@@ -39,12 +39,16 @@ class XS1:
         :param password: password for authentication
         """
         if not host and not user and not password:
-            self.use_global_config = True
+            self._use_global_config = True
         else:
-            self.use_global_config = False
-            self.host = host
-            self.user = user
-            self.password = password
+            self._use_global_config = False
+            self._host = host
+            self._user = user
+            self._password = password
+
+        self._config_info = None
+
+        self.update_config_info()
 
     @staticmethod
     def set_global_connection_info(host, user, password):
@@ -75,16 +79,19 @@ class XS1:
         :param user: username for authentication
         :param password: password for authentication
         """
-        self.use_global_config = False
-        self.host = host
-        self.user = user
-        self.password = password
+        self._use_global_config = False
+        self._host = host
+        self._user = user
+        self._password = password
+
+        self.update_config_info()
 
     def use_global_connection_info(self):
         """
         Enables the use of global configuration data
         """
-        self.use_global_config = True
+        self._use_global_config = True
+        self.update_config_info()  # update device info
 
     def send_request(self, command, *parameters):
         """
@@ -96,14 +103,14 @@ class XS1:
         """
 
         # decide if global or local configuration should be used
-        if self.use_global_config:
+        if self._use_global_config:
             host = HOST
             user = USER
             password = PASSWORD
         else:
-            host = self.host
-            user = self.user
-            password = self.password
+            host = self._host
+            user = self._user
+            password = self._password
 
         # create request url
         request_url = 'http://' + host + '/control?callback=callback'
@@ -124,6 +131,58 @@ class XS1:
                         response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
 
         return json.loads(response_text)  # convert to json object
+
+    def get_protocol_info(self):
+        """
+        Retrieves the protocol version that is used by the gateway
+
+        :return: protocol version number
+        """
+
+        response = self.send_request(self, api_constants.COMMAND_GET_PROTOCOL_INFO)
+        return response[api_constants.NODE_VERSION]
+
+    def update_config_info(self):
+        """
+        Retrieves gateway specific (and immutable) configuration data
+        """
+        self._config_info = self.send_request(self, api_constants.COMMAND_GET_CONFIG_INFO)
+
+    def get_gateway_name(self):
+        """
+        :return: the hostname of the gateway
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_NAME]
+
+    def get_gateway_hardware_version(self):
+        """
+        :return: the hardware version number of the gateway
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_HARDWARE_VERSION]
+
+    def get_gateway_bootloader_version(self):
+        """
+        :return: the bootloader version number of the gateway
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_BOOTLOADER_VERSION]
+
+    def get_gateway_firmware_version(self):
+        """
+        :return: the firmware version number of the gateway
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_FIRMWARE_VERSION]
+
+    def get_gateway_firmware_uptime(self):
+        """
+        :return: the uptime of the gateway in seconds
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_UPTIME]
+
+    def get_gateway_mac(self):
+        """
+        :return: the mac address of the gateway
+        """
+        return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_MAC]
 
     def get_all_actuators(self):
         """
