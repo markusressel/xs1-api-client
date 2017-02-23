@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 """
+This is the main xs1_api_client api which contains the XS1 object to interact with the gateway.
 
-Example usage:
-    import mr.xs1
-    xs1 = XS1()
-    xs1.initialize('192.168.1.10', 'admin', 'secret') # one time init
-    xs1.get_all_actuators()
-
+Example usage can be found in the example.py file
 """
 
+import json
 import logging
 
-# networking
 import requests
-import json
 
 from . import api_constants
 from .device.actuator.base import XS1Actuator
@@ -22,26 +17,43 @@ from .device.sensor.base import XS1Sensor
 
 _LOGGER = logging.getLogger(__name__)
 
+# global config data
 HOST = ''
 USER = ''
 PASSWORD = ''
 
 
 class XS1:
-    """This class is the main api interface that handles all communication with the XS1 gateway.
+    """
+    This class is the main api interface that handles all communication with the XS1 gateway.
     """
 
-    def __init__(self):
-        """Creates a new api object"""
+    def __init__(self, host=None, user=None, password=None):
+        """
+        Creates a new api object.
+        If no arguments are passed the global (shared) connection configuration will be used.
+        Otherwise the connection info will only be used for this XS1 instance.
+        """
+        if not host and not user and not password:
+            self.use_global_config = True
+        else:
+            self.use_global_config = False
+            self.host = host
+            self.user = user
+            self.password = password
 
     @staticmethod
-    def set_connection_info(host, user, password):
-        """Initializes api and connection info.
+    def set_global_connection_info(host, user, password):
+        """
+        Sets the global connection info.
+        This initialization is valid for all XS1 instances that do not have a specific connection configuration
+        upon instantiation or using the set_connection_info() method.
+        If you want a XS1 instance to use the global info instead of private use the use_global_connection_info() method.
 
-        Keyword arguments:
-        host -- host address the gateway can be found at
-        user -- username for authentication
-        password -- password for authentication
+        :param host: host address the gateway can be found at
+        :param user: username for authentication
+        :param password: password for authentication
+        :return:
         """
         global HOST
         global USER
@@ -51,19 +63,48 @@ class XS1:
         USER = str(user)
         PASSWORD = str(password)
 
-    @staticmethod
-    def send_request(command, *parameters):
+    def set_connection_info(self, host, user, password):
+        """
+        Sets private connection info for this XS1 instance.
+        This XS1 instance will also immediately use this connection info.
+
+        :param host: host address the gateway can be found at
+        :param user: username for authentication
+        :param password: password for authentication
+        """
+        self.use_global_config = False
+        self.host = host
+        self.user = user
+        self.password = password
+
+    def use_global_connection_info(self):
+        """
+        Enables the use of global configuration data
+        """
+        self.use_global_config = True
+
+    def send_request(self, command, *parameters):
         """Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
-        
+
         Keyword arguments:
         command -- command parameter for the URL
         parameters -- additional parameters needed for the specified command like 'number=3' (without any '&' symbol)
         """
 
+        # decide if global or local configuration should be used
+        if self.use_global_config:
+            host = HOST
+            user = USER
+            password = PASSWORD
+        else:
+            host = self.host
+            user = self.user
+            password = self.password
+
         # create request url
-        request_url = 'http://' + HOST + '/control?callback=callback'
-        if USER and PASSWORD:
-            request_url += '&' + api_constants.URL_PARAM_USER + USER + '&' + api_constants.URL_PARAM_PASSWORD + PASSWORD
+        request_url = 'http://' + host + '/control?callback=callback'
+        if user and password:
+            request_url += '&' + api_constants.URL_PARAM_USER + user + '&' + api_constants.URL_PARAM_PASSWORD + password
         request_url += '&' + api_constants.URL_PARAM_COMMAND + command
 
         # append any additional parameters
@@ -73,7 +114,7 @@ class XS1:
         _LOGGER.info("request_url: " + request_url)
 
         # make request
-        response = requests.get(request_url, auth=(USER, PASSWORD))
+        response = requests.get(request_url, auth=(user, password))
         response_text = response.text  # .encode('utf-8')
         response_text = response_text[
                         response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
@@ -119,7 +160,7 @@ class XS1:
     def get_state_actuator(self, actuator):
         """Refreshes the current value of the specified actuator.
         WARNING: this API is not very reliable, use subscribe instead
-        
+
         Key parameters:
         actuator -- actuator to write the updated state to
         """
@@ -133,7 +174,7 @@ class XS1:
     def get_state_sensor(self, sensor):
         """Refreshes the current value of the specified sensor.
         WARNING: this API is not very reliable, use subscribe instead
-        
+
         Key parameters:
         sensor -- sensor to write the updated state to
         """
@@ -146,7 +187,7 @@ class XS1:
 
     def call_actuator_function(self, actuator, function):
         """Excuted a function on the specified actuator.
-        
+
         Key parameters:
         actuator -- actuator to execute the function on
         function -- id of the function to execute
@@ -163,7 +204,7 @@ class XS1:
 
     def set_actuator_value(self, actuator, value):
         """Sets a new value for the specified actuator.
-        
+
         Key parameters:
         actuator -- actuator to set the new value on
         value -- the new value to set on the specified actuator
@@ -180,7 +221,7 @@ class XS1:
     def set_sensor_value(self, sensor, value):
         """Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
-        
+
         Key parameters:
         sensor -- sensor to set the new value on
         value -- the new value to set on the specified sensor

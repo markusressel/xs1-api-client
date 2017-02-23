@@ -1,11 +1,25 @@
 from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
 
-api = xs1api.XS1()  # Create an api object
-api.set_connection_info('192.168.2.75', None, None)  # set connection info (globally)
+# Create an api object with private configuration
+api = xs1api.XS1('192.168.2.33', None, None)
+
+# set global connection info
+# this configuration will not be used by the instance above!
+api.set_global_connection_info('192.168.2.75', None, None)
+
+# but it will be used on this instance
+global_api = xs1api.XS1()
+
+# but you can always force the use of the global config
+api.use_global_connection_info()
 
 # access api values (f.ex. for actuator or sensor type)
 print(api_constants.NODE_ACTUATOR)
+
+print(api_constants.ACTUATOR_TYPE_SWITCH)
+
+print(api_constants.UNIT_BOOLEAN)
 
 # receive a list of all actuators
 actuators = api.get_all_actuators()
@@ -24,8 +38,11 @@ for sensor in sensors:
     ## + " " + str(sensor.unit())
 
 # set a new value for an actuator
-changing_actuator = actuators[0]  # pick one from the retreived list
+changing_actuator = actuators[0]  # pick one from the received list
 print("Old value: " + str(changing_actuator.value()))  # print old value
-changing_actuator.set_value(0)  # use the object method to set a new value
-print("New value: " + str(
-    changing_actuator.value()))  # print the new value (will be updated with the response of the gateway)
+print("Old new_value: " + str(changing_actuator.new_value()))  # print old new_value
+changing_actuator.set_value(18.5)  # use the object method to set a new value
+print("Updated value: " + str(
+    changing_actuator.value()))  # print the updated value (will be updated with the response of the gateway)
+print("Updated new_value: " + str(
+    changing_actuator.new_value()))  # print the updated new_value

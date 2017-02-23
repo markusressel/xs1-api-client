@@ -27,7 +27,6 @@ class XS1Device(object):
 
     def id(self):
         """Returns the id of this device."""
-
         device_id = self.json_state.get(api_constants.NODE_PARAM_NUMBER)
         if device_id is None:
             device_id = self.json_state.get(api_constants.NODE_PARAM_ID)
@@ -35,22 +34,20 @@ class XS1Device(object):
 
     def type(self):
         """Returns the type of this device."""
-
         return self.json_state.get(api_constants.NODE_PARAM_TYPE)
 
     def name(self):
         """Returns the name of this device."""
-
         return self.json_state.get(api_constants.NODE_PARAM_NAME)
 
     def value(self):
         """Returns the current value of this device."""
-
         return self.json_state.get(api_constants.NODE_PARAM_VALUE)
 
     def new_value(self):
         """Returns the new value to set for this device.
-        If this value differs from the currrent value the gateway is still trying to update the value on the device. If it does not differ the value has already been set.
+        If this value differs from the currrent value the gateway is still trying to update the value on the device.
+        If it does not differ the value has already been set.
         """
         return self.json_state.get(api_constants.NODE_PARAM_NEW_VALUE)
 

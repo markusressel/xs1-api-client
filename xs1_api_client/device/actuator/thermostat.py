@@ -1,5 +1,4 @@
 from .base import XS1Actuator
-from ... import api_constants
 
 
 class XS1Thermostat(XS1Actuator):
@@ -10,8 +9,10 @@ class XS1Thermostat(XS1Actuator):
     def __init__(self, device_state_json, api_interface):
         super(XS1Actuator, self).__init__(device_state_json, api_interface)
 
-    def update(self):
-        self.api_interface.get_state_actuator(self)
+    def set_temperature(self, temp):
+        """
+        Sets the new target temperature of this thermostat
 
-    def set_value(self, value):
-        self.api_interface.set_actuator_value(self, value)
+        :param temp: double value
+        """
+        self.api_interface.set_actuator_value(self, temp)
