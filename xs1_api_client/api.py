@@ -175,7 +175,7 @@ class XS1:
         WARNING: this API is not very reliable, use subscribe instead
 
         :param actuator: actuator to write the updated state to
-        :return the passed in XS1Actuator object
+        :return: the passed in XS1Actuator object
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()))
@@ -190,7 +190,7 @@ class XS1:
         WARNING: this API is not very reliable, use subscribe instead
 
         :param sensor: sensor to write the updated state to
-        :return the passed in XS1Sensor object
+        :return: the passed in XS1Sensor object
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
                                      api_constants.URL_PARAM_NUMBER + str(sensor.id()))
