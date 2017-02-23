@@ -1,3 +1,10 @@
+"""
+This is an example of how to use this api.
+There are other methods besides the ones shown here. Have a look at the documentation at
+http://xs1-api-client.readthedocs.io/
+to get more info.
+"""
+
 from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
 

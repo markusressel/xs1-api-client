@@ -33,6 +33,10 @@ class XS1:
         Creates a new api object.
         If no arguments are passed the global (shared) connection configuration will be used.
         Otherwise the connection info will only be used for this XS1 instance.
+
+        :param host: host address of the gateway
+        :param user: username for authentication
+        :param password: password for authentication
         """
         if not host and not user and not password:
             self.use_global_config = True
@@ -53,7 +57,6 @@ class XS1:
         :param host: host address the gateway can be found at
         :param user: username for authentication
         :param password: password for authentication
-        :return:
         """
         global HOST
         global USER
@@ -84,11 +87,12 @@ class XS1:
         self.use_global_config = True
 
     def send_request(self, command, *parameters):
-        """Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
+        """
+        Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
 
-        Keyword arguments:
-        command -- command parameter for the URL
-        parameters -- additional parameters needed for the specified command like 'number=3' (without any '&' symbol)
+        :param command: command parameter for the URL (see api_constants)
+        :param parameters: additional parameters needed for the specified command like 'number=3' (without any '&' symbol)
+        :return: the api response as a json object
         """
 
         # decide if global or local configuration should be used
@@ -122,7 +126,11 @@ class XS1:
         return json.loads(response_text)  # convert to json object
 
     def get_all_actuators(self):
-        """Requests the list of actuators from the gateway."""
+        """
+        Requests the list of enabled actuators from the gateway.
+
+        :return: a list of XS1Actuator objects
+        """
 
         response = self.send_request(api_constants.COMMAND_GET_LIST_ACTUATORS)
 
@@ -143,7 +151,11 @@ class XS1:
         return actuators
 
     def get_all_sensors(self):
-        """Requests the list of sensors from the gateway."""
+        """
+        Requests the list of enabled sensors from the gateway.
+
+        :return: list of XS1Sensor objects
+        """
 
         response = self.send_request(api_constants.COMMAND_GET_LIST_SENSORS)
 
@@ -158,11 +170,12 @@ class XS1:
         return sensors
 
     def get_state_actuator(self, actuator):
-        """Refreshes the current value of the specified actuator.
+        """
+        Refreshes the current value of the specified actuator.
         WARNING: this API is not very reliable, use subscribe instead
 
-        Key parameters:
-        actuator -- actuator to write the updated state to
+        :param actuator: actuator to write the updated state to
+        :return the passed in XS1Actuator object
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()))
@@ -172,11 +185,12 @@ class XS1:
         return actuator
 
     def get_state_sensor(self, sensor):
-        """Refreshes the current value of the specified sensor.
+        """
+        Refreshes the current value of the specified sensor.
         WARNING: this API is not very reliable, use subscribe instead
 
-        Key parameters:
-        sensor -- sensor to write the updated state to
+        :param sensor: sensor to write the updated state to
+        :return the passed in XS1Sensor object
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
                                      api_constants.URL_PARAM_NUMBER + str(sensor.id()))
@@ -186,11 +200,12 @@ class XS1:
         return sensor
 
     def call_actuator_function(self, actuator, function):
-        """Excuted a function on the specified actuator.
+        """
+        Executes a function on the specified actuator and sets the response on the passed in actuator.
 
-        Key parameters:
-        actuator -- actuator to execute the function on
-        function -- id of the function to execute
+        :param actuator: actuator to execute the function on and set response value
+        :param function: id of the function to execute
+        :return: the passed in actuator
         """
 
         # TODO: check if function exists
@@ -203,11 +218,12 @@ class XS1:
         return actuator
 
     def set_actuator_value(self, actuator, value):
-        """Sets a new value for the specified actuator.
+        """
+        Sets a new value for the specified actuator.
 
-        Key parameters:
-        actuator -- actuator to set the new value on
-        value -- the new value to set on the specified actuator
+        :param actuator: actuator to set the new value on
+        :param value: actuator to set the new value on
+        :return: the passed in XS1Actuator object
         """
 
         response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
@@ -219,13 +235,15 @@ class XS1:
         return actuator
 
     def set_sensor_value(self, sensor, value):
-        """Sets a new value for the specified sensor.
+        """
+        Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
 
-        Key parameters:
-        sensor -- sensor to set the new value on
-        value -- the new value to set on the specified sensor
+        :param sensor: sensor to set the new value on
+        :param value: the new value to set on the specified sensor
+        :return: the passed in XS1Sensor object
         """
+
         response = self.send_request(api_constants.COMMAND_SET_STATE_SENSOR,
                                      api_constants.URL_PARAM_NUMBER + str(sensor.id()),
                                      api_constants.URL_PARAM_VALUE + str(value))
