@@ -15,9 +15,8 @@ coming weeks.
 Usage
 -----
 
-| For a basic example have a look at the ``example.py`` file.
-| If you need more info have a look at the documentation which should
-  help.
+For a basic example have a look at the ``example.py`` file.
+If you need more info have a look at the `documentation <http://xs1-api-client.readthedocs.io/>`_ at which should help.
 
 License
 =======
