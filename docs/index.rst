@@ -3,16 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-xs1_api_client
-==============
-
-xs1_api_client is a simple library for accessing and modifying actuator and sensor data of the EZcontrol XS1 gateway.
+.. include:: ../README.rst
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-    readme
+       /source/xs1_api_client
+       /source/modules
 
 Indices and tables
 ==================

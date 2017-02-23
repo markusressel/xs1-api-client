@@ -1,15 +1,29 @@
-# xs1_api_client
+xs1\_api\_client
+================
+
 A python library for accessing the EZcontrol® XS1 Gateway API
 
-# How to use
-## Installation
-Currently this library is not available via pip but will be in the coming weeks.
+How to use
+==========
 
-## Usage
-For a basic example have a look at the ```example.py``` file.
-If you need more info have a look at the documentation which should help.
+Installation
+------------
 
-# License
+Currently this library is not available via pip but will be in the
+coming weeks.
+
+Usage
+-----
+
+| For a basic example have a look at the ``example.py`` file.
+| If you need more info have a look at the documentation which should
+  help.
+
+License
+=======
+
+::
+
     xs1_api_client by Markus Ressel
     Copyright (C) 2017  Markus Ressel
 
