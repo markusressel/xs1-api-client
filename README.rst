@@ -1,5 +1,5 @@
-xs1\_api\_client
-================
+xs1-api-client
+==============
 
 A python library for accessing actuator and sensor data on the the EZcontrol® XS1 Gateway using their HTTP API.
 
