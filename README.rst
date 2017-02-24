@@ -9,8 +9,8 @@ How to use
 Installation
 ------------
 
-Currently this library is not available via pip but will be in the
-coming weeks.
+.. code-block:: bash
+    pip install xs1-api-client
 
 Usage
 -----
