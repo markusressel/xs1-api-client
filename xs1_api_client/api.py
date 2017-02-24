@@ -38,6 +38,7 @@ class XS1:
         :param user: username for authentication
         :param password: password for authentication
         """
+
         if not host and not user and not password:
             self._use_global_config = True
         else:
@@ -62,6 +63,7 @@ class XS1:
         :param user: username for authentication
         :param password: password for authentication
         """
+
         global HOST
         global USER
         global PASSWORD
@@ -79,6 +81,7 @@ class XS1:
         :param user: username for authentication
         :param password: password for authentication
         """
+
         self._use_global_config = False
         self._host = host
         self._user = user
@@ -90,6 +93,7 @@ class XS1:
         """
         Enables the use of global configuration data
         """
+
         self._use_global_config = True
         self.update_config_info()  # update device info
 
@@ -129,6 +133,8 @@ class XS1:
         response_text = response.text  # .encode('utf-8')
         response_text = response_text[
                         response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
+
+        # todo: check response for error codes
 
         return json.loads(response_text)  # convert to json object
 
@@ -219,7 +225,6 @@ class XS1:
         response = self.send_request(api_constants.COMMAND_GET_LIST_SENSORS)
 
         sensors = []
-
         if api_constants.NODE_SENSOR in response:
             for sensor in response[api_constants.NODE_SENSOR]:
                 device = XS1Sensor(sensor, self)
@@ -239,7 +244,7 @@ class XS1:
         response = self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()))
 
-        actuator.set_json_state(response[api_constants.NODE_ACTUATOR])
+        actuator.set_state(response[api_constants.NODE_ACTUATOR])
 
         return actuator
 
@@ -254,7 +259,7 @@ class XS1:
         response = self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
                                      api_constants.URL_PARAM_NUMBER + str(sensor.id()))
 
-        sensor.set_json_state(response[api_constants.NODE_SENSOR])
+        sensor.set_state(response[api_constants.NODE_SENSOR])
 
         return sensor
 
@@ -272,7 +277,7 @@ class XS1:
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()),
                                      api_constants.URL_PARAM_FUNCTION + str(function))
 
-        actuator.set_json_state(response[api_constants.NODE_ACTUATOR])
+        actuator.set_state(response[api_constants.NODE_ACTUATOR])
 
         return actuator
 
@@ -289,7 +294,7 @@ class XS1:
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()),
                                      api_constants.URL_PARAM_VALUE + str(value))
 
-        actuator.set_json_state(response[api_constants.NODE_ACTUATOR])
+        actuator.set_state(response[api_constants.NODE_ACTUATOR])
 
         return actuator
 
@@ -307,6 +312,6 @@ class XS1:
                                      api_constants.URL_PARAM_NUMBER + str(sensor.id()),
                                      api_constants.URL_PARAM_VALUE + str(value))
 
-        sensor.set_json_state(response[api_constants.NODE_SENSOR])
+        sensor.set_state(response[api_constants.NODE_SENSOR])
 
         return response

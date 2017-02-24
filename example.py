@@ -4,6 +4,7 @@ There are other methods besides the ones shown here. Have a look at the document
 http://xs1-api-client.readthedocs.io/
 to get more info.
 """
+import time
 
 from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
@@ -64,3 +65,11 @@ print("Updated value: " + str(
     changing_actuator.value()))  # print the updated value (will be updated with the response of the gateway)
 print("Updated new_value: " + str(
     changing_actuator.new_value()))  # print the updated new_value
+
+time.sleep(3)
+
+# alternatively you can call a function that is defined for an actuator (in the gateway)
+for function in changing_actuator.get_functions():
+    print("Function " + str(function.id()) + " (" + function.type() + "): " + function.description())
+    if function.type() == api_constants.FUNCTION_TYPE_OFF:
+        function.execute()

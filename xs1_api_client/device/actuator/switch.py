@@ -6,9 +6,9 @@ class XS1Switch(XS1Actuator):
     Represents a XS1 Switch.
     """
 
-    def __init__(self, device_state_json, api_interface):
+    def __init__(self, state, api_interface):
         """Initializes the switch."""
-        super(XS1Switch, self).__init__(device_state_json, api_interface)
+        super(XS1Switch, self).__init__(state, api_interface)
 
     def turn_on(self):
         """Turns on the switch."""

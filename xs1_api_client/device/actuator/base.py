@@ -7,8 +7,8 @@ class XS1Actuator(XS1Device):
     Represents a basic XS1 Actuator, there may be special variants for some types.
     """
 
-    def __init__(self, device_state_json, api_interface):
-        super(XS1Actuator, self).__init__(device_state_json, api_interface)
+    def __init__(self, state, api_interface):
+        super(XS1Actuator, self).__init__(state, api_interface)
 
     def update(self):
         """
@@ -29,13 +29,12 @@ class XS1Actuator(XS1Device):
         :return: a list of functions that can be executed using the call_function() method
         """
         functions = []
-        for function in self.json_state[api_constants.NODE_PARAM_FUNCTION]:
-            if function[api_constants.NODE_PARAM_TYPE] is api_constants.VALUE_DISABLED:
-                continue
+        for idx, function in enumerate(self._state[api_constants.NODE_PARAM_FUNCTION]):
+            if function[api_constants.NODE_PARAM_TYPE] is not api_constants.VALUE_DISABLED:
+                functions.append(XS1Function(self, idx + 1, function[api_constants.NODE_PARAM_TYPE],
+                                             function[api_constants.NODE_PARAM_DESCRIPTION]))
 
-            functions.append(
-                XS1Function(0, function[api_constants.NODE_PARAM_TYPE],
-                            function[api_constants.NODE_PARAM_DESCRIPTION]))
+        return functions
 
     def call_function(self, function):
         """

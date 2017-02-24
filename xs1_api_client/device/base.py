@@ -6,51 +6,55 @@ class XS1Device(object):
     This is a generic XS1 device, all other objetcs inherit from this.
     """
 
-    def __init__(self, device_state_json, api_interface):
+    def __init__(self, state: dict, api_interface):
         """
         Initializes the device.
 
-        :param device_state_json: json representation of this device (api response)
+        :param state: json representation of this device (api response)
         :param api_interface: the interface for handling api requests like fetching and setting values
         """
         self.api_interface = api_interface
-        self.json_state = device_state_json
+        self._state = state
 
-    def set_json_state(self, json):
+    def set_state(self, new_state: dict):
         """
         Sets a new state for this device.
+        If there is an existing state, new and old values will be merged
+        to retain any information that was missing from api responses.
 
-        :param json: json representation of this device (api response)
-        :return:
+        :param new_state: new representation of this device (api response)
         """
-        self.json_state = json
+        if self._state:
+            self._state = {**self._state, **new_state}  # merge dicts
+        else:
+            self._state = new_state  # set initial state
 
     def id(self):
         """
         :return: id of this device
         """
-        device_id = self.json_state.get(api_constants.NODE_PARAM_NUMBER)
+        device_id = self._state.get(api_constants.NODE_PARAM_NUMBER)
         if device_id is None:
-            device_id = self.json_state.get(api_constants.NODE_PARAM_ID)
+            device_id = self._state.get(api_constants.NODE_PARAM_ID)
         return device_id
 
     def type(self):
         """
         :return: the type of this device
         """
-        return self.json_state.get(api_constants.NODE_PARAM_TYPE)
+        return self._state.get(api_constants.NODE_PARAM_TYPE)
 
     def name(self):
         """
         :return: the name of this device
         """
-        return self.json_state.get(api_constants.NODE_PARAM_NAME)
+        return self._state.get(api_constants.NODE_PARAM_NAME)
 
     def value(self):
         """
         :return: the current value of this device
         """
-        return self.json_state.get(api_constants.NODE_PARAM_VALUE)
+        return self._state.get(api_constants.NODE_PARAM_VALUE)
 
     def new_value(self):
         """
@@ -60,19 +64,19 @@ class XS1Device(object):
 
         :return: the new value to set for this device
         """
-        return self.json_state.get(api_constants.NODE_PARAM_NEW_VALUE)
+        return self._state.get(api_constants.NODE_PARAM_NEW_VALUE)
 
     def unit(self):
         """
         :return: the unit that is used for the value
         """
-        return self.json_state.get(api_constants.NODE_PARAM_UNIT)
+        return self._state.get(api_constants.NODE_PARAM_UNIT)
 
     def last_update(self):
         """
         :return: the time when this device's value was updated last
         """
-        return self.json_state.get(api_constants.NODE_PARAM_UTIME)
+        return self._state.get(api_constants.NODE_PARAM_UTIME)
 
     def set_value(self, value):
         """
@@ -94,4 +98,4 @@ class XS1Device(object):
         """
         :return: Returns if this device is enabled.
         """
-        return api_constants.VALUE_DISABLED not in self.json_state[api_constants.NODE_PARAM_TYPE]
+        return api_constants.VALUE_DISABLED not in self._state[api_constants.NODE_PARAM_TYPE]

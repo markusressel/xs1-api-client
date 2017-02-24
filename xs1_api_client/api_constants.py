@@ -48,9 +48,16 @@ COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
 
 # === JSON API nodes ===
 NODE_VERSION = 'version'
+"""Node with protocol version info"""
+
 NODE_INFO = 'info'
+"""Node with gateway specific information"""
+
 NODE_ACTUATOR = 'actuator'
+"""Node with an array of actuators"""
+
 NODE_SENSOR = 'sensor'
+"""Node with an array of sensors"""
 
 # device info nodes
 NODE_DEVICE_NAME = 'devicename'
@@ -74,20 +81,41 @@ NODE_DEVICE_MAC = 'mac'
 
 # inner nodes
 NODE_PARAM_ID = 'id'
+"""Device id (only unique within actuators/sensors)"""
+
 NODE_PARAM_NUMBER = 'number'
+"""Alternative device id (only unique within actuators/sensors)"""
+
 NODE_PARAM_NAME = 'name'
+"""Device name"""
+
 NODE_PARAM_TYPE = 'type'
+"""Device type"""
+
 NODE_PARAM_VALUE = 'value'
+"""Current device value"""
+
 NODE_PARAM_NEW_VALUE = 'newvalue'
+"""New value to set for the device"""
+
 NODE_PARAM_UTIME = 'utime'
+"""Time this device was last updated"""
+
 NODE_PARAM_UNIT = 'unit'
+"""Device value unit"""
+
 NODE_PARAM_FUNCTION = 'function'
+"""Array of functions"""
+
 NODE_PARAM_DESCRIPTION = 'dsc'
+"""Device description"""
 
 # node values
 VALUE_DISABLED = 'disabled'
+"""'Disabled' type"""
 
 UNIT_BOOLEAN = 'boolean'
+"""Boolean unit type"""
 
 # === Device Types ===
 # actuator
@@ -101,6 +129,10 @@ ACTUATOR_TYPE_SOUND = 'sound'
 ACTUATOR_TYPE_THERMOSTAT = 'temperature'
 ACTUATOR_TYPE_TIMERSWITCH = 'timerswitch'
 ACTUATOR_TYPE_WINDOW = 'window'
+
+# function
+FUNCTION_TYPE_ON = 'on'
+FUNCTION_TYPE_OFF = 'off'
 
 # sensor
 SENSOR_TYPE_OTHER = 'other'
