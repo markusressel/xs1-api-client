@@ -14,7 +14,7 @@ Installation
 Usage
 -----
 
-For a basic example have a look at the `example.py <https://github.com/markusressel/xs1_api_client/blob/master/example.py>`_ file.
+For a basic example have a look at the `example.py <https://github.com/markusressel/xs1-api-client/blob/master/example.py>`_ file.
 If you need more info have a look at the `documentation <http://xs1-api-client.readthedocs.io/>`_ which should help.
 
 License
@@ -22,7 +22,7 @@ License
 
 ::
 
-    xs1_api_client by Markus Ressel
+    xs1-api-client by Markus Ressel
     Copyright (C) 2017  Markus Ressel
 
     This program is free software: you can redistribute it and/or modify
