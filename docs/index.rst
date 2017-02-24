@@ -11,4 +11,4 @@ Content:
 .. toctree::
    :maxdepth: 2
 
-          source/xs1_api_client
+    source
