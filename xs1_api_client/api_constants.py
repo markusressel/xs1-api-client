@@ -2,12 +2,18 @@
 XS1 HTTP Web API constants used to create GET request URLs and parse the JSON answer.
 """
 
-"""URL Parameter"""
+"""URL Parameters"""
+#: 'User' parameter
 URL_PARAM_USER = 'user='
+#: 'Password' parameter
 URL_PARAM_PASSWORD = 'pwd='
+#: command parameter that specifies the method the api is queried with
 URL_PARAM_COMMAND = 'cmd='
+#: number parameter that specifies the id of an actuator or sensor
 URL_PARAM_NUMBER = 'number='
+#: 'value' parameter that specifies the new value to set an actuator (or sensor) to
 URL_PARAM_VALUE = 'value='
+#: parameter that specifies the function to execute (on an actuator)
 URL_PARAM_FUNCTION = 'function='
 
 """XS1 Web API (HTTP) commands"""
