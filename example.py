@@ -9,17 +9,26 @@ from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
 
 # Create an api object with private configuration
-api = xs1api.XS1('192.168.2.33', None, None)
+api = xs1api.XS1('192.168.2.75', None, None)
+
+print("Gateway Hostname: " + api.get_gateway_name())
+print("Gateway MAC: " + api.get_gateway_mac())
+print("Gateway Hardware Version: " + api.get_gateway_hardware_version())
+print("Gateway Bootloader Version: " + api.get_gateway_bootloader_version())
+print("Gateway Firmware Version: " + api.get_gateway_firmware_version())
+print("Gateway uptime: " + str(api.get_gateway_uptime()) + " seconds")
+
+print("")
 
 # set global connection info
 # this configuration will not be used by the instance above!
-api.set_global_connection_info('192.168.2.75', None, None)
+xs1api.XS1.set_global_connection_info('192.168.2.33', None, None)
 
 # but it will be used on this instance
-global_api = xs1api.XS1()
+# global_api = xs1api.XS1()
 
 # but you can always force the use of the global config
-api.use_global_connection_info()
+# api.use_global_connection_info()
 
 # access api values (f.ex. for actuator or sensor type)
 print(api_constants.NODE_ACTUATOR)
@@ -27,6 +36,8 @@ print(api_constants.NODE_ACTUATOR)
 print(api_constants.ACTUATOR_TYPE_SWITCH)
 
 print(api_constants.UNIT_BOOLEAN)
+
+print("")
 
 # receive a list of all actuators
 actuators = api.get_all_actuators()
@@ -45,10 +56,10 @@ for sensor in sensors:
     ## + " " + str(sensor.unit())
 
 # set a new value for an actuator
-changing_actuator = actuators[0]  # pick one from the received list
+changing_actuator = actuators[1]  # pick one from the received list
 print("Old value: " + str(changing_actuator.value()))  # print old value
 print("Old new_value: " + str(changing_actuator.new_value()))  # print old new_value
-changing_actuator.set_value(18.5)  # use the object method to set a new value
+changing_actuator.set_value(100)  # use the object method to set a new value (turn light on)
 print("Updated value: " + str(
     changing_actuator.value()))  # print the updated value (will be updated with the response of the gateway)
 print("Updated new_value: " + str(

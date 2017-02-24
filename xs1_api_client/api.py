@@ -103,7 +103,7 @@ class XS1:
         """
 
         # decide if global or local configuration should be used
-        if self._use_global_config:
+        if self._use_global_config is True:
             host = HOST
             user = USER
             password = PASSWORD
@@ -146,7 +146,7 @@ class XS1:
         """
         Retrieves gateway specific (and immutable) configuration data
         """
-        self._config_info = self.send_request(self, api_constants.COMMAND_GET_CONFIG_INFO)
+        self._config_info = self.send_request(api_constants.COMMAND_GET_CONFIG_INFO)
 
     def get_gateway_name(self):
         """
@@ -172,7 +172,7 @@ class XS1:
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_FIRMWARE_VERSION]
 
-    def get_gateway_firmware_uptime(self):
+    def get_gateway_uptime(self):
         """
         :return: the uptime of the gateway in seconds
         """
