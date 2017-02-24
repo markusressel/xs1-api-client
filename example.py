@@ -40,8 +40,15 @@ print(api_constants.UNIT_BOOLEAN)
 
 print("")
 
-print(str(api.get_state_actuator(1)))
+# you can directly interface with the gateway using the api methods:
+print(str(api.get_state_actuator(2)))
+# ATTENTION: this would raise an EXCEPTION (id 65 > 64 = max)!
+# print(str(api.get_state_actuator(65)))
 
+# or set a new value using:
+print(str(api.set_actuator_value(2, 100)))
+
+# but I would recommend using the objects to get and set values like so:
 # receive a list of all actuators
 actuators = api.get_all_actuators()
 
@@ -68,10 +75,18 @@ print("Updated value: " + str(
 print("Updated new_value: " + str(
     changing_actuator.new_value()))  # print the updated new_value
 
+print("Sleeping...")
 time.sleep(3)
 
+print("")
 # alternatively you can call a function that is defined for an actuator (in the gateway)
 for function in changing_actuator.get_functions():
     print("Function " + str(function.id()) + " (" + function.type() + "): " + function.description())
     if function.type() == api_constants.FUNCTION_TYPE_OFF:
         function.execute()
+
+print("")
+print("Updated value: " + str(
+    changing_actuator.value()))  # print the updated value (will be updated with the response of the gateway)
+print("Updated new_value: " + str(
+    changing_actuator.new_value()))  # print the updated new_value

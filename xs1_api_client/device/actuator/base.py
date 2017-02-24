@@ -47,7 +47,8 @@ class XS1Actuator(XS1Device):
         if not isinstance(function, XS1Function):
             raise ValueError('Invalid function object type! Has to be a XS1Function!')
 
-        self.api_interface.call_actuator_function(self, function.id())
+        new_state = self.api_interface.call_actuator_function(self.id(), function.id())
+        self.set_state(new_state)
 
 
 class XS1Function(object):
@@ -91,4 +92,4 @@ class XS1Function(object):
         """
         Executes this function and sets the response as the new actuator value
         """
-        self._actuator.api_interface.call_actuator_function(self._actuator, self._id)
+        self._actuator.call_function(self)

@@ -137,7 +137,7 @@ class XS1:
         response_dict = json.loads(response_text)  # convert to json object
 
         if api_constants.NODE_ERROR in response_dict:
-            raise Exception(api_constants.ERROR_CODES[response_dict[api_constants.NODE_ERROR]])
+            raise Exception(api_constants.ERROR_CODES[response_dict[api_constants.NODE_ERROR]] + str(parameters))
         else:
             return response_dict
 
@@ -260,22 +260,20 @@ class XS1:
 
         return response[api_constants.NODE_SENSOR]
 
-    def call_actuator_function(self, actuator, function):
+    def call_actuator_function(self, actuator_id, function):
         """
         Executes a function on the specified actuator and sets the response on the passed in actuator.
 
-        :param actuator: actuator to execute the function on and set response value
+        :param actuator_id: actuator id to execute the function on and set response value
         :param function: id of the function to execute
         :return: the passed in actuator
         """
 
         response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator.id()),
+                                     api_constants.URL_PARAM_NUMBER + str(actuator_id),
                                      api_constants.URL_PARAM_FUNCTION + str(function))
 
-        actuator.set_state(response[api_constants.NODE_ACTUATOR])
-
-        return actuator
+        return response[api_constants.NODE_ACTUATOR]
 
     def set_actuator_value(self, actuator_id, value):
         """
