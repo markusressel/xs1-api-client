@@ -24,10 +24,10 @@ print("")
 # this configuration will not be used by the instance above!
 xs1api.XS1.set_global_connection_info('192.168.2.33', None, None)
 
-# but it will be used on this instance
+# but it will be used on this instance (without arguments)
 # global_api = xs1api.XS1()
 
-# but you can always force the use of the global config
+# but you can always force the use of the global config afterwards
 # api.use_global_connection_info()
 
 # access api values (f.ex. for actuator or sensor type)
