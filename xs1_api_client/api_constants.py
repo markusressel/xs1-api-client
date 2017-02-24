@@ -2,50 +2,74 @@
 XS1 HTTP Web API constants used to create GET request URLs and parse the JSON answer.
 """
 
-"""URL Parameters"""
-#: 'User' parameter
+# === URL Parameters ===
 URL_PARAM_USER = 'user='
-#: 'Password' parameter
-URL_PARAM_PASSWORD = 'pwd='
-#: command parameter that specifies the method the api is queried with
-URL_PARAM_COMMAND = 'cmd='
-#: number parameter that specifies the id of an actuator or sensor
-URL_PARAM_NUMBER = 'number='
-#: 'value' parameter that specifies the new value to set an actuator (or sensor) to
-URL_PARAM_VALUE = 'value='
-#: parameter that specifies the function to execute (on an actuator)
-URL_PARAM_FUNCTION = 'function='
+"""'User' parameter"""
 
-"""XS1 Web API (HTTP) commands"""
+URL_PARAM_PASSWORD = 'pwd='
+"""'Password' parameter"""
+
+URL_PARAM_COMMAND = 'cmd='
+"""command parameter that specifies the method the api is queried with"""
+
+URL_PARAM_NUMBER = 'number='
+"""number parameter that specifies the id of an actuator or sensor"""
+
+URL_PARAM_VALUE = 'value='
+"""'value' parameter that specifies the new value to set an actuator (or sensor) to"""
+
+URL_PARAM_FUNCTION = 'function='
+"""parameter that specifies the function to execute (on an actuator)"""
+
+# === XS1 Web API (HTTP) commands ===
 COMMAND_GET_PROTOCOL_INFO = 'get_protocol_info'
+"""Command to get information about the protocol version used by the gateway"""
+
 COMMAND_GET_CONFIG_INFO = 'get_config_info'
+"""Command to get (final) configuration information about the gateway"""
+
 COMMAND_GET_LIST_ACTUATORS = 'get_list_actuators'
+"""Command to get a list of all actuators"""
+
 COMMAND_GET_LIST_SENSORS = 'get_list_sensors'
+"""Command to get a list of all sensors"""
+
 COMMAND_GET_STATE_ACTUATOR = 'get_state_actuator'
+"""Command to get the state of a specific actuator"""
+
 COMMAND_GET_STATE_SENSOR = 'get_state_sensor'
+"""Command to get the state of a specific sensor"""
 
 COMMAND_SET_STATE_ACTUATOR = 'set_state_actuator'
-COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
+"""Command to set a new value on an actuator"""
 
-"""JSON API nodes"""
+COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
+"""Command to set a new value on a sensor (for debugging)"""
+
+# === JSON API nodes ===
 NODE_VERSION = 'version'
 NODE_INFO = 'info'
 NODE_ACTUATOR = 'actuator'
 NODE_SENSOR = 'sensor'
 
 # device info nodes
-"""Hostname"""
 NODE_DEVICE_NAME = 'devicename'
-"""Hardware revision"""
+"""Hostname"""
+
 NODE_DEVICE_HARDWARE_VERSION = 'hardware'
-"""Bootloader version number"""
+"""Hardware revision"""
+
 NODE_DEVICE_BOOTLOADER_VERSION = 'bootloader'
-"""Firmware version number"""
+"""Bootloader version number"""
+
 NODE_DEVICE_FIRMWARE_VERSION = 'firmware'
-"""Uptime in seconds"""
+"""Firmware version number"""
+
 NODE_DEVICE_UPTIME = 'uptime'
-"""MAC address"""
+"""Uptime in seconds"""
+
 NODE_DEVICE_MAC = 'mac'
+"""MAC address"""
 
 
 # inner nodes
@@ -65,7 +89,7 @@ VALUE_DISABLED = 'disabled'
 
 UNIT_BOOLEAN = 'boolean'
 
-"""Device types"""
+# === Device Types ===
 # actuator
 ACTUATOR_TYPE_SWITCH = 'switch'
 ACTUATOR_TYPE_DIMMER = 'dimmer'
