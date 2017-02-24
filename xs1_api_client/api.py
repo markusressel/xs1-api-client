@@ -243,10 +243,8 @@ class XS1:
         :param actuator_id: actuator id
         :return: the api response as a dict
         """
-        response = self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator_id))
-
-        return response[api_constants.NODE_ACTUATOR]
+        return self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
+                                 api_constants.URL_PARAM_NUMBER + str(actuator_id))
 
     def get_state_sensor(self, sensor_id):
         """
@@ -255,10 +253,8 @@ class XS1:
         :param sensor_id: sensor id
         :return: the api response as a dict
         """
-        response = self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
-                                     api_constants.URL_PARAM_NUMBER + str(sensor_id))
-
-        return response[api_constants.NODE_SENSOR]
+        return self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
+                                 api_constants.URL_PARAM_NUMBER + str(sensor_id))
 
     def call_actuator_function(self, actuator_id, function):
         """
@@ -266,14 +262,11 @@ class XS1:
 
         :param actuator_id: actuator id to execute the function on and set response value
         :param function: id of the function to execute
-        :return: the passed in actuator
+        :return: the api response
         """
-
-        response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator_id),
-                                     api_constants.URL_PARAM_FUNCTION + str(function))
-
-        return response[api_constants.NODE_ACTUATOR]
+        return self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
+                                 api_constants.URL_PARAM_NUMBER + str(actuator_id),
+                                 api_constants.URL_PARAM_FUNCTION + str(function))
 
     def set_actuator_value(self, actuator_id, value):
         """
@@ -281,14 +274,12 @@ class XS1:
 
         :param actuator_id: actuator id to set the new value on
         :param value: the new value to set on the specified actuator
-        :return: the passed in XS1Actuator object
+        :return: the api response
         """
 
-        response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator_id),
-                                     api_constants.URL_PARAM_VALUE + str(value))
-
-        return response[api_constants.NODE_ACTUATOR]
+        return self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
+                                 api_constants.URL_PARAM_NUMBER + str(actuator_id),
+                                 api_constants.URL_PARAM_VALUE + str(value))
 
     def set_sensor_value(self, sensor_id, value):
         """
@@ -297,11 +288,9 @@ class XS1:
 
         :param sensor_id: sensor id to set the new value on
         :param value: the new value to set on the specified sensor
-        :return: the passed in XS1Sensor object
+        :return: the api response
         """
 
-        response = self.send_request(api_constants.COMMAND_SET_STATE_SENSOR,
-                                     api_constants.URL_PARAM_NUMBER + str(sensor_id),
-                                     api_constants.URL_PARAM_VALUE + str(value))
-
-        return response[api_constants.NODE_SENSOR]
+        return self.send_request(api_constants.COMMAND_SET_STATE_SENSOR,
+                                 api_constants.URL_PARAM_NUMBER + str(sensor_id),
+                                 api_constants.URL_PARAM_VALUE + str(value))

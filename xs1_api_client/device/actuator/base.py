@@ -14,8 +14,8 @@ class XS1Actuator(XS1Device):
         """
         Updates the state of this actuator
         """
-        state = self.api_interface.get_state_actuator(self.id())
-        self.set_state(state)
+        response = self.api_interface.get_state_actuator(self.id())
+        self.set_state(response[api_constants.NODE_ACTUATOR])
 
     def set_value(self, value):
         """
@@ -24,7 +24,7 @@ class XS1Actuator(XS1Device):
         :param value: new value to set
         """
         new_state = self.api_interface.set_actuator_value(self.id(), value)
-        self.set_state(new_state)
+        self.set_state(new_state[api_constants.NODE_ACTUATOR])
 
     def get_functions(self):
         """
@@ -47,8 +47,8 @@ class XS1Actuator(XS1Device):
         if not isinstance(function, XS1Function):
             raise ValueError('Invalid function object type! Has to be a XS1Function!')
 
-        new_state = self.api_interface.call_actuator_function(self.id(), function.id())
-        self.set_state(new_state)
+        response = self.api_interface.call_actuator_function(self.id(), function.id())
+        self.set_state(response[api_constants.NODE_ACTUATOR])
 
 
 class XS1Function(object):
