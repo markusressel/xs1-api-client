@@ -272,7 +272,6 @@ class XS1:
         :return: the passed in actuator
         """
 
-        # TODO: check if function exists
         response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
                                      api_constants.URL_PARAM_NUMBER + str(actuator.id()),
                                      api_constants.URL_PARAM_FUNCTION + str(function))
