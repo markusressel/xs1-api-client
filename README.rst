@@ -9,8 +9,7 @@ How to use
 Installation
 ------------
 
-.. code-block:: bash
-    pip install xs1-api-client
+:code:`pip install xs1-api-client`
 
 Usage
 -----
