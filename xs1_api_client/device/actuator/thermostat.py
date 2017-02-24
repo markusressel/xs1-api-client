@@ -15,4 +15,5 @@ class XS1Thermostat(XS1Actuator):
 
         :param temp: double value
         """
-        self.api_interface.set_actuator_value(self, temp)
+        new_state = self.api_interface.set_actuator_value(self.id(), temp)
+        self.set_state(new_state)

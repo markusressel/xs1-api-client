@@ -40,6 +40,8 @@ print(api_constants.UNIT_BOOLEAN)
 
 print("")
 
+print(str(api.get_state_actuator(1)))
+
 # receive a list of all actuators
 actuators = api.get_all_actuators()
 

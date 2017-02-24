@@ -12,8 +12,10 @@ class XS1Switch(XS1Actuator):
 
     def turn_on(self):
         """Turns on the switch."""
-        self.api_interface.set_actuator_value(self, 100)
+        new_state = self.api_interface.set_actuator_value(self.id(), 100)
+        self.set_state(new_state)
 
     def turn_off(self):
         """Turns off the switch."""
-        self.api_interface.set_actuator_value(self, 0)
+        new_state = self.api_interface.set_actuator_value(self.id(), 0)
+        self.set_state(new_state)

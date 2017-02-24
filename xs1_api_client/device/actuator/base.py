@@ -14,7 +14,8 @@ class XS1Actuator(XS1Device):
         """
         Updates the state of this actuator
         """
-        self.api_interface.get_state_actuator(self)
+        state = self.api_interface.get_state_actuator(self.id())
+        self.set_state(state)
 
     def set_value(self, value):
         """
@@ -22,7 +23,8 @@ class XS1Actuator(XS1Device):
 
         :param value: new value to set
         """
-        self.api_interface.set_actuator_value(self, value)
+        new_state = self.api_interface.set_actuator_value(self.id(), value)
+        self.set_state(new_state)
 
     def get_functions(self):
         """

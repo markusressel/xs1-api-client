@@ -28,7 +28,7 @@ class XS1:
     This class is the main api interface that handles all communication with the XS1 gateway.
     """
 
-    def __init__(self, host=None, user=None, password=None):
+    def __init__(self, host: str = None, user: str = None, password: str = None):
         """
         Creates a new api object.
         If no arguments are passed the global (shared) connection configuration will be used.
@@ -134,9 +134,12 @@ class XS1:
         response_text = response_text[
                         response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
 
-        # todo: check response for error codes
+        response_dict = json.loads(response_text)  # convert to json object
 
-        return json.loads(response_text)  # convert to json object
+        if api_constants.NODE_ERROR in response_dict:
+            raise Exception(api_constants.ERROR_CODES[response_dict[api_constants.NODE_ERROR]])
+        else:
+            return response_dict
 
     def get_protocol_info(self):
         """
@@ -233,35 +236,29 @@ class XS1:
 
         return sensors
 
-    def get_state_actuator(self, actuator):
+    def get_state_actuator(self, actuator_id):
         """
-        Refreshes the current value of the specified actuator.
-        WARNING: this API is not very reliable, use subscribe instead
+        Gets the current state of the specified actuator.
 
-        :param actuator: actuator to write the updated state to
-        :return: the passed in XS1Actuator object
+        :param actuator_id: actuator id
+        :return: the api response as a dict
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator.id()))
+                                     api_constants.URL_PARAM_NUMBER + str(actuator_id))
 
-        actuator.set_state(response[api_constants.NODE_ACTUATOR])
+        return response[api_constants.NODE_ACTUATOR]
 
-        return actuator
-
-    def get_state_sensor(self, sensor):
+    def get_state_sensor(self, sensor_id):
         """
-        Refreshes the current value of the specified sensor.
-        WARNING: this API is not very reliable, use subscribe instead
+        Gets the current state of the specified sensor.
 
-        :param sensor: sensor to write the updated state to
-        :return: the passed in XS1Sensor object
+        :param sensor_id: sensor id
+        :return: the api response as a dict
         """
         response = self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
-                                     api_constants.URL_PARAM_NUMBER + str(sensor.id()))
+                                     api_constants.URL_PARAM_NUMBER + str(sensor_id))
 
-        sensor.set_state(response[api_constants.NODE_SENSOR])
-
-        return sensor
+        return response[api_constants.NODE_SENSOR]
 
     def call_actuator_function(self, actuator, function):
         """
@@ -280,37 +277,33 @@ class XS1:
 
         return actuator
 
-    def set_actuator_value(self, actuator, value):
+    def set_actuator_value(self, actuator_id, value):
         """
         Sets a new value for the specified actuator.
 
-        :param actuator: actuator to set the new value on
-        :param value: actuator to set the new value on
+        :param actuator_id: actuator id to set the new value on
+        :param value: the new value to set on the specified actuator
         :return: the passed in XS1Actuator object
         """
 
         response = self.send_request(api_constants.COMMAND_SET_STATE_ACTUATOR,
-                                     api_constants.URL_PARAM_NUMBER + str(actuator.id()),
+                                     api_constants.URL_PARAM_NUMBER + str(actuator_id),
                                      api_constants.URL_PARAM_VALUE + str(value))
 
-        actuator.set_state(response[api_constants.NODE_ACTUATOR])
+        return response[api_constants.NODE_ACTUATOR]
 
-        return actuator
-
-    def set_sensor_value(self, sensor, value):
+    def set_sensor_value(self, sensor_id, value):
         """
         Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
 
-        :param sensor: sensor to set the new value on
+        :param sensor_id: sensor id to set the new value on
         :param value: the new value to set on the specified sensor
         :return: the passed in XS1Sensor object
         """
 
         response = self.send_request(api_constants.COMMAND_SET_STATE_SENSOR,
-                                     api_constants.URL_PARAM_NUMBER + str(sensor.id()),
+                                     api_constants.URL_PARAM_NUMBER + str(sensor_id),
                                      api_constants.URL_PARAM_VALUE + str(value))
 
-        sensor.set_state(response[api_constants.NODE_SENSOR])
-
-        return response
+        return response[api_constants.NODE_SENSOR]

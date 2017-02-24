@@ -13,7 +13,8 @@ class XS1Sensor(XS1Device):
         """
         Updates the state of this sensor
         """
-        self.api_interface.get_state_sensor(self)
+        state = self.api_interface.get_state_sensor(self.id())
+        self.set_state(state)
 
     def set_value(self, value):
         """
@@ -21,4 +22,5 @@ class XS1Sensor(XS1Device):
         This should only be used for debugging purpose!
         :param value: new value to set
         """
-        self.api_interface.set_sensor_value(self, value)
+        new_state = self.api_interface.set_sensor_value(self.id(), value)
+        self.set_state(new_state)

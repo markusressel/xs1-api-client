@@ -59,6 +59,62 @@ NODE_ACTUATOR = 'actuator'
 NODE_SENSOR = 'sensor'
 """Node with an array of sensors"""
 
+NODE_ERROR = 'error'
+"""Node containing the error code"""
+
+# error codes
+ERROR_CODE_INVALID_COMMAND = '01'
+"""Error code for 'invalid command' """
+
+ERROR_CODE_CMD_TYPE_MISSING = '02'
+"""Error code for 'cmd type missing'"""
+
+ERROR_CODE_NOT_FOUND = '03'
+"""Error code for 'number/name not found'"""
+
+ERROR_CODE_DUPLICATE = '04'
+"""Error code for 'duplicate name'"""
+
+ERROR_CODE_INVALID_SYSTEM = '05'
+"""Error code for 'invalid system'"""
+
+ERROR_CODE_INVALID_FUNCTION = '06'
+"""Error code for 'invalid function'"""
+
+ERROR_CODE_INVALID_DATE_TIME = '07'
+"""Error code for 'invalid date/time'"""
+
+ERROR_CODE_OBJECT_NOT_FOUND = '08'
+"""Error code for 'object not found'"""
+
+ERROR_CODE_TYPE_NOT_VIRTUAL = '09'
+"""Error code for 'type not virtual'"""
+
+ERROR_CODE_SYNTAX_ERROR = '10'
+"""Error code for 'syntax error'"""
+
+ERROR_CODE_INVALID_TIME_RANGE = '11'
+"""Error code for 'error time range'"""
+
+ERROR_CODE_PROTOCOL_VERSION_MISMATCH = '12'
+"""Error code for 'protocol version mismatch'"""
+
+ERROR_CODES = {
+    ERROR_CODE_INVALID_COMMAND: 'invalid command',
+    ERROR_CODE_CMD_TYPE_MISSING: 'cmd type missing',
+    ERROR_CODE_NOT_FOUND: 'number/name not found',
+    ERROR_CODE_DUPLICATE: 'duplicate name',
+    ERROR_CODE_INVALID_SYSTEM: 'invalid system',
+    ERROR_CODE_INVALID_FUNCTION: 'invalid function',
+    ERROR_CODE_INVALID_DATE_TIME: 'invalid date/time',
+    ERROR_CODE_OBJECT_NOT_FOUND: 'object not found',
+    ERROR_CODE_TYPE_NOT_VIRTUAL: 'type not virtual',
+    ERROR_CODE_SYNTAX_ERROR: 'syntax error',
+    ERROR_CODE_INVALID_TIME_RANGE: 'error time range',
+    ERROR_CODE_PROTOCOL_VERSION_MISMATCH: 'protocol version mismatch'
+}
+"""Dictionary with description values for each error code"""
+
 # device info nodes
 NODE_DEVICE_NAME = 'devicename'
 """Hostname"""
@@ -77,7 +133,6 @@ NODE_DEVICE_UPTIME = 'uptime'
 
 NODE_DEVICE_MAC = 'mac'
 """MAC address"""
-
 
 # inner nodes
 NODE_PARAM_ID = 'id'
