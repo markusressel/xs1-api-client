@@ -25,7 +25,10 @@ class XS1Device(object):
         :param new_state: new representation of this device (api response)
         """
         if self._state:
-            self._state = {**self._state, **new_state}  # merge dicts
+            for key, value in new_state.items():
+                self._state[key] = value
+
+            #  self._state = {**self._state, **new_state}  # merge dicts (Python 3.5 required)
         else:
             self._state = new_state  # set initial state
 
