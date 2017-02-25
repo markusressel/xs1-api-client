@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='xs1_api_client',
-    version='1.0.0',
+    version='1.0.1',
     description='A library to get and set values of the EZcontrol XS1 Gateway',
     license='GPLv3+',
     author='Markus Ressel',
