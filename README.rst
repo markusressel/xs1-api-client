@@ -4,6 +4,12 @@ xs1-api-client
 A python library for accessing actuator and sensor data on the the
 EZcontrol® XS1 Gateway using its HTTP API.
 
+Build Status
+============
+
+.. image:: https://travis-ci.org/markusressel/xs1-api-client.svg?branch=master
+    :target: https://travis-ci.org/markusressel/xs1-api-client
+
 How to use
 ==========
 
@@ -224,3 +230,4 @@ License
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
