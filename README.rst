@@ -198,6 +198,12 @@ To check if a device has been configured in the XS1 web interface call:
 
 for both actuators and sensors alike.
 
+Contributing
+============
+
+Github is for social coding: if you want to write code, I encourage contributions through pull requests from forks 
+of this repository. Create Github tickets for bugs and new features and comment on the ones that you are interested in.
+
 License
 =======
 
