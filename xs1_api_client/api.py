@@ -52,7 +52,7 @@ class XS1:
         self.update_config_info()
 
     @staticmethod
-    def set_global_connection_info(host, user, password):
+    def set_global_connection_info(host, user, password) -> None:
         """
         Sets the global connection info.
         This initialization is valid for all XS1 instances that do not have a specific connection configuration
@@ -72,7 +72,7 @@ class XS1:
         USER = str(user)
         PASSWORD = str(password)
 
-    def set_connection_info(self, host, user, password):
+    def set_connection_info(self, host, user, password) -> None:
         """
         Sets private connection info for this XS1 instance.
         This XS1 instance will also immediately use this connection info.
@@ -89,7 +89,7 @@ class XS1:
 
         self.update_config_info()
 
-    def use_global_connection_info(self):
+    def use_global_connection_info(self) -> None:
         """
         Enables the use of global configuration data
         """
@@ -97,7 +97,7 @@ class XS1:
         self._use_global_config = True
         self.update_config_info()  # update device info
 
-    def send_request(self, command, *parameters):
+    def send_request(self, command, *parameters) -> dict:
         """
         Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
 
@@ -141,7 +141,7 @@ class XS1:
         else:
             return response_dict
 
-    def get_protocol_info(self):
+    def get_protocol_info(self) -> str:
         """
         Retrieves the protocol version that is used by the gateway
 
@@ -151,49 +151,49 @@ class XS1:
         response = self.send_request(self, api_constants.COMMAND_GET_PROTOCOL_INFO)
         return response[api_constants.NODE_VERSION]
 
-    def update_config_info(self):
+    def update_config_info(self) -> None:
         """
         Retrieves gateway specific (and immutable) configuration data
         """
         self._config_info = self.send_request(api_constants.COMMAND_GET_CONFIG_INFO)
 
-    def get_gateway_name(self):
+    def get_gateway_name(self) -> str:
         """
         :return: the hostname of the gateway
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_NAME]
 
-    def get_gateway_hardware_version(self):
+    def get_gateway_hardware_version(self) -> str:
         """
         :return: the hardware version number of the gateway
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_HARDWARE_VERSION]
 
-    def get_gateway_bootloader_version(self):
+    def get_gateway_bootloader_version(self) -> str:
         """
         :return: the bootloader version number of the gateway
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_BOOTLOADER_VERSION]
 
-    def get_gateway_firmware_version(self):
+    def get_gateway_firmware_version(self) -> str:
         """
         :return: the firmware version number of the gateway
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_FIRMWARE_VERSION]
 
-    def get_gateway_uptime(self):
+    def get_gateway_uptime(self) -> str:
         """
         :return: the uptime of the gateway in seconds
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_UPTIME]
 
-    def get_gateway_mac(self):
+    def get_gateway_mac(self) -> str:
         """
         :return: the mac address of the gateway
         """
         return self._config_info[api_constants.NODE_INFO][api_constants.NODE_DEVICE_MAC]
 
-    def get_all_actuators(self):
+    def get_all_actuators(self) -> [XS1Actuator]:
         """
         Requests the list of enabled actuators from the gateway.
 
@@ -218,7 +218,7 @@ class XS1:
 
         return actuators
 
-    def get_all_sensors(self):
+    def get_all_sensors(self) -> [XS1Sensor]:
         """
         Requests the list of enabled sensors from the gateway.
 
@@ -236,7 +236,7 @@ class XS1:
 
         return sensors
 
-    def get_state_actuator(self, actuator_id):
+    def get_state_actuator(self, actuator_id) -> dict:
         """
         Gets the current state of the specified actuator.
 
@@ -246,7 +246,7 @@ class XS1:
         return self.send_request(api_constants.COMMAND_GET_STATE_ACTUATOR,
                                  api_constants.URL_PARAM_NUMBER + str(actuator_id))
 
-    def get_state_sensor(self, sensor_id):
+    def get_state_sensor(self, sensor_id) -> dict:
         """
         Gets the current state of the specified sensor.
 
@@ -256,7 +256,7 @@ class XS1:
         return self.send_request(api_constants.COMMAND_GET_STATE_SENSOR,
                                  api_constants.URL_PARAM_NUMBER + str(sensor_id))
 
-    def call_actuator_function(self, actuator_id, function):
+    def call_actuator_function(self, actuator_id, function) -> dict:
         """
         Executes a function on the specified actuator and sets the response on the passed in actuator.
 
@@ -268,7 +268,7 @@ class XS1:
                                  api_constants.URL_PARAM_NUMBER + str(actuator_id),
                                  api_constants.URL_PARAM_FUNCTION + str(function))
 
-    def set_actuator_value(self, actuator_id, value):
+    def set_actuator_value(self, actuator_id, value) -> dict:
         """
         Sets a new value for the specified actuator.
 
@@ -281,7 +281,7 @@ class XS1:
                                  api_constants.URL_PARAM_NUMBER + str(actuator_id),
                                  api_constants.URL_PARAM_VALUE + str(value))
 
-    def set_sensor_value(self, sensor_id, value):
+    def set_sensor_value(self, sensor_id, value) -> dict:
         """
         Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
