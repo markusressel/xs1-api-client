@@ -10,10 +10,10 @@ import logging
 
 import requests
 
-from . import api_constants
-from .device.actuator.base import XS1Actuator
-from .device.actuator.switch import XS1Switch
-from .device.sensor.base import XS1Sensor
+from xs1_api_client import api_constants
+from xs1_api_client.device.actuator import XS1Actuator
+from xs1_api_client.device.actuator.switch import XS1Switch
+from xs1_api_client.device.sensor import XS1Sensor
 
 _LOGGER = logging.getLogger(__name__)
 

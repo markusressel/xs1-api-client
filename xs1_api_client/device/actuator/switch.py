@@ -1,5 +1,5 @@
-from xs1_api_client import api_constants, XS1
-from .base import XS1Actuator
+from xs1_api_client import api_constants
+from xs1_api_client.device.actuator import XS1Actuator
 
 
 class XS1Switch(XS1Actuator):
@@ -7,7 +7,7 @@ class XS1Switch(XS1Actuator):
     Represents a XS1 Switch.
     """
 
-    def __init__(self, state, api: XS1):
+    def __init__(self, state, api):
         """Initializes the switch."""
         super(XS1Switch, self).__init__(state, api)
 
