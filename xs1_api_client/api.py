@@ -28,7 +28,7 @@ class XS1:
     This class is the main api interface that handles all communication with the XS1 gateway.
     """
 
-    def __init__(self, host: str = None, user: str = None, password: str = None):
+    def __init__(self, host: str = None, user: str = None, password: str = None) -> None:
         """
         Creates a new api object.
         If no arguments are passed the global (shared) connection configuration will be used.

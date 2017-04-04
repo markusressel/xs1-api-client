@@ -1,3 +1,4 @@
+from xs1_api_client import XS1
 from .. import api_constants
 
 
@@ -6,17 +7,17 @@ class XS1Device(object):
     This is a generic XS1 device, all other objetcs inherit from this.
     """
 
-    def __init__(self, state: dict, api_interface):
+    def __init__(self, state: dict, api: XS1) -> None:
         """
         Initializes the device.
 
         :param state: json representation of this device (api response)
         :param api_interface: the interface for handling api requests like fetching and setting values
         """
-        self.api_interface = api_interface
+        self._api_interface = api
         self._state = state
 
-    def set_state(self, new_state: dict):
+    def set_state(self, new_state: dict) -> None:
         """
         Sets a new state for this device.
         If there is an existing state, new and old values will be merged
@@ -28,11 +29,11 @@ class XS1Device(object):
             for key, value in new_state.items():
                 self._state[key] = value
 
-            #  self._state = {**self._state, **new_state}  # merge dicts (Python 3.5 required)
+                #  self._state = {**self._state, **new_state}  # merge dicts (Python 3.5 required)
         else:
             self._state = new_state  # set initial state
 
-    def id(self):
+    def id(self) -> int:
         """
         :return: id of this device
         """
@@ -41,13 +42,13 @@ class XS1Device(object):
             device_id = self._state.get(api_constants.NODE_PARAM_ID)
         return device_id
 
-    def type(self):
+    def type(self) -> str:
         """
         :return: the type of this device
         """
         return self._state.get(api_constants.NODE_PARAM_TYPE)
 
-    def name(self):
+    def name(self) -> str:
         """
         :return: the name of this device
         """
@@ -69,19 +70,19 @@ class XS1Device(object):
         """
         return self._state.get(api_constants.NODE_PARAM_NEW_VALUE)
 
-    def unit(self):
+    def unit(self) -> str:
         """
         :return: the unit that is used for the value
         """
         return self._state.get(api_constants.NODE_PARAM_UNIT)
 
-    def last_update(self):
+    def last_update(self) -> int:
         """
         :return: the time when this device's value was updated last
         """
         return self._state.get(api_constants.NODE_PARAM_UTIME)
 
-    def set_value(self, value):
+    def set_value(self, value) -> None:
         """
         Sets a new value for this device.
         This method should be implemented by inheriting classes.
@@ -90,14 +91,14 @@ class XS1Device(object):
         """
         raise NotImplementedError("Not implemented!")
 
-    def update(self):
+    def update(self) -> None:
         """
         Updates the current value of this device.
         This method should be implemented by inheriting classes.
         """
         raise NotImplementedError("Not implemented!")
 
-    def enabled(self):
+    def enabled(self) -> bool:
         """
         :return: Returns if this device is enabled.
         """
