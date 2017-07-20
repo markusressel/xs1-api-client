@@ -26,6 +26,30 @@ class XS1Actuator(XS1Device):
         new_state = self._api_interface.set_actuator_value(self.id(), value)
         self.set_state(new_state[api_constants.NODE_ACTUATOR])
 
+    def get_function_by_id(self, func_id):
+        """
+        Get a function by it's id
+        :param func_id: function id
+        :return: XS1Function or None
+        """
+        for xs1_function in self.get_functions():
+            if xs1_function.id() == func_id:
+                return xs1_function
+
+        return None
+
+    def get_function_by_type(self, func_type: str):
+        """
+        Get a function by it's type
+        :param func_type: function type
+        :return: XS1Function or None
+        """
+        for xs1_function in self.get_functions():
+            if xs1_function.type() == func_type:
+                return xs1_function
+
+        return None
+
     def get_functions(self) -> []:
         """
         :return: a list of functions that can be executed using the call_function() method

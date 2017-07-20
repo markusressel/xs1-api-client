@@ -11,7 +11,7 @@ class XS1Device(object):
         Initializes the device.
 
         :param state: json representation of this device (api response)
-        :param api_interface: the interface for handling api requests like fetching and setting values
+        :param api: the interface for handling api requests like fetching and setting values
         """
         self._api_interface = api
         self._state = state

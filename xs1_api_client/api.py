@@ -17,11 +17,6 @@ from xs1_api_client.device.sensor import XS1Sensor
 
 _LOGGER = logging.getLogger(__name__)
 
-# global config data
-HOST = ''
-USER = ''
-PASSWORD = ''
-
 
 class XS1:
     """
@@ -39,38 +34,12 @@ class XS1:
         :param password: password for authentication
         """
 
-        if not host and not user and not password:
-            self._use_global_config = True
-        else:
-            self._use_global_config = False
-            self._host = host
-            self._user = user
-            self._password = password
-
+        self._host = None
+        self._user = None
+        self._password = None
         self._config_info = None
 
-        self.update_config_info()
-
-    @staticmethod
-    def set_global_connection_info(host, user, password) -> None:
-        """
-        Sets the global connection info.
-        This initialization is valid for all XS1 instances that do not have a specific connection configuration
-        upon instantiation or using the set_connection_info() method.
-        If you want a XS1 instance to use the global info instead of private use the use_global_connection_info() method.
-
-        :param host: host address the gateway can be found at
-        :param user: username for authentication
-        :param password: password for authentication
-        """
-
-        global HOST
-        global USER
-        global PASSWORD
-
-        HOST = str(host)
-        USER = str(user)
-        PASSWORD = str(password)
+        self.set_connection_info(host, user, password)
 
     def set_connection_info(self, host, user, password) -> None:
         """
@@ -82,20 +51,11 @@ class XS1:
         :param password: password for authentication
         """
 
-        self._use_global_config = False
         self._host = host
         self._user = user
         self._password = password
 
         self.update_config_info()
-
-    def use_global_connection_info(self) -> None:
-        """
-        Enables the use of global configuration data
-        """
-
-        self._use_global_config = True
-        self.update_config_info()  # update device info
 
     def send_request(self, command, *parameters) -> dict:
         """
@@ -106,15 +66,9 @@ class XS1:
         :return: the api response as a json object
         """
 
-        # decide if global or local configuration should be used
-        if self._use_global_config is True:
-            host = HOST
-            user = USER
-            password = PASSWORD
-        else:
-            host = self._host
-            user = self._user
-            password = self._password
+        host = self._host
+        user = self._user
+        password = self._password
 
         # create request url
         request_url = 'http://' + host + '/control?callback=callback'

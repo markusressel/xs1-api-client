@@ -10,7 +10,7 @@ class XS1Thermostat(XS1Actuator):
     def __init__(self, state, api):
         super(XS1Actuator, self).__init__(state, api)
 
-    def set_temperature(self, temp: float):
+    def set_temperature(self, temp: float) -> None:
         """
         Sets the new target temperature of this thermostat
 
