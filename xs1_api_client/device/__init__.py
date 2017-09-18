@@ -1,4 +1,5 @@
 from xs1_api_client import api_constants
+from xs1_api_client.api_constants import Node
 
 
 class XS1Device(object):
@@ -36,28 +37,28 @@ class XS1Device(object):
         """
         :return: id of this device
         """
-        device_id = self._state.get(api_constants.NODE_PARAM_NUMBER)
+        device_id = self._get_node_value(self._state, Node.PARAM_NUMBER)
         if device_id is None:
-            device_id = self._state.get(api_constants.NODE_PARAM_ID)
+            device_id = self._get_node_value(self._state, Node.PARAM_ID)
         return device_id
 
     def type(self) -> str:
         """
         :return: the type of this device
         """
-        return self._state.get(api_constants.NODE_PARAM_TYPE)
+        return self._get_node_value(self._state, Node.PARAM_TYPE)
 
     def name(self) -> str:
         """
         :return: the name of this device
         """
-        return self._state.get(api_constants.NODE_PARAM_NAME)
+        return self._get_node_value(self._state, Node.PARAM_NAME)
 
     def value(self):
         """
         :return: the current value of this device
         """
-        return self._state.get(api_constants.NODE_PARAM_VALUE)
+        return self._get_node_value(self._state, Node.PARAM_VALUE)
 
     def new_value(self):
         """
@@ -67,19 +68,19 @@ class XS1Device(object):
 
         :return: the new value to set for this device
         """
-        return self._state.get(api_constants.NODE_PARAM_NEW_VALUE)
+        return self._get_node_value(self._state, Node.PARAM_NEW_VALUE)
 
     def unit(self) -> str:
         """
         :return: the unit that is used for the value
         """
-        return self._state.get(api_constants.NODE_PARAM_UNIT)
+        return self._get_node_value(self._state, Node.PARAM_UNIT)
 
     def last_update(self) -> int:
         """
         :return: the time when this device's value was updated last
         """
-        return self._state.get(api_constants.NODE_PARAM_UTIME)
+        return self._get_node_value(self._state, Node.PARAM_UTIME)
 
     def set_value(self, value) -> None:
         """
@@ -101,4 +102,12 @@ class XS1Device(object):
         """
         :return: Returns if this device is enabled.
         """
-        return api_constants.VALUE_DISABLED not in self._state[api_constants.NODE_PARAM_TYPE]
+        return api_constants.VALUE_DISABLED not in self._get_node_value(self._state, Node.PARAM_TYPE)
+
+    def _get_node_value(self, dictionary: dict, node: Node) -> str or None:
+        """
+        :param dictionary: the dictionary used for lookup
+        :param node: the node to search for and retrieve its value
+        :return: the value of the specified node or None if it doesn't exist
+        """
+        return dictionary.get(node.value)

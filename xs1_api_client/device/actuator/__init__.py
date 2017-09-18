@@ -1,4 +1,5 @@
 from xs1_api_client import api_constants
+from xs1_api_client.api_constants import Node, FunctionType
 from xs1_api_client.device import XS1Device
 
 
@@ -15,7 +16,8 @@ class XS1Actuator(XS1Device):
         Updates the state of this actuator
         """
         response = self._api_interface.get_state_actuator(self.id())
-        self.set_state(response[api_constants.NODE_ACTUATOR])
+        new_value = self._get_node_value(response, Node.ACTUATOR)
+        self.set_state(new_value)
 
     def set_value(self, value) -> None:
         """
@@ -24,7 +26,8 @@ class XS1Actuator(XS1Device):
         :param value: new value to set
         """
         new_state = self._api_interface.set_actuator_value(self.id(), value)
-        self.set_state(new_state[api_constants.NODE_ACTUATOR])
+        new_value = self._get_node_value(new_state, Node.ACTUATOR)
+        self.set_state(new_value)
 
     def get_function_by_id(self, func_id):
         """
@@ -38,7 +41,7 @@ class XS1Actuator(XS1Device):
 
         return None
 
-    def get_function_by_type(self, func_type: str):
+    def get_function_by_type(self, func_type: FunctionType):
         """
         Get a function by it's type
         :param func_type: function type
@@ -55,10 +58,20 @@ class XS1Actuator(XS1Device):
         :return: a list of functions that can be executed using the call_function() method
         """
         functions = []
-        for idx, xs1_function in enumerate(self._state[api_constants.NODE_PARAM_FUNCTION]):
-            if xs1_function[api_constants.NODE_PARAM_TYPE] is not api_constants.VALUE_DISABLED:
-                functions.append(XS1Function(self, idx + 1, xs1_function[api_constants.NODE_PARAM_TYPE],
-                                             xs1_function[api_constants.NODE_PARAM_DESCRIPTION]))
+        for idx, xs1_function in enumerate(self._get_node_value(self._state, Node.PARAM_FUNCTION)):
+            if self._get_node_value(xs1_function, Node.PARAM_TYPE) != api_constants.VALUE_DISABLED:
+                try:
+                    function_type = FunctionType(self._get_node_value(xs1_function, Node.PARAM_TYPE))
+                except ValueError:
+                    function_type = FunctionType.UNKNOWN
+
+                functions.append(
+                    XS1Function(self,
+                                idx + 1,
+                                function_type,
+                                self._get_node_value(xs1_function, Node.PARAM_DESCRIPTION)
+                                )
+                )
 
         return functions
 
@@ -72,7 +85,8 @@ class XS1Actuator(XS1Device):
             raise ValueError('Invalid function object type! Has to be a XS1Function!')
 
         response = self._api_interface.call_actuator_function(self.id(), xs1_function.id())
-        self.set_state(response[api_constants.NODE_ACTUATOR])
+        new_value = self._get_node_value(response, Node.ACTUATOR)
+        self.set_state(new_value)
 
 
 class XS1Function(object):
@@ -80,7 +94,7 @@ class XS1Function(object):
     Represents a function of a XS1Actuator.
     """
 
-    def __init__(self, actuator: XS1Actuator, function_id: int, function_type: str, description: str):
+    def __init__(self, actuator: XS1Actuator, function_id: int, function_type: FunctionType, description: str):
         """
         Creates a function object
 
@@ -100,7 +114,7 @@ class XS1Function(object):
         """
         return self._id
 
-    def type(self) -> str:
+    def type(self) -> FunctionType:
         """
         :return: the type of this function
         """

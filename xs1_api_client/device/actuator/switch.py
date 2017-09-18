@@ -1,4 +1,4 @@
-from xs1_api_client import api_constants
+from xs1_api_client.api_constants import Node
 from xs1_api_client.device.actuator import XS1Actuator
 
 
@@ -14,9 +14,11 @@ class XS1Switch(XS1Actuator):
     def turn_on(self) -> None:
         """Turns on the switch."""
         response = self._api_interface.set_actuator_value(self.id(), 100)
-        self.set_state(response[api_constants.NODE_ACTUATOR])
+        new_value = self._get_node_value(response, Node.ACTUATOR)
+        self.set_state(new_value)
 
     def turn_off(self) -> None:
         """Turns off the switch."""
         response = self._api_interface.set_actuator_value(self.id(), 0)
-        self.set_state(response[api_constants.NODE_ACTUATOR])
+        new_value = self._get_node_value(response, Node.ACTUATOR)
+        self.set_state(new_value)

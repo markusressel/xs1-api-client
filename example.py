@@ -8,6 +8,7 @@ import time
 
 from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
+from xs1_api_client.api_constants import Node, ActuatorType, FunctionType
 
 # Create an api object with private configuration
 api = xs1api.XS1('192.168.2.75', None, None)
@@ -25,8 +26,8 @@ print("Gateway uptime: " + str(api.get_gateway_uptime()) + " seconds")
 print("")
 
 # access api values (f.ex. for actuator or sensor type)
-print(api_constants.NODE_ACTUATOR)
-print(api_constants.ACTUATOR_TYPE_SWITCH)
+print(Node.ACTUATOR.value)
+print(ActuatorType.SWITCH.value)
 print(api_constants.UNIT_BOOLEAN)
 
 print("")
@@ -43,7 +44,10 @@ print("")
 
 # but I would recommend using the objects to get and set values like so:
 # receive a list of all actuators
-actuators = api.get_all_actuators()
+# actuators = api.get_all_actuators()
+
+# or only the enabled ones (use False for disabled ones)
+actuators = api.get_all_actuators(True)
 
 print("Actuators:")
 # print their name and current value
@@ -51,8 +55,8 @@ for actuator in actuators:
     print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.value()) + ")")
     ##" " + str(actuator.unit()) +
 
-# receive a list of all sensors
-sensors = api.get_all_sensors()
+# receive a list of all enabled sensors
+sensors = api.get_all_sensors(True)
 
 print("")
 print("Sensors:")
@@ -65,7 +69,7 @@ for sensor in sensors:
 changing_actuator = actuators[6]  # pick one from the received list
 print("Old value: " + str(changing_actuator.value()))  # print old value
 print("Old new_value: " + str(changing_actuator.new_value()))  # print old new_value
-changing_actuator.set_value(16)  # use the object method to set a new value (turn light on)
+changing_actuator.set_value(1)  # use the object method to set a new value (turn light on)
 print("Updated value: " + str(
     changing_actuator.value()))  # print the updated value (will be updated with the response of the gateway)
 print("Updated new_value: " + str(
@@ -79,10 +83,10 @@ print("")
 
 # list all functions
 for func in changing_actuator.get_functions():
-    print("Function " + str(func.id()) + " (" + func.type() + "): " + func.description())
+    print("Function " + str(func.id()) + " (" + str(func.type()) + "): " + func.description())
 
 # find a function by type
-func_off = changing_actuator.get_function_by_type(api_constants.FUNCTION_TYPE_OFF)
+func_off = changing_actuator.get_function_by_type(FunctionType.OFF)
 if func_off:
     func_off.execute()
 
@@ -91,7 +95,7 @@ print("")
 func_0 = changing_actuator.get_function_by_id(1)
 if func_0:
     print("Function 1:")
-    print("Function " + str(func_0.id()) + " (" + func_0.type() + "): " + func_0.description())
+    print("Function " + str(func_0.id()) + " (" + str(func_0.type()) + "): " + func_0.description())
 
 print("")
 print("Updated value: " + str(

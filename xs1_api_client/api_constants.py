@@ -2,168 +2,204 @@
 XS1 HTTP Web API constants used to create GET request URLs and parse the JSON answer.
 """
 
-# === URL Parameters ===
-URL_PARAM_USER = 'user='
-"""'User' parameter"""
+from enum import Enum
 
-URL_PARAM_PASSWORD = 'pwd='
-"""'Password' parameter"""
 
-URL_PARAM_COMMAND = 'cmd='
-"""command parameter that specifies the method the api is queried with"""
+class UrlParam(Enum):
+    """
+    URL parameters
+    """
 
-URL_PARAM_NUMBER = 'number='
-"""number parameter that specifies the id of an actuator or sensor"""
+    USER = 'user'
+    """'User' parameter"""
 
-URL_PARAM_VALUE = 'value='
-"""'value' parameter that specifies the new value to set an actuator (or sensor) to"""
+    PASSWORD = 'pwd'
+    """'Password' parameter"""
 
-URL_PARAM_FUNCTION = 'function='
-"""parameter that specifies the function to execute (on an actuator)"""
+    COMMAND = 'cmd'
+    """command parameter that specifies the method the api is queried with"""
 
-# === XS1 Web API (HTTP) commands ===
-COMMAND_GET_PROTOCOL_INFO = 'get_protocol_info'
-"""Command to get information about the protocol version used by the gateway"""
+    NUMBER = 'number'
+    """number parameter that specifies the id of an actuator or sensor"""
 
-COMMAND_GET_CONFIG_INFO = 'get_config_info'
-"""Command to get (final) configuration information about the gateway"""
+    VALUE = 'value'
+    """'value' parameter that specifies the new value to set an actuator (or sensor) to"""
 
-COMMAND_GET_LIST_ACTUATORS = 'get_list_actuators'
-"""Command to get a list of all actuators"""
+    FUNCTION = 'function'
+    """parameter that specifies the function to execute (on an actuator)"""
 
-COMMAND_GET_LIST_SENSORS = 'get_list_sensors'
-"""Command to get a list of all sensors"""
 
-COMMAND_GET_STATE_ACTUATOR = 'get_state_actuator'
-"""Command to get the state of a specific actuator"""
+class Command(Enum):
+    """
+    XS1 Web API (HTTP) commands
+    """
 
-COMMAND_GET_STATE_SENSOR = 'get_state_sensor'
-"""Command to get the state of a specific sensor"""
+    GET_PROTOCOL_INFO = 'get_protocol_info'
+    """Command to get information about the protocol version used by the gateway"""
 
-COMMAND_SET_STATE_ACTUATOR = 'set_state_actuator'
-"""Command to set a new value on an actuator"""
+    GET_CONFIG_INFO = 'get_config_info'
+    """Command to get (final) configuration information about the gateway"""
 
-COMMAND_SET_STATE_SENSOR = 'set_state_sensor'
-"""Command to set a new value on a sensor (for debugging)"""
+    GET_LIST_ACTUATORS = 'get_list_actuators'
+    """Command to get a list of all actuators"""
 
-# === JSON API nodes ===
-NODE_VERSION = 'version'
-"""Node with protocol version info"""
+    GET_LIST_SENSORS = 'get_list_sensors'
+    """Command to get a list of all sensors"""
 
-NODE_INFO = 'info'
-"""Node with gateway specific information"""
+    GET_STATE_ACTUATOR = 'get_state_actuator'
+    """Command to get the state of a specific actuator"""
 
-NODE_ACTUATOR = 'actuator'
-"""Node with an array of actuators"""
+    GET_STATE_SENSOR = 'get_state_sensor'
+    """Command to get the state of a specific sensor"""
 
-NODE_SENSOR = 'sensor'
-"""Node with an array of sensors"""
+    SET_STATE_ACTUATOR = 'set_state_actuator'
+    """Command to set a new value on an actuator"""
 
-NODE_ERROR = 'error'
-"""Node containing the error code"""
+    SET_STATE_SENSOR = 'set_state_sensor'
+    """Command to set a new value on a sensor (for debugging)"""
 
-# error codes
-ERROR_CODE_INVALID_COMMAND = '01'
-"""Error code for 'invalid command' """
 
-ERROR_CODE_CMD_TYPE_MISSING = '02'
-"""Error code for 'cmd type missing'"""
+class Node(Enum):
+    """
+    JSON API nodes
+    """
 
-ERROR_CODE_NOT_FOUND = '03'
-"""Error code for 'number/name not found'"""
+    VERSION = 'version'
+    """Node with protocol version info"""
 
-ERROR_CODE_DUPLICATE = '04'
-"""Error code for 'duplicate name'"""
+    INFO = 'info'
+    """Node with gateway specific information"""
 
-ERROR_CODE_INVALID_SYSTEM = '05'
-"""Error code for 'invalid system'"""
+    ACTUATOR = 'actuator'
+    """Node with an array of actuators"""
 
-ERROR_CODE_INVALID_FUNCTION = '06'
-"""Error code for 'invalid function'"""
+    SENSOR = 'sensor'
+    """Node with an array of sensors"""
 
-ERROR_CODE_INVALID_DATE_TIME = '07'
-"""Error code for 'invalid date/time'"""
+    ERROR = 'error'
+    """Node containing the error code"""
 
-ERROR_CODE_OBJECT_NOT_FOUND = '08'
-"""Error code for 'object not found'"""
+    # device info nodes
+    DEVICE_NAME = 'devicename'
+    """Hostname"""
 
-ERROR_CODE_TYPE_NOT_VIRTUAL = '09'
-"""Error code for 'type not virtual'"""
+    DEVICE_HARDWARE_VERSION = 'hardware'
+    """Hardware revision"""
 
-ERROR_CODE_SYNTAX_ERROR = '10'
-"""Error code for 'syntax error'"""
+    DEVICE_BOOTLOADER_VERSION = 'bootloader'
+    """Bootloader version number"""
 
-ERROR_CODE_INVALID_TIME_RANGE = '11'
-"""Error code for 'error time range'"""
+    DEVICE_FIRMWARE_VERSION = 'firmware'
+    """Firmware version number"""
 
-ERROR_CODE_PROTOCOL_VERSION_MISMATCH = '12'
-"""Error code for 'protocol version mismatch'"""
+    DEVICE_UPTIME = 'uptime'
+    """Uptime in seconds"""
 
-ERROR_CODES = {
-    ERROR_CODE_INVALID_COMMAND: 'invalid command',
-    ERROR_CODE_CMD_TYPE_MISSING: 'cmd type missing',
-    ERROR_CODE_NOT_FOUND: 'number/name not found',
-    ERROR_CODE_DUPLICATE: 'duplicate name',
-    ERROR_CODE_INVALID_SYSTEM: 'invalid system',
-    ERROR_CODE_INVALID_FUNCTION: 'invalid function',
-    ERROR_CODE_INVALID_DATE_TIME: 'invalid date/time',
-    ERROR_CODE_OBJECT_NOT_FOUND: 'object not found',
-    ERROR_CODE_TYPE_NOT_VIRTUAL: 'type not virtual',
-    ERROR_CODE_SYNTAX_ERROR: 'syntax error',
-    ERROR_CODE_INVALID_TIME_RANGE: 'error time range',
-    ERROR_CODE_PROTOCOL_VERSION_MISMATCH: 'protocol version mismatch'
-}
-"""Dictionary with description values for each error code"""
+    DEVICE_MAC = 'mac'
+    """MAC address"""
 
-# device info nodes
-NODE_DEVICE_NAME = 'devicename'
-"""Hostname"""
+    # inner nodes
+    PARAM_ID = 'id'
+    """Device id (only unique within actuators/sensors)"""
 
-NODE_DEVICE_HARDWARE_VERSION = 'hardware'
-"""Hardware revision"""
+    PARAM_NUMBER = 'number'
+    """Alternative device id (only unique within actuators/sensors)"""
 
-NODE_DEVICE_BOOTLOADER_VERSION = 'bootloader'
-"""Bootloader version number"""
+    PARAM_NAME = 'name'
+    """Device name"""
 
-NODE_DEVICE_FIRMWARE_VERSION = 'firmware'
-"""Firmware version number"""
+    PARAM_TYPE = 'type'
+    """Device type"""
 
-NODE_DEVICE_UPTIME = 'uptime'
-"""Uptime in seconds"""
+    PARAM_VALUE = 'value'
+    """Current device value"""
 
-NODE_DEVICE_MAC = 'mac'
-"""MAC address"""
+    PARAM_NEW_VALUE = 'newvalue'
+    """New value to set for the device"""
 
-# inner nodes
-NODE_PARAM_ID = 'id'
-"""Device id (only unique within actuators/sensors)"""
+    PARAM_UTIME = 'utime'
+    """Time this device was last updated"""
 
-NODE_PARAM_NUMBER = 'number'
-"""Alternative device id (only unique within actuators/sensors)"""
+    PARAM_UNIT = 'unit'
+    """Device value unit"""
 
-NODE_PARAM_NAME = 'name'
-"""Device name"""
+    PARAM_FUNCTION = 'function'
+    """Array of functions"""
 
-NODE_PARAM_TYPE = 'type'
-"""Device type"""
+    PARAM_DESCRIPTION = 'dsc'
+    """Device description"""
 
-NODE_PARAM_VALUE = 'value'
-"""Current device value"""
 
-NODE_PARAM_NEW_VALUE = 'newvalue'
-"""New value to set for the device"""
+class ErrorCode(Enum):
+    """
+    Error codes
+    """
 
-NODE_PARAM_UTIME = 'utime'
-"""Time this device was last updated"""
+    INVALID_COMMAND = '01'
+    """Error code for 'invalid command' """
 
-NODE_PARAM_UNIT = 'unit'
-"""Device value unit"""
+    CMD_TYPE_MISSING = '02'
+    """Error code for 'cmd type missing'"""
 
-NODE_PARAM_FUNCTION = 'function'
-"""Array of functions"""
+    NOT_FOUND = '03'
+    """Error code for 'number/name not found'"""
 
-NODE_PARAM_DESCRIPTION = 'dsc'
-"""Device description"""
+    DUPLICATE = '04'
+    """Error code for 'duplicate name'"""
+
+    INVALID_SYSTEM = '05'
+    """Error code for 'invalid system'"""
+
+    INVALID_FUNCTION = '06'
+    """Error code for 'invalid function'"""
+
+    INVALID_DATE_TIME = '07'
+    """Error code for 'invalid date/time'"""
+
+    OBJECT_NOT_FOUND = '08'
+    """Error code for 'object not found'"""
+
+    TYPE_NOT_VIRTUAL = '09'
+    """Error code for 'type not virtual'"""
+
+    SYNTAX_ERROR = '10'
+    """Error code for 'syntax error'"""
+
+    INVALID_TIME_RANGE = '11'
+    """Error code for 'error time range'"""
+
+    PROTOCOL_VERSION_MISMATCH = '12'
+    """Error code for 'protocol version mismatch'"""
+
+    @staticmethod
+    def get_message(error_code) -> str:
+        if error_code == ErrorCode.INVALID_COMMAND:
+            return 'invalid command'
+        elif error_code == ErrorCode.CMD_TYPE_MISSING:
+            return 'cmd type missing'
+        elif error_code == ErrorCode.NOT_FOUND:
+            return 'number/name not found'
+        elif error_code == ErrorCode.DUPLICATE:
+            return 'duplicate name'
+        elif error_code == ErrorCode.INVALID_SYSTEM:
+            return 'invalid system'
+        elif error_code == ErrorCode.INVALID_FUNCTION:
+            return 'invalid function'
+        elif error_code == ErrorCode.INVALID_DATE_TIME:
+            return 'invalid date/time'
+        elif error_code == ErrorCode.OBJECT_NOT_FOUND:
+            return 'object not found'
+        elif error_code == ErrorCode.TYPE_NOT_VIRTUAL:
+            return 'type not virtual'
+        elif error_code == ErrorCode.SYNTAX_ERROR:
+            return 'syntax error'
+        elif error_code == ErrorCode.INVALID_TIME_RANGE:
+            return 'error time range'
+        elif error_code == ErrorCode.PROTOCOL_VERSION_MISMATCH:
+            return 'protocol version mismatch'
+        else:
+            return 'unknown error code'
+
 
 # node values
 VALUE_DISABLED = 'disabled'
@@ -172,65 +208,80 @@ VALUE_DISABLED = 'disabled'
 UNIT_BOOLEAN = 'boolean'
 """Boolean unit type"""
 
-# === Device Types ===
-# actuator
-ACTUATOR_TYPE_SWITCH = 'switch'
-ACTUATOR_TYPE_DIMMER = 'dimmer'
-ACTUATOR_TYPE_DOOR = 'door'
-ACTUATOR_TYPE_SUN_BLIND = 'sun-blind'
-ACTUATOR_TYPE_BLIND = 'blind'
-ACTUATOR_TYPE_SHUTTER = 'shutter'
-ACTUATOR_TYPE_SOUND = 'sound'
-ACTUATOR_TYPE_THERMOSTAT = 'temperature'
-ACTUATOR_TYPE_TIMERSWITCH = 'timerswitch'
-ACTUATOR_TYPE_WINDOW = 'window'
 
-# function
-FUNCTION_TYPE_ON = 'on'
-FUNCTION_TYPE_OFF = 'off'
+class ActuatorType(Enum):
+    """
+    Actuator types
+    """
 
-# sensor
-SENSOR_TYPE_OTHER = 'other'
-SENSOR_TYPE_REMOTECONTROL = 'remotecontrol'
-SENSOR_TYPE_HYGROMETER = 'hygrometer'
-SENSOR_TYPE_BAROMETER = 'barometer'
-SENSOR_TYPE_WIND_SPEED = 'windspeed'
-SENSOR_TYPE_WIND_DIRECTION = 'winddirection'
-SENSOR_TYPE_WIND_VARIANCE = 'windvariance'
-SENSOR_TYPE_LIGHT = 'light'
-SENSOR_TYPE_PYRANOMETER = 'pyranometer'
-SENSOR_TYPE_RAIN = 'rain'
-SENSOR_TYPE_RAIN_INTENSITY = 'rainintensity'
-SENSOR_TYPE_RAIN_1H = 'rain_1h'
-SENSOR_TYPE_RAIN_24H = 'rain_24h'
-SENSOR_TYPE_SOIL_TEMP = 'soiltemp'
-SENSOR_TYPE_SOIL_MOISTURE = 'soilmoisture'
-SENSOR_TYPE_LEAF_WETNESS = 'leafwetness'
-SENSOR_TYPE_WATERLEVEL = 'waterlevel'
-SENSOR_TYPE_MOTION = 'motion'
-SENSOR_TYPE_PRESENCE = 'presence'
-SENSOR_TYPE_SMOKEDETECTOR = 'smokedetector'
-SENSOR_TYPE_HEATDETECTOR = 'heatdetector'
-SENSOR_TYPE_WATERDETECTOR = 'waterdetector'
-SENSOR_TYPE_AIRQUALITY = 'air_quality'
-SENSOR_TYPE_WINDOW_OPEN = 'windowopen'
-SENSOR_TYPE_DOOR_OPEN = 'dooropen'
-SENSOR_TYPE_DOOR_BELL = 'doorbell'
-SENSOR_TYPE_ALARMMAT = 'alarmmat'
-SENSOR_TYPE_LIGHTBARRIER = 'lightbarrier'
-SENSOR_TYPE_FENCEDETECTOR = 'fencedetector'
-SENSOR_TYPE_MAIL = 'mail'
-SENSOR_TYPE_GAS_CO = 'gas_co'
-SENSOR_TYPE_GAS_BUTAN = 'gas_butan'
-SENSOR_TYPE_GAS_METHAN = 'gas_methan'
-SENSOR_TYPE_GAS_PROPAN = 'gas_propan'
-SENSOR_TYPE_WINDGUST = 'windgust'
-SENSOR_TYPE_UV_INDEX = 'uv_index'
-SENSOR_TYPE_POWER_CONSUMPTION = 'pwr_consump'
-SENSOR_TYPE_WATER_CONSUMPTION = 'wtr_consump'
-SENSOR_TYPE_GAS_CONSUMPTION = 'gas_consump'
-SENSOR_TYPE_OIL_CONSUMPTION = 'oil_consump'
-SENSOR_TYPE_POWER_PEAK = 'pwr_peak'
-SENSOR_TYPE_WATER_PEAK = 'wtr_peak'
-SENSOR_TYPE_GAS_PEAK = 'gas_peak'
-SENSOR_TYPE_OIL_PEAK = 'oil_peak'
+    SWITCH = 'switch'
+    DIMMER = 'dimmer'
+    DOOR = 'door'
+    SUN_BLIND = 'sun-blind'
+    BLIND = 'blind'
+    SHUTTER = 'shutter'
+    SOUND = 'sound'
+    THERMOSTAT = 'temperature'
+    TIMERSWITCH = 'timerswitch'
+    WINDOW = 'window'
+
+
+class FunctionType(Enum):
+    """
+    Function types
+    """
+
+    ON = 'on'
+    OFF = 'off'
+    UNKNOWN = 'unknown'
+
+
+class SensorType(Enum):
+    """
+    Sensor types
+    """
+
+    OTHER = 'other'
+    REMOTECONTROL = 'remotecontrol'
+    HYGROMETER = 'hygrometer'
+    BAROMETER = 'barometer'
+    WIND_SPEED = 'windspeed'
+    WIND_DIRECTION = 'winddirection'
+    WIND_VARIANCE = 'windvariance'
+    LIGHT = 'light'
+    PYRANOMETER = 'pyranometer'
+    RAIN = 'rain'
+    RAIN_INTENSITY = 'rainintensity'
+    RAIN_1H = 'rain_1h'
+    RAIN_24H = 'rain_24h'
+    SOIL_TEMP = 'soiltemp'
+    SOIL_MOISTURE = 'soilmoisture'
+    LEAF_WETNESS = 'leafwetness'
+    WATERLEVEL = 'waterlevel'
+    MOTION = 'motion'
+    PRESENCE = 'presence'
+    SMOKEDETECTOR = 'smokedetector'
+    HEATDETECTOR = 'heatdetector'
+    WATERDETECTOR = 'waterdetector'
+    AIRQUALITY = 'air_quality'
+    WINDOW_OPEN = 'windowopen'
+    DOOR_OPEN = 'dooropen'
+    DOOR_BELL = 'doorbell'
+    ALARMMAT = 'alarmmat'
+    LIGHTBARRIER = 'lightbarrier'
+    FENCEDETECTOR = 'fencedetector'
+    MAIL = 'mail'
+    GAS_CO = 'gas_co'
+    GAS_BUTAN = 'gas_butan'
+    GAS_METHAN = 'gas_methan'
+    GAS_PROPAN = 'gas_propan'
+    WINDGUST = 'windgust'
+    UV_INDEX = 'uv_index'
+    POWER_CONSUMPTION = 'pwr_consump'
+    WATER_CONSUMPTION = 'wtr_consump'
+    GAS_CONSUMPTION = 'gas_consump'
+    OIL_CONSUMPTION = 'oil_consump'
+    POWER_PEAK = 'pwr_peak'
+    WATER_PEAK = 'wtr_peak'
+    GAS_PEAK = 'gas_peak'
+    OIL_PEAK = 'oil_peak'
