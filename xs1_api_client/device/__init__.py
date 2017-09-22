@@ -17,6 +17,13 @@ class XS1Device(object):
         self._api_interface = api
         self._state = state
 
+    def __str__(self) -> str:
+        """
+        :return: String representation of this device
+        """
+        return "%s (ID: %i, Enabled: %s, Type: %s, Value: %s, New Value: %s, Unit: %s)" % (
+            self.name(), self.id(), self.enabled(), self.type(), self.value(), self.new_value(), self.unit())
+
     def set_state(self, new_state: dict) -> None:
         """
         Sets a new state for this device.

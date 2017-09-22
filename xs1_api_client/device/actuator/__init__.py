@@ -11,6 +11,9 @@ class XS1Actuator(XS1Device):
     def __init__(self, state, api):
         super(XS1Actuator, self).__init__(state, api)
 
+    def __str__(self):
+        return "Actuator: " + super(XS1Actuator, self).__str__()
+
     def update(self) -> None:
         """
         Updates the state of this actuator
@@ -107,6 +110,10 @@ class XS1Function(object):
         self._id = function_id
         self._type = function_type
         self._description = description
+
+    def __str__(self):
+        return "Function: %s (ID: %i, Type: %s, Description: %s)" % (
+            self.description(), self.id(), self.type(), self.description())
 
     def id(self) -> int:
         """

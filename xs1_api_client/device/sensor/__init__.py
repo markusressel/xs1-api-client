@@ -10,6 +10,9 @@ class XS1Sensor(XS1Device):
     def __init__(self, state, api):
         super(XS1Sensor, self).__init__(state, api)
 
+    def __str__(self):
+        return "Sensor: " + super(XS1Sensor, self).__str__()
+
     def update(self) -> None:
         """
         Updates the state of this sensor

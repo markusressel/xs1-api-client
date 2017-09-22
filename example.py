@@ -55,6 +55,9 @@ for actuator in actuators:
     print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.value()) + ")")
     ##" " + str(actuator.unit()) +
 
+    # or simply
+    # print(actuator)
+
 # receive a list of all enabled sensors
 sensors = api.get_all_sensors(True)
 
@@ -64,6 +67,9 @@ print("Sensors:")
 for sensor in sensors:
     print("Sensor " + str(sensor.id()) + ": " + sensor.name() + " (" + str(sensor.value()) + ")")
     ## + " " + str(sensor.unit())
+
+    # or simply
+    # print(sensor)
 
 # set a new value for an actuator
 changing_actuator = actuators[6]  # pick one from the received list
@@ -84,6 +90,9 @@ print("")
 # list all functions
 for func in changing_actuator.get_functions():
     print("Function " + str(func.id()) + " (" + str(func.type()) + "): " + func.description())
+
+    # or simply
+    # print(func)
 
 # find a function by type
 func_off = changing_actuator.get_function_by_type(FunctionType.OFF)
