@@ -1,7 +1,7 @@
 xs1-api-client
 ==============
 
-A python 3.3+ library for accessing actuator and sensor data on the the
+A python 3.4+ library for accessing actuator and sensor data on the the
 EZcontrol® XS1 Gateway using its HTTP API.
 
 Build Status
@@ -114,6 +114,13 @@ your actuators:
     for actuator in actuators:
         print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.type()) + ")")
 
+There is also an integrated ``__str__`` method to print out most of the useful properties just like this:
+
+::
+
+    for actuator in actuators:
+        print(actuator)
+
 Retrieving a single actuator is not yet possible.
 
 Retrieve an Actuator Value
@@ -170,9 +177,9 @@ and print them like this:
 ::
 
     for function in functions:
-        print("Function " + str(function.id()) + " (" + function.type() + "): " + function.description())
+        print(function)
 
-to execute one of the functions use type:
+to execute one of the functions type:
 
 ::
 
@@ -200,6 +207,13 @@ To retrieve a list of all sensors that are configured
 
     for sensor in sensors:
         print("Sensor " + str(sensor.id()) + ": " + sensor.name() + " (" + str(sensor.value()) + ")")
+
+Just like mentioned above you can also use:
+
+::
+
+    for sensor in sensors:
+        print(sensor)
 
 Updating Sensor Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
