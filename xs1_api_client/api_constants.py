@@ -35,10 +35,40 @@ class Command(Enum):
     """
 
     GET_PROTOCOL_INFO = 'get_protocol_info'
-    """Command to get information about the protocol version used by the gateway"""
+    """Command to get information about the protocol version used by the XS1"""
 
     GET_CONFIG_INFO = 'get_config_info'
-    """Command to get (final) configuration information about the gateway"""
+    """Command to get (final) configuration information about the XS1"""
+
+    GET_CONFIG_MAIN = 'get_config_main'
+    """Command to get additional configuration information about the XS1"""
+
+    GET_LIST_SYSTEMS = 'get_list_systems'
+    """Returns a list of currently compatible systems"""
+
+    GET_LIST_FUNCTIONS = 'get_list_functions'
+    """Returns a list of available functions / actions for actuators"""
+
+    GET_TYPES_ACTUATORS = 'get_types_actuators'
+    """Retrieves the types of compatible actuators"""
+
+    GET_TYPES_SENSORS = 'get_types_sensors'
+    """Retrieves the types of compatible sensors"""
+
+    GET_LIST_RFMODES = 'get_list_rfmodes'
+    """Returns a list of currently active and compatible RF modes of the XS1"""
+
+    GET_CONFIG_ACTUATOR = 'get_config_actuator'
+    """Command to get the configuration of an actuator"""
+
+    SET_CONFIG_ACTUATOR = 'set_config_actuator'
+    """Command to set the configuration of an actuator"""
+
+    GET_CONFIG_SENSOR = 'get_config_sensor'
+    """Command to get the configuration of a sensor"""
+
+    SET_CONFIG_SENSOR = 'set_config_sensor'
+    """Command to set the configuration of a sensor"""
 
     GET_LIST_ACTUATORS = 'get_list_actuators'
     """Command to get a list of all actuators"""
