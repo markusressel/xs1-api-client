@@ -1,3 +1,5 @@
+import re
+
 from xs1_api_client import api_constants
 from xs1_api_client.api_constants import Node
 
@@ -6,6 +8,8 @@ class XS1Device(object):
     """
     This is a generic XS1 device, all other objetcs inherit from this.
     """
+
+    NAME_PATTERN_VALID = re.compile(r'^[a-zA-Z0-9_]+$', re.IGNORECASE)
 
     def __init__(self, state: dict, api) -> None:
         """
@@ -61,6 +65,17 @@ class XS1Device(object):
         """
         return self._get_node_value(self._state, Node.PARAM_NAME)
 
+    def set_name(self, name: str):
+        """
+        Sets a new name for this device.
+        Keep in mind that there are some limitations for a device name.
+
+        :param name: the new name to set
+        :return: the new name of the actuator
+        """
+        if not self.NAME_PATTERN_VALID.match(name):
+            raise AttributeError("Name must be alphanumeric + underscore!")
+
     def value(self):
         """
         :return: the current value of this device
@@ -111,10 +126,15 @@ class XS1Device(object):
         """
         return api_constants.VALUE_DISABLED not in self._get_node_value(self._state, Node.PARAM_TYPE)
 
-    def _get_node_value(self, dictionary: dict, node: Node) -> str or None:
+    def _get_node_value(self, dictionary: dict, node: Node or str) -> str or None:
         """
         :param dictionary: the dictionary used for lookup
         :param node: the node to search for and retrieve its value
         :return: the value of the specified node or None if it doesn't exist
         """
-        return dictionary.get(node.value)
+        if isinstance(node, Node):
+            node_name = node.value
+        else:
+            node_name = str(node)
+
+        return dictionary.get(node_name)

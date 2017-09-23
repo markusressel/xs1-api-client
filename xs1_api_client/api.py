@@ -74,14 +74,21 @@ class XS1:
         if user and password:
             request_url += '&' + UrlParam.USER.value + '=' + user + '&' + UrlParam.PASSWORD.value + '=' + password
         # append command to execute
-        request_url += '&' + UrlParam.COMMAND.value + '=' + command.value
+        if isinstance(command, Command):
+            command = command.value
+        else:
+            command = str(command)
+        request_url += '&' + UrlParam.COMMAND.value + '=' + command
 
         # append any additional parameters
         if parameters:
             for key, value in parameters.items():
-                if not isinstance(key, UrlParam):
-                    raise Exception("Invalid type of parameter key! Needs to be of type UrlParam!")
-                request_url += '&' + key.value + '=' + str(value)
+                if isinstance(key, UrlParam):
+                    key = key.value
+                else:
+                    key = str(key)
+
+                request_url += '&' + key + '=' + str(value)
 
         _LOGGER.info("request_url: " + request_url)
 
@@ -130,6 +137,75 @@ class XS1:
         """
         self._config_info = self.send_request(Command.GET_CONFIG_INFO)
 
+    def get_config_main(self) -> dict:
+        """
+        :return: main configuration of the XS1
+        """
+        response = self.send_request(Command.GET_CONFIG_MAIN)
+        return self._get_node_value(response, "main")
+
+    def get_list_systems(self) -> list:
+        """
+        :return: a list of currently compatible systems
+        """
+        response = self.send_request(Command.GET_LIST_SYSTEMS)
+        return self._get_node_value(response, Node.SYSTEM)
+
+    def get_list_functions(self) -> list:
+        """
+        :return: a list of available functions / actions for actuators
+        """
+        response = self.send_request(Command.GET_LIST_FUNCTIONS)
+        return self._get_node_value(response, Node.FUNCTION)
+
+    def get_types_actuators(self) -> list:
+        """
+        :return: a list of compatible actuators
+        """
+        response = self.send_request(Command.GET_TYPES_ACTUATORS)
+        return self._get_node_value(response, "actuatortype")
+
+    def get_types_sensors(self) -> list:
+        """
+        :return: a list of compatible sensors
+        """
+        response = self.send_request(Command.GET_TYPES_SENSORS)
+        return self._get_node_value(response, "sensortype")
+
+    def get_config_actuator(self, actuator_id: int) -> dict:
+        """
+        :return: the configuration of a specific actuator
+        """
+        response = self.send_request(Command.GET_CONFIG_ACTUATOR, {UrlParam.NUMBER: actuator_id})
+        return self._get_node_value(response, Node.ACTUATOR)
+
+    def set_config_actuator(self, actuator_id: int, configuration: dict) -> dict:
+        """
+        :return: the configuration of a specific actuator
+        """
+
+        configuration[UrlParam.NUMBER.value] = actuator_id
+
+        response = self.send_request(Command.SET_CONFIG_ACTUATOR, configuration)
+        return self._get_node_value(response, Node.ACTUATOR)
+
+    def get_config_sensor(self, sensor_id: int) -> dict:
+        """
+        :return: the configuration of a specific sensor
+        """
+        response = self.send_request(Command.GET_CONFIG_SENSOR, {UrlParam.NUMBER: sensor_id})
+        return self._get_node_value(response, Node.SENSOR)
+
+    def set_config_sensor(self, sensor_id: int, configuration: dict) -> dict:
+        """
+        :return: the configuration of a specific actuator
+        """
+
+        configuration[UrlParam.NUMBER.value] = sensor_id
+
+        response = self.send_request(Command.SET_CONFIG_SENSOR, configuration)
+        return self._get_node_value(response, Node.SENSOR)
+
     def get_gateway_name(self) -> str:
         """
         :return: the hostname of the gateway
@@ -169,6 +245,20 @@ class XS1:
     def _get_config_info_value(self, node: Node):
         return self._config_info[Node.INFO.value][node.value]
 
+    def get_actuator(self, actuator_id: int) -> XS1Actuator or None:
+        """
+        Get an actuator with a specific id
+        :param actuator_id: the id of the actuator
+        :return: XS1Actuator
+        """
+
+        all_actuators = self.get_all_actuators()
+        for actuator in all_actuators:
+            if actuator.id() == actuator_id:
+                return actuator
+
+        return None
+
     def get_all_actuators(self, enabled: bool or None = None) -> [XS1Actuator]:
         """
         Requests the list of enabled actuators from the gateway.
@@ -200,6 +290,20 @@ class XS1:
                     continue
                 filtered_actuators.append(actuator)
             return filtered_actuators
+
+    def get_sensor(self, sensor_id: int) -> XS1Sensor or None:
+        """
+        Get a sensor with a specific id
+        :param sensor_id: the id of the actuator
+        :return: XS1Sensor
+        """
+
+        all_sensors = self.get_all_sensors()
+        for sensor in all_sensors:
+            if sensor.id() == sensor_id:
+                return sensor
+
+        return None
 
     def get_all_sensors(self, enabled: bool or None = None) -> [XS1Sensor]:
         """
@@ -292,10 +396,16 @@ class XS1:
                                      UrlParam.VALUE: value
                                  })
 
-    def _get_node_value(self, dictionary: dict, node: Node) -> str or None:
+    def _get_node_value(self, dictionary: dict, node: Node or str) -> any:
         """
         :param dictionary: the dictionary for lookup
         :param node: the node to retrieve the value for
         :return: the value of this node or None if it doesn't exist
         """
-        return dictionary.get(node.value)
+
+        if isinstance(node, Node):
+            node_name = node.value
+        else:
+            node_name = str(node)
+
+        return dictionary.get(node_name)

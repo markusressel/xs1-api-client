@@ -21,6 +21,33 @@ class XS1Sensor(XS1Device):
         new_value = self._get_node_value(response, Node.SENSOR)
         self.set_state(new_value)
 
+    def set_name(self, name: str):
+        """
+        Sets a new name for this device.
+        Keep in mind that there are some limitations for a device name.
+
+        :param name: the new name to set
+        :return: the new name of the sensor
+        """
+        # check name arg for validity
+        super(XS1Sensor, self).set_name(name)
+
+        config = self._api_interface.get_config_sensor(self.id())
+
+        # name is already set, to minimize flash writes don't write it again
+        if config["name"] == name:
+            return name
+
+        config["name"] = name
+
+        result = self._api_interface.set_config_sensor(self.id(), config)
+        new_name = self._get_node_value(result, "name")
+
+        # save new_name to internal state
+        self._state[Node.PARAM_NAME.value] = new_name
+
+        return new_name
+
     def set_value(self, value) -> None:
         """
         Sets a value for this sensor

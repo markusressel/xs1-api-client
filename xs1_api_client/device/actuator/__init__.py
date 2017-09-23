@@ -22,6 +22,33 @@ class XS1Actuator(XS1Device):
         new_value = self._get_node_value(response, Node.ACTUATOR)
         self.set_state(new_value)
 
+    def set_name(self, name: str):
+        """
+        Sets a new name for this device.
+        Keep in mind that there are some limitations for a device name.
+
+        :param name: the new name to set
+        :return: the new name of the actuator
+        """
+        # check name arg for validity
+        super(XS1Actuator, self).set_name(name)
+
+        config = self._api_interface.get_config_actuator(self.id())
+
+        # name is already set, to minimize flash writes don't write it again
+        if config["name"] == name:
+            return name
+
+        config["name"] = name
+
+        result = self._api_interface.set_config_actuator(self.id(), config)
+        new_name = self._get_node_value(result, "name")
+
+        # save new_name to internal state
+        self._state[Node.PARAM_NAME.value] = new_name
+
+        return new_name
+
     def set_value(self, value) -> None:
         """
         Sets a new value for this actuator

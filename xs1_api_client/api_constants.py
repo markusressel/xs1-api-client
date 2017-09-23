@@ -100,11 +100,17 @@ class Node(Enum):
     INFO = 'info'
     """Node with gateway specific information"""
 
+    SYSTEM = 'system'
+    """Node with gateway main configuration"""
+
     ACTUATOR = 'actuator'
     """Node with an array of actuators"""
 
     SENSOR = 'sensor'
     """Node with an array of sensors"""
+
+    FUNCTION = 'function'
+    """Node with an array of functions"""
 
     ERROR = 'error'
     """Node containing the error code"""
