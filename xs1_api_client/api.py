@@ -10,7 +10,7 @@ import logging
 
 import requests
 
-from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode
+from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, FunctionType
 from xs1_api_client.device.actuator import XS1Actuator
 from xs1_api_client.device.actuator.switch import XS1Switch
 from xs1_api_client.device.sensor import XS1Sensor
@@ -76,8 +76,11 @@ class XS1:
         # append command to execute
         if isinstance(command, Command):
             command = command.value
-        else:
+        elif isinstance(command, str):
             command = str(command)
+        else:
+            raise ValueError("Invalid command type! Must be a Command enum constant or a string!")
+
         request_url += '&' + UrlParam.COMMAND.value + '=' + command
 
         # append any additional parameters
@@ -88,7 +91,18 @@ class XS1:
                 else:
                     key = str(key)
 
-                request_url += '&' + key + '=' + str(value)
+                # append parameter to request url
+                if key == UrlParam.FUNCTION.value and isinstance(value, list):
+                    for idx, func in enumerate(value):
+                        function_type = func["type"]
+                        if isinstance(function_type, FunctionType):
+                            function_type = function_type.value
+
+                        request_url += '&function%d.type=%s' % (idx + 1, function_type)
+                        request_url += '&function%d.dsc=%s' % (idx + 1, func["dsc"])
+
+                else:
+                    request_url += '&' + key + '=' + str(value)
 
         _LOGGER.info("request_url: " + request_url)
 

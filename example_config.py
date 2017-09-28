@@ -8,8 +8,9 @@ to get more info.
 from random import randint
 
 from xs1_api_client import api as xs1api
-
 # Create an api object with private configuration
+from xs1_api_client.api_constants import UrlParam
+
 api = xs1api.XS1('192.168.2.75', None, None)
 
 print("")
@@ -32,20 +33,28 @@ print("")
 # keep in mind though that additional parameters are different for each type
 # and if you don't specify all necessary parameters the configuration might fail
 
-# this is a simple example to change the name of an existing configuration
+# this is a simple example to change the name of an existing actuator configuration
+# by using the RAW API method
+# there is also a much simpler version of this, seen below
 actuator_id_to_change = 17
+
+# retrieve the current configuration
 current_config = api.get_config_actuator(actuator_id_to_change)
 
 print(current_config)
 print("")
-new_config = current_config.copy()
-new_config["name"] = "My_new_name" + str(randint(0, 9))
 
+# copy the configuration and change the value of a key
+new_config = current_config.copy()
+new_config[UrlParam.NAME.value] = "My_new_name" + str(randint(0, 9))
+
+# set the changed configuration and print the result of the request
 print(api.set_config_actuator(actuator_id_to_change, new_config))
 
+# you can also use convenience methods directly on the actuators and sensors
 actuator = api.get_actuator(35)
 print("Old name: " + actuator.name())
-print("New name: " + actuator.set_name("FF_s2"))
+print("New name: " + actuator.set_name("ACTUATOR_35"))
 print("New name: " + actuator.name())
 
 sensor = api.get_sensor(8)
