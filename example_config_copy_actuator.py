@@ -105,7 +105,7 @@ my_config[UrlParam.FUNCTION] = [
 # and if you don't specify all necessary parameters the configuration might fail
 
 # in this example we will try to copy an existing actuator to a new actuator slot
-# ATTENTION: This will (if successfull) overwrite any existing configuration!
+# ATTENTION: This will (if successful) overwrite any existing configuration!
 # Make a BACKUP!
 
 actuator_id_to_copy = 30
