@@ -27,14 +27,6 @@ xs1_api_client.api_constants module
     :undoc-members:
     :show-inheritance:
 
-xs1_api_client.test_XS1 module
-------------------------------
-
-.. automodule:: xs1_api_client.test_XS1
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------

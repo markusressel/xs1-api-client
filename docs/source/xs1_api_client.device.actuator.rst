@@ -4,14 +4,6 @@ xs1_api_client.device.actuator package
 Submodules
 ----------
 
-xs1_api_client.device.actuator.base module
-------------------------------------------
-
-.. automodule:: xs1_api_client.device.actuator.base
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 xs1_api_client.device.actuator.switch module
 --------------------------------------------
 
