@@ -98,8 +98,7 @@ the **id**, **name**, **type** and other values.
 Retrieve Actuators
 ~~~~~~~~~~~~~~~~~~
 
-To retrieve a list of all actuators that are configured
-(``type != "disabled"``) use the following call:
+To retrieve a list of all actuators that are configured use the following call:
 
 ::
 
@@ -121,7 +120,17 @@ There is also an integrated ``__str__`` method to print out most of the useful p
     for actuator in actuators:
         print(actuator)
 
-Retrieving a single actuator is not yet possible.
+You can also filter the elements by ``enabled`` and ``disabled`` state using:
+
+::
+
+    enabled_actuators = api.get_all_actuators(True)
+
+Retrieve a single actuator simply by using:
+
+::
+
+    actuator_1 = api.get_actuator(1)
 
 Retrieve an Actuator Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -192,12 +201,17 @@ this value to the actual remote device like mentioned above.
 Retrieve a List of Sensors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To retrieve a list of all sensors that are configured
-(``type != "disabled"``) use the following call:
+To retrieve a list of all sensors that are configured use the following call:
 
 ::
 
     sensors = api.get_all_sensors()
+
+Just like with actuators you can filter the elements by ``enabled`` and ``disabled`` state using:
+
+::
+
+    enabled_sensors = api.get_all_sensors(True)
 
 | This will return a list of ``XS1Sensor`` objects which is the base
   class for all sensors.
@@ -215,6 +229,14 @@ Just like mentioned above you can also use:
     for sensor in sensors:
         print(sensor)
 
+or:
+
+::
+
+    sensor_1 = api.get_sensor(1)
+
+to retrieve a specific sensor.
+
 Updating Sensor Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -226,7 +248,7 @@ object call:
 
     sensor.update()
 
-After that the complete state of this sensor should be updated.
+After that the complete state of this sensor is updated.
 
 Disabled Devices
 ~~~~~~~~~~~~~~~~
