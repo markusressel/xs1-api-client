@@ -1,6 +1,6 @@
 """
 This is an example of how to use this api.
-There are other methods besides the ones shown here. Have a look at the documentation at
+There may be other methods besides the ones shown here. Have a look at the documentation at
 http://xs1-api-client.readthedocs.io/
 to get more info.
 """

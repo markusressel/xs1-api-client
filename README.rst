@@ -81,12 +81,6 @@ gateway information which you can output like this:
 Now that you have a connection to your gateway we can retrieve its
 configuration and set or retrieve values of the devices.
 
-Currently there is **no way of setting configuration data** with this
-library. This means you still have to do all your actuator and sensor
-configuration using the webinterface of the XS1.
-
-After you have done that you can head over to the next section.
-
 Devices
 ~~~~~~~
 
@@ -264,6 +258,28 @@ To check if a device has been configured in the XS1 web interface call:
     device.enabled()
 
 for both actuators and sensors alike.
+
+Get a device configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Since version 2.0 it is possible to get and set device configurations on the XS1 using this library.
+Please have a look at the ``example_config.py`` file to get an idea of how to retrieve a device configuration.
+
+Modify a device configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Before you proceed**
+Every configuration change will write to the internal flash memory of the XS1.
+Please keep in mind that that the use flash memory can and will probably degrade when written too often.
+
+Copy a device configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is a very detailed example in this project called ``example_config_copy_actuator.py`` that will show you
+how to copy a device configuration and also explains the most important configuration parameters you will have to use
+to set a custom configuration. Keep in mind though that the configuration parameters can vary between device
+types and systems.
+
 
 Contributing
 ============
