@@ -1,4 +1,7 @@
-xs1-api-client
+.. |pypi_version| image:: https://badge.fury.io/py/xs1-api-client.svg
+    :target: https://badge.fury.io/py/xs1-api-client
+
+xs1-api-client |pypi_version|
 ==============
 
 A python 3.4+ library for accessing actuator and sensor data on the the
