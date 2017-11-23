@@ -31,10 +31,15 @@ setup(
     author_email='mail@markusressel.de',
     url='https://www.markusressel.de',
     packages=find_packages(),
+    python_requires='>=3.4',
     classifiers=[
         DEVELOPMENT_STATUS,
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7'
     ],
     install_requires=[
         'requests', 'urllib3',
