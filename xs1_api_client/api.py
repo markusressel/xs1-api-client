@@ -9,6 +9,8 @@ import json
 import logging
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, FunctionType
 from xs1_api_client.device.actuator import XS1Actuator
@@ -22,6 +24,11 @@ class XS1:
     """
     This class is the main api interface that handles all communication with the XS1 gateway.
     """
+
+    # setup retry and backoff strategy
+    RETRY_STRATEGY = Retry(total=5,
+                           backoff_factor=0.1,
+                           status_forcelist=[500, 502, 503, 504])
 
     def __init__(self, host: str = None, user: str = None, password: str = None) -> None:
         """
@@ -106,8 +113,12 @@ class XS1:
 
         _LOGGER.info("request_url: " + request_url)
 
+        # create session
+        session = requests.Session()
+        session.mount('http://', HTTPAdapter(max_retries=self.RETRY_STRATEGY))
+
         # make request
-        response = requests.get(request_url, auth=(user, password))
+        response = session.get(request_url, auth=(user, password))
         response_text = response.text  # .encode('utf-8')
         response_text_json = response_text[
                              response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
