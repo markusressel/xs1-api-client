@@ -297,8 +297,8 @@ class XS1:
         all_actuators = []
         # create actuator objects
         for actuator in self._get_node_value(response, Node.ACTUATOR):
-            if (self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.SWITCH) or (
-                        self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.DIMMER
+            if (self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.SWITCH.value) or (
+                        self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.DIMMER.value
             ):
                 device = XS1Switch(actuator, self)
             else:
