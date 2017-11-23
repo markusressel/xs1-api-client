@@ -10,8 +10,15 @@ from xs1_api_client import api as xs1api
 from xs1_api_client import api_constants
 from xs1_api_client.api_constants import Node, ActuatorType, FunctionType
 
+print(Node.ACTUATOR)
+
 # Create an api object with private configuration
 api = xs1api.XS1('192.168.2.75', None, None)
+
+actuators = api.get_all_actuators()
+for actuator in actuators:
+    if actuator.type() == ActuatorType.SWITCH.value:
+        print(actuator.name())
 
 # Update the connection info at a later time
 api.set_connection_info('192.168.2.75', None, None)
