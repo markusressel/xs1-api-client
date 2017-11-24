@@ -2,7 +2,7 @@ import subprocess
 
 from setuptools import setup, find_packages
 
-VERSION_NUMBER = "2.1.2"
+VERSION_NUMBER = "2.1.3"
 
 GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
 GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
@@ -31,7 +31,7 @@ setup(
     author_email='mail@markusressel.de',
     url='https://www.markusressel.de',
     packages=find_packages(),
-    python_requires='>=3.4',
+    # python_requires='>=3.4',
     classifiers=[
         DEVELOPMENT_STATUS,
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
