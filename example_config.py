@@ -46,7 +46,7 @@ print("")
 
 # copy the configuration and change the value of a key
 new_config = current_config.copy()
-new_config[UrlParam.NAME.value] = "My_new_name" + str(randint(0, 9))
+new_config[UrlParam.NAME] = "My_new_name" + str(randint(0, 9))
 
 # set the changed configuration and print the result of the request
 print(api.set_config_actuator(actuator_id_to_change, new_config))

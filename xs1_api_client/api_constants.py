@@ -5,7 +5,32 @@ XS1 HTTP Web API constants used to create GET request URLs and parse the JSON an
 from enum import Enum
 
 
-class UrlParam(Enum):
+class ApiConstant(Enum):
+    """
+    Enum base class for all api constants
+    """
+
+    def __eq__(self, other) -> bool:
+        """
+        Compare an ApiConstant to another one.
+        If the other type is not an ApiConstant it will be compared by value using str(other)
+
+        :param other: object to compare with
+        :return: True if the same or at least the same value
+        """
+
+        if self.__class__ == other.__class__:
+            # if both are Enums compare directly
+            return self is other
+        else:
+            # otherwise try to compare just by value
+            return str(other) == self.value
+
+    def __hash__(self):
+        return super().__hash__()
+
+
+class UrlParam(ApiConstant):
     """
     URL parameters
     """
@@ -53,7 +78,7 @@ class UrlParam(Enum):
     LOG = 'log'
 
 
-class Command(Enum):
+class Command(ApiConstant):
     """
     XS1 Web API (HTTP) commands
     """
@@ -113,7 +138,7 @@ class Command(Enum):
     """Command to set a new value on a sensor (for debugging)"""
 
 
-class Node(Enum):
+class Node(ApiConstant):
     """
     JSON API nodes
     """
@@ -190,7 +215,7 @@ class Node(Enum):
     """Device description"""
 
 
-class ErrorCode(Enum):
+class ErrorCode(ApiConstant):
     """
     Error codes
     """
@@ -267,7 +292,7 @@ UNIT_BOOLEAN = 'boolean'
 """Boolean unit type"""
 
 
-class ActuatorType(Enum):
+class ActuatorType(ApiConstant):
     """
     Actuator types
     """
@@ -285,7 +310,7 @@ class ActuatorType(Enum):
     TIMERSWITCH = 'timerswitch'
 
 
-class FunctionType(Enum):
+class FunctionType(ApiConstant):
     """
     Function types
     """
@@ -318,7 +343,7 @@ class FunctionType(Enum):
     UNKNOWN = 'unknown'
 
 
-class SensorType(Enum):
+class SensorType(ApiConstant):
     """
     Sensor types
     """
@@ -374,7 +399,7 @@ class SensorType(Enum):
     OIL_PEAK = 'oil_peak'
 
 
-class SystemType(Enum):
+class SystemType(ApiConstant):
     VIRTUAL = 'virtual'
     FS10 = 'fs10'
     FS20 = 'fs20'

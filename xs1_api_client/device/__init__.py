@@ -1,6 +1,6 @@
 import re
 
-from xs1_api_client.api_constants import Node, ActuatorType
+from xs1_api_client.api_constants import Node, ActuatorType, SensorType
 
 
 class XS1Device(object):
@@ -52,11 +52,25 @@ class XS1Device(object):
             device_id = self._get_node_value(self._state, Node.PARAM_ID)
         return device_id
 
-    def type(self) -> str:
+    def type(self) -> ActuatorType or SensorType or str:
         """
         :return: the type of this device
         """
-        return self._get_node_value(self._state, Node.PARAM_TYPE)
+
+        device_type_string = self._get_node_value(self._state, Node.PARAM_TYPE)
+
+        # try to convert string value to Enum constant
+        try:
+            return ActuatorType(device_type_string)
+        except ValueError:
+            pass
+
+        try:
+            return SensorType(device_type_string)
+        except ValueError:
+            pass
+
+        return device_type_string
 
     def name(self) -> str:
         """
@@ -123,7 +137,7 @@ class XS1Device(object):
         """
         :return: Returns if this device is enabled.
         """
-        return ActuatorType.DISABLED.value != self._get_node_value(self._state, Node.PARAM_TYPE)
+        return not ActuatorType.DISABLED == self.type()
 
     def _get_node_value(self, dictionary: dict, node: Node or str) -> str or None:
         """

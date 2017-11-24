@@ -9,7 +9,7 @@ from xs1_api_client import api as xs1api
 # Create an api object with private configuration
 from xs1_api_client.api_constants import FunctionType, SystemType, ActuatorType, UrlParam
 
-api = xs1api.XS1('192.168.2.75', None, None)
+api = xs1api.XS1(None, None, None)
 
 # to set a completely new configuration for an actuator
 # you have to get all of its configuration parameters right
@@ -61,10 +61,13 @@ my_config = {}
 my_config[UrlParam.NAME] = "My_Actuator"
 
 # now provide a system
-my_config[UrlParam.SYSTEM] = SystemType.IT.value
+# Note: You can safely use Enum constants to specify keys and values.
+# The library will automatically take care of that for you and convert them to the
+# correct string representation for use in a http request
+my_config[UrlParam.SYSTEM] = SystemType.IT
 
 # and a corresponding type
-my_config[UrlParam.TYPE] = ActuatorType.SWITCH.value
+my_config[UrlParam.TYPE] = ActuatorType.SWITCH
 
 # now comes the tricky part
 # provide a "connection" configuration for your device
@@ -78,20 +81,21 @@ my_config['address'] = 5
 # you can set those individually using exact url parameters like this
 
 my_config[UrlParam.FUNCTION1_DSC] = "On"
-my_config[UrlParam.FUNCTION1_TYPE] = FunctionType.ON.value
+my_config[UrlParam.FUNCTION1_TYPE] = FunctionType.ON
 
 my_config[UrlParam.FUNCTION2_DSC] = "Off"
-my_config[UrlParam.FUNCTION2_TYPE] = FunctionType.OFF.value
+my_config[UrlParam.FUNCTION2_TYPE] = FunctionType.OFF
 
 my_config[UrlParam.FUNCTION3_DSC] = ""
-my_config[UrlParam.FUNCTION3_TYPE] = FunctionType.DISABLED.value
+my_config[UrlParam.FUNCTION3_TYPE] = FunctionType.DISABLED
 
 my_config[UrlParam.FUNCTION4_DSC] = ""
-my_config[UrlParam.FUNCTION4_TYPE] = FunctionType.DISABLED.value
+my_config[UrlParam.FUNCTION4_TYPE] = FunctionType.DISABLED
 
 # you can also use a list of dictionaries instead
 # like seen in a json configuration response from the gateway
 # the functions will be numbered ascending
+# Note: Behaviour when both methods are used simultaneously is undefined.
 
 my_config[UrlParam.FUNCTION] = [
     {"type": FunctionType.ON, "dsc": "On"},
@@ -110,6 +114,8 @@ my_config[UrlParam.FUNCTION] = [
 
 actuator_id_to_copy = 30
 target_id = 31
+
+api.set_config_actuator(target_id, my_config)
 
 # retrieve the current configuration
 configuration = api.get_config_actuator(actuator_id_to_copy)

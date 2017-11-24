@@ -12,7 +12,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, FunctionType
+from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, FunctionType, ApiConstant
 from xs1_api_client.device.actuator import XS1Actuator
 from xs1_api_client.device.actuator.switch import XS1Switch
 from xs1_api_client.device.sensor import XS1Sensor
@@ -60,7 +60,8 @@ class XS1:
         self._user = user
         self._password = password
 
-        self.update_config_info()
+        if host:
+            self.update_config_info()
 
     def send_request(self, command: Command, parameters: dict = None) -> dict:
         """
@@ -76,10 +77,10 @@ class XS1:
         password = self._password
 
         # create request url
-        request_url = 'http://' + host + '/control?callback=callback'
+        request_url = "http://%s/control?callback=callback" % host
         # append credentials, if any
         if user and password:
-            request_url += '&' + UrlParam.USER.value + '=' + user + '&' + UrlParam.PASSWORD.value + '=' + password
+            request_url += "&%s=%s&%s=%s" % (UrlParam.USER.value, user, UrlParam.PASSWORD.value, password)
         # append command to execute
         if isinstance(command, Command):
             command = command.value
@@ -88,28 +89,52 @@ class XS1:
         else:
             raise ValueError("Invalid command type! Must be a Command enum constant or a string!")
 
-        request_url += '&' + UrlParam.COMMAND.value + '=' + command
+        request_url += "&%s=%s" % (UrlParam.COMMAND.value, command)
 
         # append any additional parameters
         if parameters:
-            for key, value in parameters.items():
-                if isinstance(key, UrlParam):
-                    key = key.value
-                else:
-                    key = str(key)
 
+            def process_parameters(params: dict) -> dict:
+                """
+                Removes duplicates and replaces ApiConstants (Enums) with it's value
+
+                :param params: parameters to process
+                :return: cleaned up parameters
+                """
+
+                processed = {}
+                for k, v in params.items():
+                    # special treatment when a list of functions is found
+                    if k == UrlParam.FUNCTION and isinstance(v, list):
+                        for idx, func in enumerate(v):
+                            function_type = func["type"]
+                            if isinstance(function_type, FunctionType):
+                                function_type = function_type.value
+
+                            processed['function%d.type' % (idx + 1)] = str(function_type)
+                            processed['function%d.dsc' % (idx + 1)] = str(func["dsc"])
+
+                        continue
+
+                    # if the value is an enum, use it's value instead
+                    if isinstance(v, ApiConstant):
+                        v = v.value
+
+                    # if the key is an enum, use it's value as the key
+                    # and give it priority over other parameters that might have the same key
+                    if isinstance(k, ApiConstant):
+                        processed[k.value] = v
+                    else:
+                        k = str(k)
+                        if k not in processed:
+                            processed[k] = v
+
+                return processed
+
+            processed_params = process_parameters(parameters)
+            for key, value in processed_params.items():
                 # append parameter to request url
-                if key == UrlParam.FUNCTION.value and isinstance(value, list):
-                    for idx, func in enumerate(value):
-                        function_type = func["type"]
-                        if isinstance(function_type, FunctionType):
-                            function_type = function_type.value
-
-                        request_url += '&function%d.type=%s' % (idx + 1, function_type)
-                        request_url += '&function%d.dsc=%s' % (idx + 1, func["dsc"])
-
-                else:
-                    request_url += '&' + key + '=' + str(value)
+                request_url += "&%s=%s" % (key, value)
 
         _LOGGER.info("request_url: " + request_url)
 
@@ -209,7 +234,7 @@ class XS1:
         :return: the configuration of a specific actuator
         """
 
-        configuration[UrlParam.NUMBER.value] = actuator_id
+        configuration[UrlParam.NUMBER] = actuator_id
 
         response = self.send_request(Command.SET_CONFIG_ACTUATOR, configuration)
         return self._get_node_value(response, Node.ACTUATOR)
@@ -297,9 +322,8 @@ class XS1:
         all_actuators = []
         # create actuator objects
         for actuator in self._get_node_value(response, Node.ACTUATOR):
-            if (self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.SWITCH.value) or (
-                        self._get_node_value(actuator, Node.PARAM_TYPE) == ActuatorType.DIMMER.value
-            ):
+            actuator_type = self._get_node_value(actuator, Node.PARAM_TYPE)
+            if ActuatorType.SWITCH == actuator_type or ActuatorType.DIMMER == actuator_type:
                 device = XS1Switch(actuator, self)
             else:
                 device = XS1Actuator(actuator, self)
