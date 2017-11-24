@@ -262,8 +262,6 @@ class ErrorCode(Enum):
 
 
 # node values
-VALUE_DISABLED = 'disabled'
-"""'Disabled' type"""
 
 UNIT_BOOLEAN = 'boolean'
 """Boolean unit type"""

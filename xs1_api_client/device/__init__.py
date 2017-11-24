@@ -1,7 +1,6 @@
 import re
 
-from xs1_api_client import api_constants
-from xs1_api_client.api_constants import Node
+from xs1_api_client.api_constants import Node, ActuatorType
 
 
 class XS1Device(object):
@@ -124,7 +123,7 @@ class XS1Device(object):
         """
         :return: Returns if this device is enabled.
         """
-        return api_constants.VALUE_DISABLED not in self._get_node_value(self._state, Node.PARAM_TYPE)
+        return ActuatorType.DISABLED.value != self._get_node_value(self._state, Node.PARAM_TYPE)
 
     def _get_node_value(self, dictionary: dict, node: Node or str) -> str or None:
         """

@@ -1,4 +1,3 @@
-from xs1_api_client import api_constants
 from xs1_api_client.api_constants import Node, FunctionType
 from xs1_api_client.device import XS1Device
 
@@ -89,7 +88,7 @@ class XS1Actuator(XS1Device):
         """
         functions = []
         for idx, xs1_function in enumerate(self._get_node_value(self._state, Node.PARAM_FUNCTION)):
-            if self._get_node_value(xs1_function, Node.PARAM_TYPE) != api_constants.VALUE_DISABLED:
+            if self._get_node_value(xs1_function, Node.PARAM_TYPE) != FunctionType.DISABLED.value:
                 try:
                     function_type = FunctionType(self._get_node_value(xs1_function, Node.PARAM_TYPE))
                 except ValueError:
