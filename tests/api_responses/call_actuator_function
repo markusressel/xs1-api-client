@@ -1,0 +1,24 @@
+{
+        "version": 16,
+        "type": "set_state_actuator",
+        "actuator": {
+                "number": 3,
+                "name": "Markus_Nachttisch",
+                "type": "switch",
+                "value": 0.0,
+                "newvalue": 0.0,
+                "unit": "%",
+                "utime": 1511492305,
+                "date": {
+                        "weekday": "fr",
+                        "day": 24,
+                        "month": 11,
+                        "year": 2017
+                },
+                "time": {
+                        "hour": 3,
+                        "min": 58,
+                        "sec": 25
+                }
+        }
+}

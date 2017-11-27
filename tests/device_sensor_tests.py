@@ -46,3 +46,10 @@ class TestXS1(XS1TestBase):
 
         response = self._underTest.set_config_sensor(2, new_config)
         self.assertIsNotNone(response)
+
+    def test_api_get_state_sensor(self):
+        api_response = TestXS1.get_api_response("get_state_sensor")
+        self._underTest._send_request = MagicMock(return_value=api_response)
+
+        response = self._underTest.get_state_sensor(1)
+        self.assertIsNotNone(response)

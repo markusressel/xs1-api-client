@@ -1,0 +1,24 @@
+{
+        "version": 16,
+        "type": "get_state_actuator",
+        "actuator": {
+                "number": 1,
+                "name": "Markus_Temp",
+                "type": "disabled",
+                "value": 0.0,
+                "newvalue": 0.0,
+                "unit": "%",
+                "utime": 0,
+                "date": {
+                        "weekday": "th",
+                        "day": 1,
+                        "month": 1,
+                        "year": 1970
+                },
+                "time": {
+                        "hour": 1,
+                        "min": 0,
+                        "sec": 0
+                }
+        }
+}
