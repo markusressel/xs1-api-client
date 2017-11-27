@@ -23,7 +23,7 @@ Build Status
 .. |codebeat_master| image:: https://codebeat.co/badges/f11a5607-2193-4e86-b924-fc4b1698ec8f
     :target: https://codebeat.co/projects/github-com-markusressel-xs1-api-client-master
     
-.. |codebeat_beta| image:: https://codebeat.co/badges/f11a5607-2193-4e86-b924-xxxxxxxxx
+.. |codebeat_beta| image:: https://codebeat.co/badges/f11a5607-2193-4e86-b924-ca2fbeb53388
     :target: https://codebeat.co/projects/github-com-markusressel-xs1-api-client-beta
     
 .. |codebeat_dev| image:: https://codebeat.co/badges/dc91633f-bf08-4314-8da4-31cae22a8706
