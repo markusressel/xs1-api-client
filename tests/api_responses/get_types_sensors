@@ -1,0 +1,201 @@
+{
+        "version": 16,
+        "type": "get_types_sensors",
+        "sensortype": [
+                {
+                        "name": "disabled",
+                        "unit": ""
+                },
+                {
+                        "name": "other",
+                        "unit": ""
+                },
+                {
+                        "name": "remotecontrol",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "temperature",
+                        "unit": "°C"
+                },
+                {
+                        "name": "hygrometer",
+                        "unit": "%"
+                },
+                {
+                        "name": "barometer",
+                        "unit": "hPa"
+                },
+                {
+                        "name": "windspeed",
+                        "unit": "km/h"
+                },
+                {
+                        "name": "winddirection",
+                        "unit": "°"
+                },
+                {
+                        "name": "windvariance",
+                        "unit": "variance"
+                },
+                {
+                        "name": "light",
+                        "unit": "lux"
+                },
+                {
+                        "name": "pyranometer",
+                        "unit": "W/m²"
+                },
+                {
+                        "name": "rain",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "rainintensity",
+                        "unit": "mm/h"
+                },
+                {
+                        "name": "rain_1h",
+                        "unit": "mm/h"
+                },
+                {
+                        "name": "rain_24h",
+                        "unit": "mm/h"
+                },
+                {
+                        "name": "soiltemp",
+                        "unit": "°C"
+                },
+                {
+                        "name": "soilmoisture",
+                        "unit": "%"
+                },
+                {
+                        "name": "leafwetness",
+                        "unit": "%"
+                },
+                {
+                        "name": "waterlevel",
+                        "unit": "m"
+                },
+                {
+                        "name": "motion",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "presence",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "smokedetector",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "heatdetector",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "waterdetector",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "air_quality",
+                        "unit": "%"
+                },
+                {
+                        "name": "windowbreak",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "windowopen",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "dooropen",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "doorbell",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "alarmmat",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "lightbarrier",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "fencedetector",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "mail",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "counter",
+                        "unit": ""
+                },
+                {
+                        "name": "counterdiff",
+                        "unit": ""
+                },
+                {
+                        "name": "gas_co",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "gas_butan",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "gas_methan",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "gas_propan",
+                        "unit": "boolean"
+                },
+                {
+                        "name": "windgust",
+                        "unit": "km/h"
+                },
+                {
+                        "name": "uv_index",
+                        "unit": ""
+                },
+                {
+                        "name": "pwr_consump",
+                        "unit": "W/h"
+                },
+                {
+                        "name": "pwr_peak",
+                        "unit": "W/h"
+                },
+                {
+                        "name": "wtr_consump",
+                        "unit": "dm³"
+                },
+                {
+                        "name": "wtr_peak",
+                        "unit": "dm³"
+                },
+                {
+                        "name": "gas_consump",
+                        "unit": "dm³"
+                },
+                {
+                        "name": "gas_peak",
+                        "unit": "dm³"
+                },
+                {
+                        "name": "oil_consump",
+                        "unit": "dm³"
+                },
+                {
+                        "name": "oil_peak",
+                        "unit": "dm³"
+                }]
+}

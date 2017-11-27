@@ -46,7 +46,7 @@ class XS1:
 
         self.set_connection_info(host, user, password)
 
-    def set_connection_info(self, host, user, password) -> None:
+    def set_connection_info(self, host: str, user: str = None, password: str = None) -> None:
         """
         Sets private connection info for this XS1 instance.
         This XS1 instance will also immediately use this connection info.
@@ -62,6 +62,27 @@ class XS1:
 
         if host:
             self.update_config_info()
+
+    def get_host(self) -> str or None:
+        """
+        :return: the currently set host address
+        """
+
+        return self._host
+
+    def get_user(self) -> str or None:
+        """
+        :return: the currently set user used for authentication
+        """
+
+        return self._user
+
+    def get_password(self) -> str or None:
+        """
+        :return: the currently set password used for authentication
+        """
+
+        return self._password
 
     def call_api(self, command: Command, parameters: dict = None) -> dict:
         """
@@ -88,6 +109,9 @@ class XS1:
         :param parameters: additional parameters
         :return: request url
         """
+
+        if not self._host:
+            raise Exception("Missing host!")
 
         # create request url
         request_url = "http://%s/control?callback=callback" % self._host

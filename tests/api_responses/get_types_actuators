@@ -1,0 +1,38 @@
+{
+        "version": 16,
+        "type": "get_types_actuators",
+        "actuatortype": [
+                {
+                        "name": "disabled"
+                },
+                {
+                        "name": "switch"
+                },
+                {
+                        "name": "dimmer"
+                },
+                {
+                        "name": "blind"
+                },
+                {
+                        "name": "sun-blind"
+                },
+                {
+                        "name": "door"
+                },
+                {
+                        "name": "window"
+                },
+                {
+                        "name": "temperature"
+                },
+                {
+                        "name": "sound"
+                },
+                {
+                        "name": "shutter"
+                },
+                {
+                        "name": "timerswitch"
+                }]
+}

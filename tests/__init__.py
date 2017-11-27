@@ -1,5 +1,6 @@
 import json
 import unittest
+from unittest.mock import MagicMock
 
 from xs1_api_client import api as xs1api
 
@@ -7,8 +8,19 @@ from xs1_api_client import api as xs1api
 class XS1TestBase(unittest.TestCase):
     _underTest = None
 
+    _test_host = "testhost"
+
     def setUp(self):
         self._underTest = xs1api.XS1()
+
+        old = self._underTest._send_request
+
+        api_response = XS1TestBase.get_api_response("get_config_info")
+        self._underTest._send_request = MagicMock(return_value=api_response)
+
+        self._underTest.set_connection_info(self._test_host)
+
+        self._underTest._send_request = old
 
     def tearDown(self):
         pass
