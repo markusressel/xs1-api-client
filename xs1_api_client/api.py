@@ -447,7 +447,7 @@ class XS1:
                 filtered_sensors.append(sensor)
             return filtered_sensors
 
-    def get_state_actuator(self, actuator_id) -> dict:
+    def get_state_actuator(self, actuator_id: int) -> dict:
         """
         Gets the current state of the specified actuator.
 
@@ -457,7 +457,7 @@ class XS1:
         return self.call_api(Command.GET_STATE_ACTUATOR,
                              {UrlParam.NUMBER: actuator_id})
 
-    def get_state_sensor(self, sensor_id) -> dict:
+    def get_state_sensor(self, sensor_id: int) -> dict:
         """
         Gets the current state of the specified sensor.
 
@@ -469,7 +469,7 @@ class XS1:
                                  UrlParam.NUMBER: sensor_id,
                              })
 
-    def call_actuator_function(self, actuator_id, function) -> dict:
+    def call_actuator_function(self, actuator_id: int, function) -> dict:
         """
         Executes a function on the specified actuator and sets the response on the passed in actuator.
 
@@ -484,7 +484,7 @@ class XS1:
                                  UrlParam.FUNCTION: function
                              })
 
-    def set_actuator_value(self, actuator_id, value) -> dict:
+    def set_actuator_value(self, actuator_id: int, value) -> dict:
         """
         Sets a new value for the specified actuator.
 
@@ -499,7 +499,7 @@ class XS1:
                                  UrlParam.VALUE: value
                              })
 
-    def set_sensor_value(self, sensor_id, value) -> dict:
+    def set_sensor_value(self, sensor_id: int, value) -> dict:
         """
         Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
