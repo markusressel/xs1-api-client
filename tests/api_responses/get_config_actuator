@@ -1,0 +1,12 @@
+{"version": 15, "type": "get_config_actuator",
+"actuator": {"number": 1, "id": 1,
+            "name": "Fernsehlampe", "system": "ab400",
+            "type": "switch", "hc1": 26, "hc2": 0,
+            "address": 1,
+            "function": [{"type": "on", "dsc": "ON"},
+                         {"type": "off", "dsc": "OFF"},
+                         {"type": "disabled",
+                          "dsc": ""},
+                         {"type": "disabled",
+                          "dsc": ""}], "room": 1,
+            "x": 0, "y": 0, "z": 0, "log": "off"}}

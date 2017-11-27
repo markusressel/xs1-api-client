@@ -1,0 +1,121 @@
+{
+	"version": 16,
+	"type": "get_list_systems",
+	"system": [
+		{
+			"name": "virtual",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "dim_up", "dim_down", "absolut", "off_wait_on"]
+		},
+		{
+			"name": "fs10",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait"]
+		},
+		{
+			"name": "fs20",
+			"functions": [ "disabled", "on", "off", "dim_absolut", "toggle", "on_wait_off", "dim_up", "dim_down", "absolut", "special", "wait", "long_on", "long_off", "off_wait_on"]
+		},
+		{
+			"name": "rs200",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait", "long_on", "long_off"]
+		},
+		{
+			"name": "ab400",
+			"functions": [ "disabled", "on", "off", "on_wait_off", "wait", "long_on", "long_off", "off_wait_on"]
+		},
+		{
+			"name": "ab601",
+			"functions": [ "disabled", "on", "off", "on_wait_off"]
+		},
+		{
+			"name": "it",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "absolut", "wait", "long_on", "long_off", "off_wait_on", "on_wait_on", "off_wait_off", "impuls"]
+		},
+		{
+			"name": "rev",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait"]
+		},
+		{
+			"name": "bsquigg",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait"]
+		},
+		{
+			"name": "marmi",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "dim_up", "dim_down", "wait"]
+		},
+		{
+			"name": "fc1",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait"]
+		},
+		{
+			"name": "oasefm",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "learn", "wait"]
+		},
+		{
+			"name": "rs862",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait"]
+		},
+		{
+			"name": "ws433",
+			"functions": []
+		},
+		{
+			"name": "ws300",
+			"functions": []
+		},
+		{
+			"name": "fht",
+			"functions": [ "disabled", "auto", "manual"]
+		},
+		{
+			"name": "hms",
+			"functions": []
+		},
+		{
+			"name": "wmr200",
+			"functions": []
+		},
+		{
+			"name": "em",
+			"functions": []
+		},
+		{
+			"name": "vent831",
+			"functions": []
+		},
+		{
+			"name": "warema",
+			"functions": [ "disabled", "on", "off", "learn", "blind_abs", "wait", "long_on", "long_off", "stop", "button_short", "button_long"]
+		},
+		{
+			"name": "bgj",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "dim_up", "dim_down", "absolut", "wait", "long_on", "long_off", "off_wait_on"]
+		},
+		{
+			"name": "rsl",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "learn", "absolut", "wait", "off_wait_on"]
+		},
+		{
+			"name": "he",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "wait", "off_wait_on"]
+		},
+		{
+			"name": "it2",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "dim_up", "dim_down", "absolut", "wait", "long_on", "long_off", "off_wait_on", "on_wait_on", "off_wait_off"]
+		},
+		{
+			"name": "fa20rf",
+			"functions": [ "disabled", "on", "off", "absolut", "wait", "impuls"]
+		},
+		{
+			"name": "rgbled1",
+			"functions": [ "disabled", "on", "off", "on_wait_off", "dim_up", "dim_down", "absolut", "wait"]
+		},
+		{
+			"name": "schalk",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "absolut", "wait", "long_on", "long_off", "stop", "off_wait_on", "on_wait_on", "off_wait_off", "impuls"]
+		},
+		{
+			"name": "ab500",
+			"functions": [ "disabled", "on", "off", "toggle", "on_wait_off", "dim_up", "dim_down", "absolut", "wait", "long_on", "long_off", "off_wait_on", "on_wait_on", "off_wait_off"]
+		}]
+}

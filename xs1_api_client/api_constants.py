@@ -58,6 +58,9 @@ class UrlParam(ApiConstant):
     FUNCTION = 'function'
     """parameter that specifies the function to execute (on an actuator)"""
 
+    HC1 = "hc1"
+    HC2 = "hc2"
+
     ADDRESS = 'address'
 
     INITVALUE = 'initvalue'
@@ -74,6 +77,10 @@ class UrlParam(ApiConstant):
     FACTOR = 'factor'
 
     OFFSET = 'offset'
+
+    X = 'x'
+    Y = 'y'
+    Z = 'z'
 
     LOG = 'log'
 

@@ -1,0 +1,7 @@
+{"version": 15, "type": "set_config_sensor",
+"sensor": {"number": 2, "id": 0, "name": "Keller_",
+           "system": "ws300", "type": "hygrometer",
+           "hc1": 0, "hc2": 0, "address": 3,
+           "factor": 1.000000, "offset": 0.000000,
+           "room": 0, "x": 0, "y": 0, "z": 0,
+           "log": "off"}}

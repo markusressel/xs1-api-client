@@ -12,7 +12,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, FunctionType, ApiConstant
+from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, ErrorCode, ApiConstant
 from xs1_api_client.device.actuator import XS1Actuator
 from xs1_api_client.device.actuator.switch import XS1Switch
 from xs1_api_client.device.sensor import XS1Sensor
@@ -63,13 +63,30 @@ class XS1:
         if host:
             self.update_config_info()
 
-    def send_request(self, command: Command, parameters: dict = None) -> dict:
+    def call_api(self, command: Command, parameters: dict = None) -> dict:
         """
         Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
 
         :param command: command parameter for the URL (see api_constants)
         :param parameters: additional parameters needed for the specified command like 'number=3' passed in as a dictionary
         :return: the api response as a json object
+        """
+
+        request_url = self._build_request_url(command, parameters)
+        response = self._send_request(request_url)
+
+        # raises an exception if anything is wrong
+        self._check_errors(command, parameters, response)
+
+        return response
+
+    def _build_request_url(self, command: Command, parameters: dict = None) -> str:
+        """
+        Builds a request url from the input parameters
+
+        :param command: the main command
+        :param parameters: additional parameters
+        :return: request url
         """
 
         host = self._host
@@ -107,12 +124,22 @@ class XS1:
                     # special treatment when a list of functions is found
                     if k == UrlParam.FUNCTION and isinstance(v, list):
                         for idx, func in enumerate(v):
-                            function_type = func["type"]
-                            if isinstance(function_type, FunctionType):
+                            function_type = None
+                            function_description = None
+
+                            for k2, v2 in func.items():
+                                if k2 == "type":
+                                    function_type = v2
+                                if k2 == "dsc":
+                                    function_description = v2
+
+                            if isinstance(function_type, ApiConstant):
                                 function_type = function_type.value
+                            if isinstance(function_description, ApiConstant):
+                                function_description = function_description.value
 
                             processed['function%d.type' % (idx + 1)] = str(function_type)
-                            processed['function%d.dsc' % (idx + 1)] = str(func["dsc"])
+                            processed['function%d.dsc' % (idx + 1)] = str(function_description)
 
                         continue
 
@@ -136,6 +163,16 @@ class XS1:
                 # append parameter to request url
                 request_url += "&%s=%s" % (key, value)
 
+        return request_url
+
+    def _send_request(self, request_url: str) -> dict:
+        """
+        Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
+
+        :param request_url: the request url
+        :return: the api response as a json object
+        """
+
         _LOGGER.info("request_url: " + request_url)
 
         # create session
@@ -143,14 +180,26 @@ class XS1:
         session.mount('http://', HTTPAdapter(max_retries=self.RETRY_STRATEGY))
 
         # make request
-        response = session.get(request_url, auth=(user, password))
+        response = session.get(request_url, auth=(self._user, self._password))
         response_text = response.text  # .encode('utf-8')
         response_text_json = response_text[
                              response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
 
         response_dict = json.loads(response_text_json)  # convert to json object
+        return response_dict
 
-        error = self._get_node_value(response_dict, Node.ERROR)
+    def _check_errors(self, command: Command, parameters: dict, response: dict) -> dict:
+        """
+        Checks the repsonse dict for errors.
+        Does nothing if no error is detected
+
+        :param command: the command used for the request
+        :param parameters: parameters used for the request
+        :param response: the api response json
+        :return: the api response if no error is detected, raises an exception otherwise
+        """
+
+        error = self._get_node_value(response, Node.ERROR)
         if error:
             try:
                 error_code = ErrorCode(error)
@@ -169,7 +218,7 @@ class XS1:
                 " while trying to execute " + str(command) +
                 " with " + parameters_message[:-2])
         else:
-            return response_dict
+            return response
 
     def get_protocol_info(self) -> str:
         """
@@ -178,55 +227,55 @@ class XS1:
         :return: protocol version number
         """
 
-        response = self.send_request(Command.GET_PROTOCOL_INFO)
+        response = self.call_api(Command.GET_PROTOCOL_INFO)
         return self._get_node_value(response, Node.VERSION)
 
     def update_config_info(self) -> None:
         """
         Retrieves gateway specific (and immutable) configuration data
         """
-        self._config_info = self.send_request(Command.GET_CONFIG_INFO)
+        self._config_info = self.call_api(Command.GET_CONFIG_INFO)
 
     def get_config_main(self) -> dict:
         """
         :return: main configuration of the XS1
         """
-        response = self.send_request(Command.GET_CONFIG_MAIN)
+        response = self.call_api(Command.GET_CONFIG_MAIN)
         return self._get_node_value(response, "main")
 
     def get_list_systems(self) -> list:
         """
         :return: a list of currently compatible systems
         """
-        response = self.send_request(Command.GET_LIST_SYSTEMS)
+        response = self.call_api(Command.GET_LIST_SYSTEMS)
         return self._get_node_value(response, Node.SYSTEM)
 
     def get_list_functions(self) -> list:
         """
         :return: a list of available functions / actions for actuators
         """
-        response = self.send_request(Command.GET_LIST_FUNCTIONS)
+        response = self.call_api(Command.GET_LIST_FUNCTIONS)
         return self._get_node_value(response, Node.FUNCTION)
 
     def get_types_actuators(self) -> list:
         """
         :return: a list of compatible actuators
         """
-        response = self.send_request(Command.GET_TYPES_ACTUATORS)
+        response = self.call_api(Command.GET_TYPES_ACTUATORS)
         return self._get_node_value(response, "actuatortype")
 
     def get_types_sensors(self) -> list:
         """
         :return: a list of compatible sensors
         """
-        response = self.send_request(Command.GET_TYPES_SENSORS)
+        response = self.call_api(Command.GET_TYPES_SENSORS)
         return self._get_node_value(response, "sensortype")
 
     def get_config_actuator(self, actuator_id: int) -> dict:
         """
         :return: the configuration of a specific actuator
         """
-        response = self.send_request(Command.GET_CONFIG_ACTUATOR, {UrlParam.NUMBER: actuator_id})
+        response = self.call_api(Command.GET_CONFIG_ACTUATOR, {UrlParam.NUMBER: actuator_id})
         return self._get_node_value(response, Node.ACTUATOR)
 
     def set_config_actuator(self, actuator_id: int, configuration: dict) -> dict:
@@ -236,14 +285,14 @@ class XS1:
 
         configuration[UrlParam.NUMBER] = actuator_id
 
-        response = self.send_request(Command.SET_CONFIG_ACTUATOR, configuration)
+        response = self.call_api(Command.SET_CONFIG_ACTUATOR, configuration)
         return self._get_node_value(response, Node.ACTUATOR)
 
     def get_config_sensor(self, sensor_id: int) -> dict:
         """
         :return: the configuration of a specific sensor
         """
-        response = self.send_request(Command.GET_CONFIG_SENSOR, {UrlParam.NUMBER: sensor_id})
+        response = self.call_api(Command.GET_CONFIG_SENSOR, {UrlParam.NUMBER: sensor_id})
         return self._get_node_value(response, Node.SENSOR)
 
     def set_config_sensor(self, sensor_id: int, configuration: dict) -> dict:
@@ -253,7 +302,7 @@ class XS1:
 
         configuration[UrlParam.NUMBER.value] = sensor_id
 
-        response = self.send_request(Command.SET_CONFIG_SENSOR, configuration)
+        response = self.call_api(Command.SET_CONFIG_SENSOR, configuration)
         return self._get_node_value(response, Node.SENSOR)
 
     def get_gateway_name(self) -> str:
@@ -317,7 +366,7 @@ class XS1:
         :return: a list of XS1Actuator objects
         """
 
-        response = self.send_request(Command.GET_LIST_ACTUATORS)
+        response = self.call_api(Command.GET_LIST_ACTUATORS)
 
         all_actuators = []
         # create actuator objects
@@ -361,7 +410,7 @@ class XS1:
         :return: list of XS1Sensor objects
         """
 
-        response = self.send_request(Command.GET_LIST_SENSORS)
+        response = self.call_api(Command.GET_LIST_SENSORS)
 
         all_sensors = []
         for sensor in self._get_node_value(response, Node.SENSOR):
@@ -385,8 +434,8 @@ class XS1:
         :param actuator_id: actuator id
         :return: the api response as a dict
         """
-        return self.send_request(Command.GET_STATE_ACTUATOR,
-                                 {UrlParam.NUMBER: actuator_id})
+        return self.call_api(Command.GET_STATE_ACTUATOR,
+                             {UrlParam.NUMBER: actuator_id})
 
     def get_state_sensor(self, sensor_id) -> dict:
         """
@@ -395,10 +444,10 @@ class XS1:
         :param sensor_id: sensor id
         :return: the api response as a dict
         """
-        return self.send_request(Command.GET_STATE_SENSOR,
-                                 {
-                                     UrlParam.NUMBER: sensor_id,
-                                 })
+        return self.call_api(Command.GET_STATE_SENSOR,
+                             {
+                                 UrlParam.NUMBER: sensor_id,
+                             })
 
     def call_actuator_function(self, actuator_id, function) -> dict:
         """
@@ -408,11 +457,12 @@ class XS1:
         :param function: id of the function to execute
         :return: the api response
         """
-        return self.send_request(Command.SET_STATE_ACTUATOR,
-                                 {
-                                     UrlParam.NUMBER: actuator_id,
-                                     UrlParam.FUNCTION: function
-                                 })
+
+        return self.call_api(Command.SET_STATE_ACTUATOR,
+                             {
+                                 UrlParam.NUMBER: actuator_id,
+                                 UrlParam.FUNCTION: function
+                             })
 
     def set_actuator_value(self, actuator_id, value) -> dict:
         """
@@ -423,11 +473,11 @@ class XS1:
         :return: the api response
         """
 
-        return self.send_request(Command.SET_STATE_ACTUATOR,
-                                 {
-                                     UrlParam.NUMBER: actuator_id,
-                                     UrlParam.VALUE: value
-                                 })
+        return self.call_api(Command.SET_STATE_ACTUATOR,
+                             {
+                                 UrlParam.NUMBER: actuator_id,
+                                 UrlParam.VALUE: value
+                             })
 
     def set_sensor_value(self, sensor_id, value) -> dict:
         """
@@ -439,11 +489,11 @@ class XS1:
         :return: the api response
         """
 
-        return self.send_request(Command.SET_STATE_SENSOR,
-                                 {
-                                     UrlParam.NUMBER: sensor_id,
-                                     UrlParam.VALUE: value
-                                 })
+        return self.call_api(Command.SET_STATE_SENSOR,
+                             {
+                                 UrlParam.NUMBER: sensor_id,
+                                 UrlParam.VALUE: value
+                             })
 
     def _get_node_value(self, dictionary: dict, node: Node or str) -> any:
         """

@@ -1,0 +1,583 @@
+{
+	"version": 16,
+	"type": "get_list_sensors",
+	"utc_offset": 60,
+	"dst": "off",
+	"sensor": [
+		{
+			"name": "broken",
+			"id": 1,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Schlafzimmer_Temp_C",
+			"id": 2,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Wohnzimmer_Temp_C",
+			"id": 3,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Markus_Temp_C",
+			"id": 4,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_5",
+			"id": 5,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_6",
+			"id": 6,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_7",
+			"id": 7,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "SENSOR_8",
+			"id": 8,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_9",
+			"id": 9,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_other",
+			"id": 10,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_remotecontrol",
+			"id": 11,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_hygrometer",
+			"id": 12,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_barometer",
+			"id": 13,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_windspeed",
+			"id": 14,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_winddirection",
+			"id": 15,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_windvariance",
+			"id": 16,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_light",
+			"id": 17,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_pyranometer",
+			"id": 18,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_rain",
+			"id": 19,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_rainintensity",
+			"id": 20,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_rain_1h",
+			"id": 21,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_rain_24h",
+			"id": 22,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_soiltemp",
+			"id": 23,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_soilmoisture",
+			"id": 24,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_leafwetness",
+			"id": 25,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_waterlevel",
+			"id": 26,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_motion",
+			"id": 27,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_presence",
+			"id": 28,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_smokedetector",
+			"id": 29,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_heatdetector",
+			"id": 30,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_waterdetector",
+			"id": 31,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_air_quality",
+			"id": 32,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_windowbreak",
+			"id": 33,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_windowopen___",
+			"id": 34,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_dooropen",
+			"id": 35,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_doorbell",
+			"id": 36,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_alarmmat",
+			"id": 37,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_lightbarrier",
+			"id": 38,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_fencedetector",
+			"id": 39,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_mail",
+			"id": 40,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_co",
+			"id": 41,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_butan",
+			"id": 42,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_methan",
+			"id": 43,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_propan",
+			"id": 44,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_windgust",
+			"id": 45,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_uv_index",
+			"id": 46,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_pwr_consump",
+			"id": 47,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_pwr_peak",
+			"id": 48,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_wtr_consump",
+			"id": 49,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_wtr_peak",
+			"id": 50,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_consump",
+			"id": 51,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_gas_peak",
+			"id": 52,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_oil_consump",
+			"id": 53,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "test_oil_peak",
+			"id": 54,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_55",
+			"id": 55,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_56",
+			"id": 56,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_57",
+			"id": 57,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_58",
+			"id": 58,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_59",
+			"id": 59,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_60",
+			"id": 60,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_61",
+			"id": 61,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_62",
+			"id": 62,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_63",
+			"id": 63,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		},
+		{
+			"name": "Sensor_64",
+			"id": 64,
+			"type": "disabled",
+			"value": 0.0,
+			"utime": 0,
+			"unit": "",
+			"state": []
+		}]
+}

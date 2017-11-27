@@ -1,0 +1,19 @@
+{ "version": 15,
+"type": "get_list_functions",
+"function":
+    [
+        { "name": "disabled" },
+        { "name": "on" },
+        { "name": "off" },
+        { "name": "absolut" },
+        { "name": "relative" },
+        { "name": "toggle" },
+        { "name": "on_wait_off" },
+        { "name": "dim_up" },
+        { "name": "dim_down" },
+        { "name": "auto" },
+        { "name": "manual" },
+        { "name": "learn" },
+        { "name": "special" }
+    ]
+}

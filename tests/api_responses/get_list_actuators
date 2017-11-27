@@ -1,0 +1,1736 @@
+{
+"version": 16,
+"type": "get_list_actuators",
+"utc_offset": 60,
+"dst": "off",
+"actuator": [
+    {
+        "name": "Markus_Temp",
+        "id": 1,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "auto",
+                "dsc": "16°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "18°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "19°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "20°C"
+            }
+        ]
+    },
+    {
+        "name": "Schlafzimmer_Temp",
+        "id": 2,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "auto",
+                "dsc": "16°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "17°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "18°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "19°C"
+            }
+        ]
+    },
+    {
+        "name": "Markus_Nachttisch",
+        "id": 3,
+        "type": "switch",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 1511492305,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Wohnzimmer_Temp",
+        "id": 4,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "auto",
+                "dsc": "16°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "17°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "18°C"
+            },
+            {
+                "type": "auto",
+                "dsc": "20°C"
+            }
+        ]
+    },
+    {
+        "name": "Kueche_links",
+        "id": 5,
+        "type": "switch",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Markus_Schreibtisch",
+        "id": 6,
+        "type": "switch",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 1511347321,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Markus_Schrank",
+        "id": 7,
+        "type": "switch",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 1511347318,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Markus_Decke",
+        "id": 8,
+        "type": "dimmer",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 1511347317,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "on_wait_on",
+                "dsc": "DIM"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Markus_Verstaerker",
+        "id": 9,
+        "type": "switch",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 1511485846,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Wohn_Schrank",
+        "id": 10,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Wohn_Kugel",
+        "id": 11,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Wohn_Blau",
+        "id": 12,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Schlafzimmer_Kugel",
+        "id": 13,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Kueche_rechts",
+        "id": 14,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Bastel_Fenster",
+        "id": 15,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "test_sound",
+        "id": 16,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "My_new_name7",
+        "id": 17,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "XS1_API_CLIENT_0",
+        "id": 18,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_19",
+        "id": 19,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_20",
+        "id": 20,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_21",
+        "id": 21,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_22",
+        "id": 22,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_23",
+        "id": 23,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_24",
+        "id": 24,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_25",
+        "id": 25,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_26",
+        "id": 26,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_27",
+        "id": 27,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_28",
+        "id": 28,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_29",
+        "id": 29,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_30",
+        "id": 30,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_30_CPY",
+        "id": 31,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "on",
+                "dsc": "ON"
+            },
+            {
+                "type": "off",
+                "dsc": "OFF"
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_32",
+        "id": 32,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_33",
+        "id": 33,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_34",
+        "id": 34,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "FF_s2",
+        "id": 35,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_36",
+        "id": 36,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_37",
+        "id": 37,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_38",
+        "id": 38,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_39",
+        "id": 39,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_40",
+        "id": 40,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_41",
+        "id": 41,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_42",
+        "id": 42,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_43",
+        "id": 43,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_44",
+        "id": 44,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_45",
+        "id": 45,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_46",
+        "id": 46,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_47",
+        "id": 47,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_48",
+        "id": 48,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_49",
+        "id": 49,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_50",
+        "id": 50,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_51",
+        "id": 51,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_52",
+        "id": 52,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_53",
+        "id": 53,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_54",
+        "id": 54,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_55",
+        "id": 55,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_56",
+        "id": 56,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_57",
+        "id": 57,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_58",
+        "id": 58,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_59",
+        "id": 59,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_60",
+        "id": 60,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_61",
+        "id": 61,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_62",
+        "id": 62,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_63",
+        "id": 63,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    },
+    {
+        "name": "Actuator_64",
+        "id": 64,
+        "type": "disabled",
+        "value": 0.0,
+        "newvalue": 0.0,
+        "utime": 0,
+        "unit": "%",
+        "function": [
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            },
+            {
+                "type": "disabled",
+                "dsc": ""
+            }
+        ]
+    }]
+}
+
