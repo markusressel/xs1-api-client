@@ -65,11 +65,11 @@ class XS1:
 
     def call_api(self, command: Command, parameters: dict = None) -> dict:
         """
-        Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
+        Executes a command on the xs1 api and returns it's response as a dictionary (if there was no error).
 
         :param command: command parameter for the URL (see api_constants)
         :param parameters: additional parameters needed for the specified command like 'number=3' passed in as a dictionary
-        :return: the api response as a json object
+        :return: the api response
         """
 
         request_url = self._build_request_url(command, parameters)
@@ -89,15 +89,11 @@ class XS1:
         :return: request url
         """
 
-        host = self._host
-        user = self._user
-        password = self._password
-
         # create request url
-        request_url = "http://%s/control?callback=callback" % host
+        request_url = "http://%s/control?callback=callback" % self._host
         # append credentials, if any
-        if user and password:
-            request_url += "&%s=%s&%s=%s" % (UrlParam.USER.value, user, UrlParam.PASSWORD.value, password)
+        if self._user and self._password:
+            request_url += "&%s=%s&%s=%s" % (UrlParam.USER.value, self._user, UrlParam.PASSWORD.value, self._password)
         # append command to execute
         if isinstance(command, Command):
             command = command.value
@@ -329,7 +325,7 @@ class XS1:
         """
         return self._get_config_info_value(Node.DEVICE_FIRMWARE_VERSION)
 
-    def get_gateway_uptime(self) -> str:
+    def get_gateway_uptime(self) -> int:
         """
         :return: the uptime of the gateway in seconds
         """
