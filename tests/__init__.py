@@ -22,7 +22,11 @@ class XS1TestBase(unittest.TestCase):
         :return: the hypothetical api response dict to use as a replacement for the "send_request" method
         """
 
-        with open('api_responses/%s' % filename, 'r') as myfile:
+        import os
+        directory = os.path.dirname(__file__)
+        file_path = os.path.join(directory, 'api_responses', filename)
+
+        with open(file_path, 'r') as myfile:
             api_response_text = myfile.read()
         return json.loads(api_response_text)
 
