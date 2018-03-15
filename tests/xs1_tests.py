@@ -16,7 +16,7 @@ class TestXS1(XS1TestBase):
         api_response = TestXS1.get_api_response("get_config_info")
         self._underTest._send_request = MagicMock(return_value=api_response)
 
-        self._underTest.set_connection_info(test_host, test_user, test_password)
+        self._underTest.set_connection_info(host=test_host, user=test_user, password=test_password)
 
         self.assertEqual(self._underTest.get_host(), test_host)
         self.assertEqual(self._underTest.get_user(), test_user)
