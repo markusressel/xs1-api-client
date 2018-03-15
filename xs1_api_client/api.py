@@ -30,33 +30,44 @@ class XS1:
                            backoff_factor=0.1,
                            status_forcelist=[500, 502, 503, 504])
 
-    def __init__(self, host: str = None, user: str = None, password: str = None) -> None:
+    REQUEST_ADAPTER = HTTPAdapter(max_retries=RETRY_STRATEGY)
+
+    _host = None
+    _port = None
+    _ssl = None
+    _user = None
+    _password = None
+    _config_info = None
+
+    def __init__(self, host: str = None, port: int = 80, ssl: bool = False, user: str = None,
+                 password: str = None) -> None:
         """
         Creates a new api object.
 
-        :param host: host address of the gateway
+        :param host: host address of the gateway api
+        :param port: host port of the gateway api
+        :param ssl: uses HTTPS instead of HTTP if set to True
         :param user: username for authentication
         :param password: password for authentication
         """
 
-        self._host = None
-        self._user = None
-        self._password = None
-        self._config_info = None
+        self.set_connection_info(host, port, ssl, user, password)
 
-        self.set_connection_info(host, user, password)
-
-    def set_connection_info(self, host: str, user: str = None, password: str = None) -> None:
+    def set_connection_info(self, host: str, port: int, ssl: bool, user: str = None, password: str = None) -> None:
         """
         Sets private connection info for this XS1 instance.
         This XS1 instance will also immediately use this connection info.
 
-        :param host: host address the gateway can be found at
+        :param host: host address of the gateway api
+        :param port: host port of the gateway api
+        :param ssl: uses HTTPS instead of HTTP if set to True
         :param user: username for authentication
         :param password: password for authentication
         """
 
         self._host = host
+        self._port = port
+        self._ssl = ssl
         self._user = user
         self._password = password
 
@@ -93,7 +104,7 @@ class XS1:
         :return: the api response
         """
 
-        request_url = self._build_request_url(command, parameters)
+        request_url = self._build_request_url(command, parameters, self._ssl)
         response = self._send_request(request_url)
 
         # raises an exception if anything is wrong
@@ -101,12 +112,13 @@ class XS1:
 
         return response
 
-    def _build_request_url(self, command: Command, parameters: dict = None) -> str:
+    def _build_request_url(self, command: Command, parameters: dict = None, ssl: bool = False) -> str:
         """
         Builds a request url from the input parameters
 
         :param command: the main command
         :param parameters: additional parameters
+        :param ssl: Uses HTTPS instead of HTTP
         :return: request url
         """
 
@@ -114,7 +126,12 @@ class XS1:
             raise Exception("Missing host!")
 
         # create request url
-        request_url = "http://%s/control?callback=callback" % self._host
+        request_url = "http"
+        if ssl:
+            request_url += "s"
+        request_url += "://"
+
+        request_url += "%s:%s/control?callback=callback" % (self._host, self._port)
         # append credentials, if any
         if self._user and self._password:
             request_url += "&%s=%s&%s=%s" % (UrlParam.USER.value, self._user, UrlParam.PASSWORD.value, self._password)
@@ -193,14 +210,20 @@ class XS1:
         :return: the api response as a json object
         """
 
-        _LOGGER.info("request_url: " + request_url)
+        _LOGGER.info("request_url: %s" % request_url)
 
         # create session
         session = requests.Session()
-        session.mount('http://', HTTPAdapter(max_retries=self.RETRY_STRATEGY))
+
+        if self._ssl:
+            protocol = 'https://'
+        else:
+            protocol = 'http://'
+
+        session.mount(protocol, self.REQUEST_ADAPTER)
 
         # make request
-        response = session.get(request_url, auth=(self._user, self._password))
+        response = session.get(request_url, timeout=5, auth=(self._user, self._password))
         response_text = response.text  # .encode('utf-8')
         response_text_json = response_text[
                              response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
@@ -210,7 +233,7 @@ class XS1:
 
     def _check_errors(self, command: Command, parameters: dict, response: dict) -> dict:
         """
-        Checks the repsonse dict for errors.
+        Checks the response dict for errors.
         Does nothing if no error is detected
 
         :param command: the command used for the request

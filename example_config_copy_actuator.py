@@ -9,7 +9,7 @@ from xs1_api_client import api as xs1api
 # Create an api object with private configuration
 from xs1_api_client.api_constants import FunctionType, SystemType, ActuatorType, UrlParam
 
-api = xs1api.XS1(None, None, None)
+api = xs1api.XS1(host="192.168.2.75", port=81, ssl=False, user=None, password=None)
 
 # to set a completely new configuration for an actuator
 # you have to get all of its configuration parameters right

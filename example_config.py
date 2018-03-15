@@ -11,7 +11,7 @@ from xs1_api_client import api as xs1api
 # Create an api object with private configuration
 from xs1_api_client.api_constants import UrlParam
 
-api = xs1api.XS1('192.168.2.75', None, None)
+api = xs1api.XS1('192.168.2.75', user=None, password=None)
 
 print("")
 print(api.get_config_main())

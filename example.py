@@ -11,10 +11,10 @@ from xs1_api_client import api_constants
 from xs1_api_client.api_constants import Node, ActuatorType, FunctionType
 
 # Create an api object with private configuration
-api = xs1api.XS1('192.168.2.75', None, None)
+api = xs1api.XS1('192.168.2.75')
 
 # Update the connection info at a later time
-api.set_connection_info('192.168.2.75', None, None)
+api.set_connection_info('192.168.2.75')
 
 print("Gateway Hostname: " + api.get_gateway_name())
 print("Gateway MAC: " + api.get_gateway_mac())
