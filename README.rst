@@ -67,7 +67,7 @@ directly when creating it:
     from xs1_api_client import api_constants
 
     # Create an api object with private configuration
-    api = xs1api.XS1('192.168.2.20', "Username", "Password")
+    api = xs1api.XS1(host='192.168.2.20', user="Username", password="Password")
 
 This will automatically try to connect to the gateway with the given credentials and retrieve basic
 gateway information which you can output like this:
@@ -81,21 +81,27 @@ gateway information which you can output like this:
     print("Gateway Firmware Version: " + api.get_gateway_firmware_version())
     print("Gateway uptime: " + str(api.get_gateway_uptime()) + " seconds")
 
+You can also specify a custom port and enable SSL:
+
+::
+
+    api = xs1api.XS1(host='192.168.2.20', port=1234, ssl=True, user="Username", password="Password")
+
 Now that you have a connection to your gateway we can retrieve its
-configuration and set or retrieve values of the devices.
+configuration and set or retrieve values of configured actuators and sensors or even modify their configuration.
 
 Devices
 ~~~~~~~
 
 All devices that you have configured in your XS1 are implemented using
-the ``XS1Device`` base class which can be found at ``/device/base.py``.
+the ``XS1Device`` base class which can be found at ``/device/__init__.py``.
 This class provides basic functionality for every device like getting
 the **id**, **name**, **type** and other values.
 
 Retrieve Actuators
 ~~~~~~~~~~~~~~~~~~
 
-To retrieve a list of all actuators that are configured use the following call:
+To retrieve a list of all 64 actuators use the following call:
 
 ::
 
@@ -198,7 +204,7 @@ this value to the actual remote device like mentioned above.
 Retrieve a List of Sensors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To retrieve a list of all sensors that are configured use the following call:
+To retrieve a list of all 64 sensors use the following call:
 
 ::
 
@@ -254,7 +260,7 @@ The XS1 allows up to 64 actuator and 64 sensor configurations. These 128
 device configurations are accessible via the HTTP API at any time - even
 when there is nothing configured for a specific device id/number.
 
-To check if a device has been configured in the XS1 web interface call:
+To check if a device has been configured (and enabled) in the XS1 web interface call:
 
 ::
 
