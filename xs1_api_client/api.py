@@ -53,7 +53,7 @@ class XS1:
 
         self.set_connection_info(host, port, ssl, user, password)
 
-    def set_connection_info(self, host: str, port: int = 80, ssl: bool = False, user: str = None,
+    def set_connection_info(self, host: str, port: int = None, ssl: bool = False, user: str = None,
                             password: str = None) -> None:
         """
         Sets private connection info for this XS1 instance.
@@ -132,7 +132,12 @@ class XS1:
             request_url += "s"
         request_url += "://"
 
-        request_url += "%s:%s/control?callback=callback" % (self._host, self._port)
+        request_url += "%s" % self._host
+        if self._port:
+            request_url += ":%s" % self._port
+
+        request_url += "/control?callback=callback"
+
         # append credentials, if any
         if self._user and self._password:
             request_url += "&%s=%s&%s=%s" % (UrlParam.USER.value, self._user, UrlParam.PASSWORD.value, self._password)
