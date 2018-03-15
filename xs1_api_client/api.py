@@ -53,7 +53,8 @@ class XS1:
 
         self.set_connection_info(host, port, ssl, user, password)
 
-    def set_connection_info(self, host: str, port: int, ssl: bool, user: str = None, password: str = None) -> None:
+    def set_connection_info(self, host: str, port: int = 80, ssl: bool = False, user: str = None,
+                            password: str = None) -> None:
         """
         Sets private connection info for this XS1 instance.
         This XS1 instance will also immediately use this connection info.
