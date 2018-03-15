@@ -356,7 +356,7 @@ class XS1:
 
     def get_gateway_name(self) -> str:
         """
-        :return: the hostname of the gateway
+        :return: the device name of the gateway
         """
         return self._get_config_info_value(Node.DEVICE_NAME)
 

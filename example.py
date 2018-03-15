@@ -16,7 +16,7 @@ api = xs1api.XS1('192.168.2.75')
 # Update the connection info at a later time
 api.set_connection_info('192.168.2.75')
 
-print("Gateway Hostname: " + api.get_gateway_name())
+print("Gateway Device Name: " + api.get_gateway_name())
 print("Gateway MAC: " + api.get_gateway_mac())
 print("Gateway Hardware Version: " + api.get_gateway_hardware_version())
 print("Gateway Bootloader Version: " + api.get_gateway_bootloader_version())
