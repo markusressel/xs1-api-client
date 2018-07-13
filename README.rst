@@ -2,7 +2,7 @@
     :target: https://badge.fury.io/py/xs1-api-client
 
 xs1-api-client |pypi_version|
-==============
+=============================
 
 A python 3.4+ library for accessing actuator and sensor data on the the
 EZcontrol® XS1 Gateway using its HTTP API.
@@ -276,7 +276,7 @@ Since version 2.0 it is possible to get and set device configurations on the XS1
 Please have a look at the ``example_config.py`` file to get an idea of how to retrieve a device configuration.
 
 Modify a device configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Before you proceed**
 

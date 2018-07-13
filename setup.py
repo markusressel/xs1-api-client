@@ -2,7 +2,7 @@ import subprocess
 
 from setuptools import setup, find_packages
 
-VERSION_NUMBER = "2.3.0"
+VERSION_NUMBER = "2.3.2"
 
 GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
 GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
@@ -22,14 +22,44 @@ else:
     DEVELOPMENT_STATUS = "Development Status :: 2 - Pre-Alpha"
     VERSION_NAME = "%s-%s" % (VERSION_NUMBER, GIT_BRANCH)
 
+
+def readme_type() -> str:
+    import os
+    if os.path.exists("README.rst"):
+        return "text/x-rst"
+    if os.path.exists("README.md"):
+        return "text/markdown"
+
+
+def readme() -> [str]:
+    with open('README.rst') as f:
+        return f.read()
+
+
+def install_requirements() -> [str]:
+    return read_requirements_file("requirements.txt")
+
+
+def test_requirements() -> [str]:
+    return read_requirements_file("test_requirements.txt")
+
+
+def read_requirements_file(file_name: str):
+    with open(file_name, encoding='utf-8') as f:
+        requirements_file = f.readlines()
+    return [r.strip() for r in requirements_file]
+
+
 setup(
     name='xs1_api_client',
     version=VERSION_NAME,
     description='A library to get and set values of the EZcontrol XS1 Gateway',
+    long_description=readme(),
+    long_description_content_type=readme_type(),
     license='GPLv3+',
     author='Markus Ressel',
     author_email='mail@markusressel.de',
-    url='https://www.markusressel.de',
+    url='https://github.com/markusressel/xs1-api-client',
     packages=find_packages(),
     # python_requires='>=3.4',
     classifiers=[
@@ -41,8 +71,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7'
     ],
-    install_requires=[
-        'requests', 'urllib3',
-        # 'logging'
-    ]
+    install_requires=install_requirements(),
+    tests_require=test_requirements()
 )
