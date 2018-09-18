@@ -219,23 +219,22 @@ class XS1:
         _LOGGER.info("request_url: %s" % request_url)
 
         # create session
-        session = requests.Session()
+        with requests.Session() as session:
+            if self._ssl:
+                protocol = 'https://'
+            else:
+                protocol = 'http://'
 
-        if self._ssl:
-            protocol = 'https://'
-        else:
-            protocol = 'http://'
+            session.mount(protocol, self.REQUEST_ADAPTER)
 
-        session.mount(protocol, self.REQUEST_ADAPTER)
+            # make request
+            response = session.get(request_url, timeout=5, auth=(self._user, self._password))
+            response_text = response.text  # .encode('utf-8')
+            response_text_json = response_text[
+                                 response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
 
-        # make request
-        response = session.get(request_url, timeout=5, auth=(self._user, self._password))
-        response_text = response.text  # .encode('utf-8')
-        response_text_json = response_text[
-                             response_text.index('{'):response_text.rindex('}') + 1]  # cut out valid json response
-
-        response_dict = json.loads(response_text_json)  # convert to json object
-        return response_dict
+            response_dict = json.loads(response_text_json)  # convert to json object
+            return response_dict
 
     def _check_errors(self, command: Command, parameters: dict, response: dict) -> dict:
         """
