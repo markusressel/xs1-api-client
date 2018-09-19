@@ -61,7 +61,7 @@ Create the API Object
 The basic way of creating an API object is by providing connection info
 directly when creating it:
 
-::
+.. code-block:: python
 
     from xs1_api_client import api as xs1api
     from xs1_api_client import api_constants
@@ -72,7 +72,7 @@ directly when creating it:
 This will automatically try to connect to the gateway with the given credentials and retrieve basic
 gateway information which you can output like this:
 
-::
+.. code-block:: python
 
     print("Gateway Hostname: " + api.get_gateway_name())
     print("Gateway MAC: " + api.get_gateway_mac())
@@ -83,7 +83,7 @@ gateway information which you can output like this:
 
 You can also specify a custom port and enable SSL:
 
-::
+.. code-block:: python
 
     api = xs1api.XS1(host='192.168.2.20', port=1234, ssl=True, user="Username", password="Password")
 
@@ -103,7 +103,7 @@ Retrieve Actuators
 
 To retrieve a list of all 64 actuators use the following call:
 
-::
+.. code-block:: python
 
     actuators = api.get_all_actuators()
 
@@ -111,27 +111,27 @@ This will return a list of ``XS1Actuator`` objects which is another base
 class for all actuators. You can use something like this to print all
 your actuators:
 
-::
+.. code-block:: python
 
     for actuator in actuators:
         print("Actuator " + str(actuator.id()) + ": " + actuator.name() + " (" + str(actuator.type()) + ")")
 
 There is also an integrated ``__str__`` method to print out most of the useful properties just like this:
 
-::
+.. code-block:: python
 
     for actuator in actuators:
         print(actuator)
 
 You can also filter the elements by ``enabled`` and ``disabled`` state using:
 
-::
+.. code-block:: python
 
     enabled_actuators = api.get_all_actuators(True)
 
 Retrieve a single actuator simply by using:
 
-::
+.. code-block:: python
 
     actuator_1 = api.get_actuator(1)
 
@@ -140,7 +140,7 @@ Retrieve an Actuator Value
 
 To retrieve the current value of an actuator just call:
 
-::
+.. code-block:: python
 
     current_value = actuator.value()
 
@@ -149,7 +149,7 @@ Set a new Actuator value
 
 To set a new value to this actuator use:
 
-::
+.. code-block:: python
 
     actuator.set_value(100)
 
@@ -167,7 +167,7 @@ Currently there is **no callback** when the value is finally updated so
 **you have to update the device information manually** if you want to
 get an update on its current state:
 
-::
+.. code-block:: python
 
     actuator.update()
 
@@ -180,20 +180,20 @@ Executing Actuator Functions
 If you have defined function presets for a device you can get a list of
 all functions using:
 
-::
+.. code-block:: python
 
     functions = actuator.get_functions()
 
 and print them like this:
 
-::
+.. code-block:: python
 
     for function in functions:
         print(function)
 
 to execute one of the functions type:
 
-::
+.. code-block:: python
 
     function.execute()
 
@@ -206,13 +206,13 @@ Retrieve a List of Sensors
 
 To retrieve a list of all 64 sensors use the following call:
 
-::
+.. code-block:: python
 
     sensors = api.get_all_sensors()
 
 Just like with actuators you can filter the elements by ``enabled`` and ``disabled`` state using:
 
-::
+.. code-block:: python
 
     enabled_sensors = api.get_all_sensors(True)
 
@@ -220,21 +220,21 @@ Just like with actuators you can filter the elements by ``enabled`` and ``disabl
   class for all sensors.
 | You can print basic information about them like this:
 
-::
+.. code-block:: python
 
     for sensor in sensors:
         print("Sensor " + str(sensor.id()) + ": " + sensor.name() + " (" + str(sensor.value()) + ")")
 
 Just like mentioned above you can also use:
 
-::
+.. code-block:: python
 
     for sensor in sensors:
         print(sensor)
 
 or:
 
-::
+.. code-block:: python
 
     sensor_1 = api.get_sensor(1)
 
@@ -247,7 +247,7 @@ Just like with actuators there is no automatic updates for sensors
 either. To get a state update from the XS1 gateway for your sensor
 object call:
 
-::
+.. code-block:: python
 
     sensor.update()
 
@@ -262,7 +262,7 @@ when there is nothing configured for a specific device id/number.
 
 To check if a device has been configured (and enabled) in the XS1 web interface call:
 
-::
+.. code-block:: python
 
     device.enabled()
 
