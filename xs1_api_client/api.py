@@ -6,7 +6,6 @@ Example usage can be found in the example.py file
 """
 
 import json
-import logging
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -16,8 +15,6 @@ from xs1_api_client.api_constants import UrlParam, Command, Node, ActuatorType, 
 from xs1_api_client.device.actuator import XS1Actuator
 from xs1_api_client.device.actuator.switch import XS1Switch
 from xs1_api_client.device.sensor import XS1Sensor
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class XS1:
@@ -216,8 +213,6 @@ class XS1:
         :return: the api response as a json object
         """
 
-        _LOGGER.info("request_url: %s" % request_url)
-
         # create session
         with requests.Session() as session:
             if self._ssl:
@@ -249,6 +244,7 @@ class XS1:
 
         error = self._get_node_value(response, Node.ERROR)
         if error:
+            # try to map error code to one of the known error values
             try:
                 error_code = ErrorCode(error)
                 error_message = ErrorCode.get_message(error_code)
@@ -256,6 +252,7 @@ class XS1:
                 error_code = "UNKNOWN"
                 error_message = "Unknown error code " + str(error)
 
+            # add used parameters to error message if there were used any
             parameters_message = ""
             if parameters:
                 for key, value in parameters.items():
