@@ -27,8 +27,6 @@ class XS1:
                            backoff_factor=0.1,
                            status_forcelist=[500, 502, 503, 504])
 
-    REQUEST_ADAPTER = HTTPAdapter(max_retries=RETRY_STRATEGY)
-
     _host = None
     _port = None
     _ssl = None
@@ -220,7 +218,7 @@ class XS1:
             else:
                 protocol = 'http://'
 
-            session.mount(protocol, self.REQUEST_ADAPTER)
+            session.mount(protocol, HTTPAdapter(max_retries=self.RETRY_STRATEGY))
 
             # make request
             response = session.get(request_url, timeout=5, auth=(self._user, self._password))
