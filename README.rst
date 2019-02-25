@@ -41,8 +41,7 @@ Home Assistant
 ==============
 The initial goal of this library was to be able to integrate the EZcontrol® XS1 Gateway with `Home Assistant <https://www.home-assistant.io>`_.
 You can find the related integration documentation here: 
-
-`XS1 Home Assistant component documentation<https://www.home-assistant.io/components/xs1/>`_
+`XS1 Home Assistant component documentation <https://www.home-assistant.io/components/xs1/>`_
 
 How to use
 ==========
