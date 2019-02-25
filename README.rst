@@ -37,6 +37,12 @@ Build Status
 | |codebeat_master|  | |codebeat_beta|  | |codebeat_dev|  |
 +--------------------+------------------+-----------------+
 
+Home Assistant
+==============
+The initial goal of this library was to be able to integrate the EZcontrol® XS1 Gateway with `Home Assistant <https://www.home-assistant.io>`_.
+You can find the related integration documentation here: 
+
+`Home Assistrant component <https://www.home-assistant.io/components/xs1/>`_
 
 How to use
 ==========
