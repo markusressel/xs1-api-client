@@ -456,9 +456,12 @@ class XS1:
         response = self.call_api(Command.GET_LIST_SENSORS)
 
         all_sensors = []
+        sensor_number = 1
         for sensor in self._get_node_value(response, Node.SENSOR):
+            sensor["number"] = sensor_number
             device = XS1Sensor(sensor, self)
             all_sensors.append(device)
+            sensor_number += 1
 
         if enabled is None:
             return all_sensors
