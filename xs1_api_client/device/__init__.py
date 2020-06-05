@@ -56,7 +56,6 @@ class XS1Device(object):
         """
         :return: the type of this device
         """
-
         device_type_string = self._get_node_value(self._state, Node.PARAM_TYPE)
 
         # try to convert string value to Enum constant

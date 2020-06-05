@@ -25,7 +25,6 @@ class XS1Sensor(XS1Device):
         """
         Sets a new name for this device.
         Keep in mind that there are some limitations for a device name.
-
         :param name: the new name to set
         :return: the new name of the sensor
         """

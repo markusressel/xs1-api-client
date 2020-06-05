@@ -25,7 +25,6 @@ class XS1Actuator(XS1Device):
         """
         Sets a new name for this device.
         Keep in mind that there are some limitations for a device name.
-
         :param name: the new name to set
         :return: the new name of the actuator
         """
@@ -51,7 +50,6 @@ class XS1Actuator(XS1Device):
     def set_value(self, value) -> None:
         """
         Sets a new value for this actuator
-
         :param value: new value to set
         """
         new_state = self._api_interface.set_actuator_value(self.id(), value)
@@ -107,7 +105,6 @@ class XS1Actuator(XS1Device):
     def call_function(self, xs1_function):
         """
         Calls the specified function by id and saves the api response as the new state
-
         :param xs1_function: XS1Function object
         """
         if not isinstance(xs1_function, XS1Function):

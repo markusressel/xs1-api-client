@@ -13,7 +13,6 @@ class XS1Thermostat(XS1Actuator):
     def set_temperature(self, temp: float) -> None:
         """
         Sets the new target temperature of this thermostat
-
         :param temp: new target temperature
         """
         response = self._api_interface.set_actuator_value(self.id(), temp)

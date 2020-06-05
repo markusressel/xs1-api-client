@@ -21,7 +21,6 @@ class XS1:
     """
     This class is the main api interface that handles all communication with the XS1 gateway.
     """
-
     # setup retry and backoff strategy
     RETRY_STRATEGY = Retry(total=5,
                            backoff_factor=0.1,
@@ -34,18 +33,16 @@ class XS1:
     _password = None
     _config_info = None
 
-    def __init__(self, host: str = None, port: int = 80, ssl: bool = False, user: str = None,
+    def __init__(self, host: str = None, port: int or None = 80, ssl: bool = False, user: str = None,
                  password: str = None) -> None:
         """
         Creates a new api object.
-
         :param host: host address of the gateway api
         :param port: host port of the gateway api
         :param ssl: uses HTTPS instead of HTTP if set to True
         :param user: username for authentication
         :param password: password for authentication
         """
-
         self.set_connection_info(host, port, ssl, user, password)
 
     def set_connection_info(self, host: str, port: int = None, ssl: bool = False, user: str = None,
@@ -53,14 +50,12 @@ class XS1:
         """
         Sets private connection info for this XS1 instance.
         This XS1 instance will also immediately use this connection info.
-
         :param host: host address of the gateway api
         :param port: host port of the gateway api
         :param ssl: uses HTTPS instead of HTTP if set to True
         :param user: username for authentication
         :param password: password for authentication
         """
-
         self._host = host
         self._port = port
         self._ssl = ssl
@@ -74,32 +69,27 @@ class XS1:
         """
         :return: the currently set host address
         """
-
         return self._host
 
     def get_user(self) -> str or None:
         """
         :return: the currently set user used for authentication
         """
-
         return self._user
 
     def get_password(self) -> str or None:
         """
         :return: the currently set password used for authentication
         """
-
         return self._password
 
     def call_api(self, command: Command, parameters: dict = None) -> dict:
         """
         Executes a command on the xs1 api and returns it's response as a dictionary (if there was no error).
-
         :param command: command parameter for the URL (see api_constants)
         :param parameters: additional parameters needed for the specified command like 'number=3' passed in as a dictionary
         :return: the api response
         """
-
         request_url = self._build_request_url(command, parameters, self._ssl)
         response = self._send_request(request_url)
 
@@ -111,13 +101,11 @@ class XS1:
     def _build_request_url(self, command: Command, parameters: dict = None, ssl: bool = False) -> str:
         """
         Builds a request url from the input parameters
-
         :param command: the main command
         :param parameters: additional parameters
         :param ssl: Uses HTTPS instead of HTTP
         :return: request url
         """
-
         if not self._host:
             raise Exception("Missing host!")
 
@@ -152,7 +140,6 @@ class XS1:
             def process_parameters(params: dict) -> dict:
                 """
                 Removes duplicates and replaces ApiConstants (Enums) with it's value
-
                 :param params: parameters to process
                 :return: cleaned up parameters
                 """
@@ -206,11 +193,9 @@ class XS1:
     def _send_request(self, request_url: str) -> dict:
         """
         Sends a GET request to the XS1 Gateway and returns the response as a JSON object.
-
         :param request_url: the request url
         :return: the api response as a json object
         """
-
         # create session
         with requests.Session() as session:
             if self._ssl:
@@ -233,13 +218,11 @@ class XS1:
         """
         Checks the response dict for errors.
         Does nothing if no error is detected
-
         :param command: the command used for the request
         :param parameters: parameters used for the request
         :param response: the api response json
         :return: the api response if no error is detected, raises an exception otherwise
         """
-
         error = self._get_node_value(response, Node.ERROR)
         if error:
             # try to map error code to one of the known error values
@@ -266,10 +249,8 @@ class XS1:
     def get_protocol_info(self) -> str:
         """
         Retrieves the protocol version that is used by the gateway
-
         :return: protocol version number
         """
-
         response = self.call_api(Command.GET_PROTOCOL_INFO)
         return self._get_node_value(response, Node.VERSION)
 
@@ -325,7 +306,6 @@ class XS1:
         """
         :return: the configuration of a specific actuator
         """
-
         configuration[UrlParam.NUMBER] = actuator_id
 
         response = self.call_api(Command.SET_CONFIG_ACTUATOR, configuration)
@@ -342,7 +322,6 @@ class XS1:
         """
         :return: the configuration of a specific actuator
         """
-
         configuration[UrlParam.NUMBER.value] = sensor_id
 
         response = self.call_api(Command.SET_CONFIG_SENSOR, configuration)
@@ -393,7 +372,6 @@ class XS1:
         :param actuator_id: the id of the actuator
         :return: XS1Actuator
         """
-
         all_actuators = self.get_all_actuators()
         for actuator in all_actuators:
             if actuator.id() == actuator_id:
@@ -404,11 +382,9 @@ class XS1:
     def get_all_actuators(self, enabled: bool or None = None) -> [XS1Actuator]:
         """
         Requests the list of enabled actuators from the gateway.
-
         :param enabled:
         :return: a list of XS1Actuator objects
         """
-
         response = self.call_api(Command.GET_LIST_ACTUATORS)
 
         all_actuators = []
@@ -438,7 +414,6 @@ class XS1:
         :param sensor_id: the id of the actuator
         :return: XS1Sensor
         """
-
         all_sensors = self.get_all_sensors()
         for sensor in all_sensors:
             if sensor.id() == sensor_id:
@@ -449,10 +424,8 @@ class XS1:
     def get_all_sensors(self, enabled: bool or None = None) -> [XS1Sensor]:
         """
         Requests the list of enabled sensors from the gateway.
-
         :return: list of XS1Sensor objects
         """
-
         response = self.call_api(Command.GET_LIST_SENSORS)
 
         all_sensors = []
@@ -473,7 +446,6 @@ class XS1:
     def get_state_actuator(self, actuator_id: int) -> dict:
         """
         Gets the current state of the specified actuator.
-
         :param actuator_id: actuator id
         :return: the api response as a dict
         """
@@ -483,7 +455,6 @@ class XS1:
     def get_state_sensor(self, sensor_id: int) -> dict:
         """
         Gets the current state of the specified sensor.
-
         :param sensor_id: sensor id
         :return: the api response as a dict
         """
@@ -495,12 +466,10 @@ class XS1:
     def call_actuator_function(self, actuator_id: int, function) -> dict:
         """
         Executes a function on the specified actuator and sets the response on the passed in actuator.
-
         :param actuator_id: actuator id to execute the function on and set response value
         :param function: id of the function to execute
         :return: the api response
         """
-
         return self.call_api(Command.SET_STATE_ACTUATOR,
                              {
                                  UrlParam.NUMBER: actuator_id,
@@ -510,12 +479,10 @@ class XS1:
     def set_actuator_value(self, actuator_id: int, value) -> dict:
         """
         Sets a new value for the specified actuator.
-
         :param actuator_id: actuator id to set the new value on
         :param value: the new value to set on the specified actuator
         :return: the api response
         """
-
         return self.call_api(Command.SET_STATE_ACTUATOR,
                              {
                                  UrlParam.NUMBER: actuator_id,
@@ -526,12 +493,10 @@ class XS1:
         """
         Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
-
         :param sensor_id: sensor id to set the new value on
         :param value: the new value to set on the specified sensor
         :return: the api response
         """
-
         return self.call_api(Command.SET_STATE_SENSOR,
                              {
                                  UrlParam.NUMBER: sensor_id,
@@ -544,7 +509,6 @@ class XS1:
         :param node: the node to retrieve the value for
         :return: the value of this node or None if it doesn't exist
         """
-
         if isinstance(node, Node):
             node_name = node.value
         else:
