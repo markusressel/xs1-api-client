@@ -47,10 +47,13 @@ class XS1Device(object):
         """
         :return: id of this device
         """
-        device_id = self._get_node_value(self._state, Node.PARAM_NUMBER)
-        if device_id is None:
-            device_id = self._get_node_value(self._state, Node.PARAM_ID)
-        return device_id
+        return self._get_node_value(self._state, Node.PARAM_ID)
+
+    def number(self) -> int:
+        """
+        :return: number of this device
+        """
+        return self._get_node_value(self._state, Node.PARAM_NUMBER)
 
     def type(self) -> ActuatorType or SensorType or str:
         """
