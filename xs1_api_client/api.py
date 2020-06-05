@@ -412,8 +412,10 @@ class XS1:
         response = self.call_api(Command.GET_LIST_ACTUATORS)
 
         all_actuators = []
+        actuator_number = 1
         # create actuator objects
         for actuator in self._get_node_value(response, Node.ACTUATOR):
+            actuator["number"] = actuator_number
             actuator_type = self._get_node_value(actuator, Node.PARAM_TYPE)
             if ActuatorType.SWITCH == actuator_type or ActuatorType.DIMMER == actuator_type:
                 device = XS1Switch(actuator, self)
@@ -421,6 +423,7 @@ class XS1:
                 device = XS1Actuator(actuator, self)
 
             all_actuators.append(device)
+            actuator_number += 1
 
         if enabled is None:
             return all_actuators
