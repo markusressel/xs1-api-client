@@ -408,9 +408,9 @@ class XS1:
 
         all_actuators = []
         # create actuator objects
-        for idx, actuator in enumerate(self._get_node_value(response, Node.ACTUATOR), start=1):
+        for number, actuator in enumerate(self._get_node_value(response, Node.ACTUATOR), start=1):
             # attach number to data so we can use it for future requests
-            actuator[Node.PARAM_NUMBER.value] = idx
+            actuator[Node.PARAM_NUMBER.value] = number
 
             actuator_type = self._get_node_value(actuator, Node.PARAM_TYPE)
             if ActuatorType.SWITCH == actuator_type or ActuatorType.DIMMER == actuator_type:
@@ -464,9 +464,9 @@ class XS1:
         response = self.call_api(Command.GET_LIST_SENSORS)
 
         all_sensors = []
-        for idx, sensor in enumerate(self._get_node_value(response, Node.SENSOR), start=1):
+        for number, sensor in enumerate(self._get_node_value(response, Node.SENSOR), start=1):
             # attach number to data so we can use it for future requests
-            sensor[Node.PARAM_NUMBER.value] = idx
+            sensor[Node.PARAM_NUMBER.value] = number
             device = XS1Sensor(sensor, self)
             all_sensors.append(device)
 
