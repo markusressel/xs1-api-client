@@ -445,7 +445,7 @@ class XS1:
 
     def get_sensor_by_number(self, number: int) -> XS1Sensor or None:
         """
-        Get a sensor with a specific id
+        Get a sensor with a specific number
         :param number: the number of the sensor
         :return: XS1Sensor
         """
