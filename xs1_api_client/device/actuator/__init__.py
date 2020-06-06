@@ -17,7 +17,7 @@ class XS1Actuator(XS1Device):
         """
         Updates the state of this actuator
         """
-        response = self._api_interface.get_state_actuator(self.id())
+        response = self._api_interface.get_state_actuator(self.number())
         new_value = self._get_node_value(response, Node.ACTUATOR)
         self.set_state(new_value)
 
@@ -31,7 +31,7 @@ class XS1Actuator(XS1Device):
         # check name arg for validity
         super(XS1Actuator, self).set_name(name)
 
-        config = self._api_interface.get_config_actuator(self.id())
+        config = self._api_interface.get_config_actuator(self.number())
 
         # name is already set, to minimize flash writes don't write it again
         if config["name"] == name:
@@ -39,7 +39,7 @@ class XS1Actuator(XS1Device):
 
         config["name"] = name
 
-        result = self._api_interface.set_config_actuator(self.id(), config)
+        result = self._api_interface.set_config_actuator(self.number(), config)
         new_name = self._get_node_value(result, "name")
 
         # save new_name to internal state
@@ -52,7 +52,7 @@ class XS1Actuator(XS1Device):
         Sets a new value for this actuator
         :param value: new value to set
         """
-        new_state = self._api_interface.set_actuator_value(self.id(), value)
+        new_state = self._api_interface.set_actuator_value(self.number(), value)
         new_value = self._get_node_value(new_state, Node.ACTUATOR)
         self.set_state(new_value)
 

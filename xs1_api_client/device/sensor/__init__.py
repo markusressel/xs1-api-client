@@ -17,7 +17,7 @@ class XS1Sensor(XS1Device):
         """
         Updates the state of this sensor
         """
-        response = self._api_interface.get_state_sensor(self.id())
+        response = self._api_interface.get_state_sensor(self.number())
         new_value = self._get_node_value(response, Node.SENSOR)
         self.set_state(new_value)
 
@@ -31,7 +31,7 @@ class XS1Sensor(XS1Device):
         # check name arg for validity
         super(XS1Sensor, self).set_name(name)
 
-        config = self._api_interface.get_config_sensor(self.id())
+        config = self._api_interface.get_config_sensor(self.number())
 
         # name is already set, to minimize flash writes don't write it again
         if config["name"] == name:
@@ -39,7 +39,7 @@ class XS1Sensor(XS1Device):
 
         config["name"] = name
 
-        result = self._api_interface.set_config_sensor(self.id(), config)
+        result = self._api_interface.set_config_sensor(self.number(), config)
         new_name = self._get_node_value(result, "name")
 
         # save new_name to internal state
@@ -53,6 +53,6 @@ class XS1Sensor(XS1Device):
         This should only be used for debugging purpose!
         :param value: new value to set
         """
-        response = self._api_interface.set_sensor_value(self.id(), value)
+        response = self._api_interface.set_sensor_value(self.number(), value)
         new_value = self._get_node_value(response, Node.SENSOR)
         self.set_state(new_value)

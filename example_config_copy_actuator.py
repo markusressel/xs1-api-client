@@ -112,13 +112,13 @@ my_config[UrlParam.FUNCTION] = [
 # ATTENTION: This will (if successful) overwrite any existing configuration!
 # Make a BACKUP!
 
-actuator_id_to_copy = 30
-target_id = 31
+actuator_number_to_copy = 30
+target_number = 31
 
-api.set_config_actuator(target_id, my_config)
+api.set_config_actuator(target_number, my_config)
 
 # retrieve the current configuration
-configuration = api.get_config_actuator(actuator_id_to_copy)
+configuration = api.get_config_actuator(actuator_number_to_copy)
 
 print("Source: " + str(configuration))
 print("")
@@ -128,10 +128,10 @@ copy = configuration.copy()
 copy[UrlParam.NAME.value] = "Actuator_30_CPY"
 
 # set the changed configuration
-api.set_config_actuator(target_id, copy)
+api.set_config_actuator(target_number, copy)
 
 # print the new state
-print("Target: " + str(api.get_config_actuator(target_id)))
+print("Target: " + str(api.get_config_actuator(target_number)))
 
 
 # print(api.set_config_actuator(actuator_id_to_change, my_config))

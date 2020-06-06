@@ -295,34 +295,40 @@ class XS1:
         response = self.call_api(Command.GET_TYPES_SENSORS)
         return self._get_node_value(response, "sensortype")
 
-    def get_config_actuator(self, actuator_id: int) -> dict:
+    def get_config_actuator(self, number: int) -> dict:
         """
+        :param number: number of the actuator
         :return: the configuration of a specific actuator
         """
-        response = self.call_api(Command.GET_CONFIG_ACTUATOR, {UrlParam.NUMBER: actuator_id})
+        response = self.call_api(Command.GET_CONFIG_ACTUATOR, {UrlParam.NUMBER: number})
         return self._get_node_value(response, Node.ACTUATOR)
 
-    def set_config_actuator(self, actuator_id: int, configuration: dict) -> dict:
+    def set_config_actuator(self, number: int, configuration: dict) -> dict:
         """
-        :return: the configuration of a specific actuator
+        :param number: number of the actuator
+        :param configuration: actuator configuration
+        :return: the new configuration of the specific actuator
         """
-        configuration[UrlParam.NUMBER] = actuator_id
+        configuration[UrlParam.NUMBER] = number
 
         response = self.call_api(Command.SET_CONFIG_ACTUATOR, configuration)
         return self._get_node_value(response, Node.ACTUATOR)
 
-    def get_config_sensor(self, sensor_id: int) -> dict:
+    def get_config_sensor(self, number: int) -> dict:
         """
-        :return: the configuration of a specific sensor
+        :param number: number of the sensor
+        :return: the configuration of the specific sensor
         """
-        response = self.call_api(Command.GET_CONFIG_SENSOR, {UrlParam.NUMBER: sensor_id})
+        response = self.call_api(Command.GET_CONFIG_SENSOR, {UrlParam.NUMBER: number})
         return self._get_node_value(response, Node.SENSOR)
 
-    def set_config_sensor(self, sensor_id: int, configuration: dict) -> dict:
+    def set_config_sensor(self, number: int, configuration: dict) -> dict:
         """
-        :return: the configuration of a specific actuator
+        :param number: number of the actuator
+        :param configuration: sensor configuration
+        :return: the new configuration of the sensor
         """
-        configuration[UrlParam.NUMBER.value] = sensor_id
+        configuration[UrlParam.NUMBER.value] = number
 
         response = self.call_api(Command.SET_CONFIG_SENSOR, configuration)
         return self._get_node_value(response, Node.SENSOR)
@@ -379,6 +385,19 @@ class XS1:
 
         return None
 
+    def get_actuator_by_number(self, number: int) -> XS1Actuator or None:
+        """
+        Get an actuator with a specific number
+        :param number: the number of the actuator
+        :return: XS1Actuator
+        """
+        all_actuators = self.get_all_actuators()
+        for actuator in all_actuators:
+            if actuator.number() == number:
+                return actuator
+
+        return None
+
     def get_all_actuators(self, enabled: bool or None = None) -> [XS1Actuator]:
         """
         Requests the list of enabled actuators from the gateway.
@@ -389,7 +408,10 @@ class XS1:
 
         all_actuators = []
         # create actuator objects
-        for actuator in self._get_node_value(response, Node.ACTUATOR):
+        for idx, actuator in enumerate(self._get_node_value(response, Node.ACTUATOR), start=1):
+            # attach number to data so we can use it for future requests
+            actuator[Node.PARAM_NUMBER.value] = idx
+
             actuator_type = self._get_node_value(actuator, Node.PARAM_TYPE)
             if ActuatorType.SWITCH == actuator_type or ActuatorType.DIMMER == actuator_type:
                 device = XS1Switch(actuator, self)
@@ -411,12 +433,25 @@ class XS1:
     def get_sensor(self, sensor_id: int) -> XS1Sensor or None:
         """
         Get a sensor with a specific id
-        :param sensor_id: the id of the actuator
+        :param sensor_id: the id of the sensor
         :return: XS1Sensor
         """
         all_sensors = self.get_all_sensors()
         for sensor in all_sensors:
             if sensor.id() == sensor_id:
+                return sensor
+
+        return None
+
+    def get_sensor_by_number(self, number: int) -> XS1Sensor or None:
+        """
+        Get a sensor with a specific id
+        :param number: the number of the sensor
+        :return: XS1Sensor
+        """
+        all_sensors = self.get_all_sensors()
+        for sensor in all_sensors:
+            if sensor.number() == number:
                 return sensor
 
         return None
@@ -429,7 +464,9 @@ class XS1:
         response = self.call_api(Command.GET_LIST_SENSORS)
 
         all_sensors = []
-        for sensor in self._get_node_value(response, Node.SENSOR):
+        for idx, sensor in enumerate(self._get_node_value(response, Node.SENSOR), start=1):
+            # attach number to data so we can use it for future requests
+            sensor[Node.PARAM_NUMBER.value] = idx
             device = XS1Sensor(sensor, self)
             all_sensors.append(device)
 
