@@ -24,8 +24,9 @@ class XS1Device(object):
         """
         :return: String representation of this device
         """
-        return "%s (ID: %i, Enabled: %s, Type: %s, Value: %s, New Value: %s, Unit: %s)" % (
-            self.name(), self.id(), self.enabled(), self.type(), self.value(), self.new_value(), self.unit())
+        return "%s (ID: %i, Number: %i, Enabled: %s, Type: %s, Value: %s, New Value: %s, Unit: %s)" % (
+            self.name(), self.id(), self.number(), self.enabled(), self.type(), self.value(), self.new_value(),
+            self.unit())
 
     def set_state(self, new_state: dict) -> None:
         """
@@ -47,16 +48,18 @@ class XS1Device(object):
         """
         :return: id of this device
         """
-        device_id = self._get_node_value(self._state, Node.PARAM_NUMBER)
-        if device_id is None:
-            device_id = self._get_node_value(self._state, Node.PARAM_ID)
-        return device_id
+        return self._get_node_value(self._state, Node.PARAM_ID)
+
+    def number(self) -> int:
+        """
+        :return: number of this device
+        """
+        return self._get_node_value(self._state, Node.PARAM_NUMBER)
 
     def type(self) -> ActuatorType or SensorType or str:
         """
         :return: the type of this device
         """
-
         device_type_string = self._get_node_value(self._state, Node.PARAM_TYPE)
 
         # try to convert string value to Enum constant

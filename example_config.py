@@ -36,10 +36,10 @@ print("")
 # this is a simple example to change the name of an existing actuator configuration
 # by using the RAW API method
 # there is also a much simpler version of this, seen below
-actuator_id_to_change = 17
+actuator_number_to_change = 17
 
 # retrieve the current configuration
-current_config = api.get_config_actuator(actuator_id_to_change)
+current_config = api.get_config_actuator(actuator_number_to_change)
 
 print(current_config)
 print("")
@@ -49,7 +49,7 @@ new_config = current_config.copy()
 new_config[UrlParam.NAME] = "My_new_name" + str(randint(0, 9))
 
 # set the changed configuration and print the result of the request
-print(api.set_config_actuator(actuator_id_to_change, new_config))
+print(api.set_config_actuator(actuator_number_to_change, new_config))
 
 # you can also use convenience methods directly on the actuators and sensors
 actuator = api.get_actuator(35)

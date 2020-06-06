@@ -43,6 +43,18 @@ The initial goal of this library was to be able to integrate the EZcontrol® XS1
 You can find the related integration documentation here: 
 `XS1 Home Assistant component documentation <https://www.home-assistant.io/components/xs1/>`_
 
+Note:
+xs1-api-client was designed to have reusable device objects, meaning device objects can be updated.
+When a user changes the order of devices within the XS1 gateway, their ids don't change but their numbers (orders) do.
+This causes the "device object" <-> device id association to get messed up. Since there is no way for us to know
+about this change, it's impossible for us to tell that the device number we use for an already created device object
+does not correspond to the correct device anymore without fetching all devices again, which requires the recreation
+of all device objects.
+
+**TL;DR:**
+**Do not change the order of the devices in the XS1 Gateway** if you can avoid it, and if you do,
+restart the service that relies on xs1-api-client to force a re-fetch of all devices.
+
 How to use
 ==========
 

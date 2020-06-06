@@ -45,7 +45,7 @@ class UrlParam(ApiConstant):
     """command parameter that specifies the method the api is queried with"""
 
     NUMBER = 'number'
-    """number parameter that specifies the id of an actuator or sensor"""
+    """number parameter that specifies the number of an actuator or sensor"""
 
     NAME = 'name'
 
