@@ -443,63 +443,63 @@ class XS1:
                 filtered_sensors.append(sensor)
             return filtered_sensors
 
-    def get_state_actuator(self, actuator_id: int) -> dict:
+    def get_state_actuator(self, actuator_number: int) -> dict:
         """
         Gets the current state of the specified actuator.
-        :param actuator_id: actuator id
+        :param actuator_number: actuator number (not id!)
         :return: the api response as a dict
         """
         return self.call_api(Command.GET_STATE_ACTUATOR,
-                             {UrlParam.NUMBER: actuator_id})
+                             {UrlParam.NUMBER: actuator_number})
 
-    def get_state_sensor(self, sensor_id: int) -> dict:
+    def get_state_sensor(self, sensor_number: int) -> dict:
         """
         Gets the current state of the specified sensor.
-        :param sensor_id: sensor id
+        :param sensor_number: sensor number (not id!)
         :return: the api response as a dict
         """
         return self.call_api(Command.GET_STATE_SENSOR,
                              {
-                                 UrlParam.NUMBER: sensor_id,
+                                 UrlParam.NUMBER: sensor_number,
                              })
 
-    def call_actuator_function(self, actuator_id: int, function) -> dict:
+    def call_actuator_function(self, actuator_number: int, function) -> dict:
         """
         Executes a function on the specified actuator and sets the response on the passed in actuator.
-        :param actuator_id: actuator id to execute the function on and set response value
+        :param actuator_number: actuator number (not id!) to execute the function on and set response value
         :param function: id of the function to execute
         :return: the api response
         """
         return self.call_api(Command.SET_STATE_ACTUATOR,
                              {
-                                 UrlParam.NUMBER: actuator_id,
+                                 UrlParam.NUMBER: actuator_number,
                                  UrlParam.FUNCTION: function
                              })
 
-    def set_actuator_value(self, actuator_id: int, value) -> dict:
+    def set_actuator_value(self, actuator_number: int, value) -> dict:
         """
         Sets a new value for the specified actuator.
-        :param actuator_id: actuator id to set the new value on
+        :param actuator_number: actuator number (not id!) to set the new value on
         :param value: the new value to set on the specified actuator
         :return: the api response
         """
         return self.call_api(Command.SET_STATE_ACTUATOR,
                              {
-                                 UrlParam.NUMBER: actuator_id,
+                                 UrlParam.NUMBER: actuator_number,
                                  UrlParam.VALUE: value
                              })
 
-    def set_sensor_value(self, sensor_id: int, value) -> dict:
+    def set_sensor_value(self, sensor_number: int, value) -> dict:
         """
         Sets a new value for the specified sensor.
         WARNING: Only use this for "virtual" sensors or for debugging!
-        :param sensor_id: sensor id to set the new value on
+        :param sensor_number: sensor number (not id!) to set the new value on
         :param value: the new value to set on the specified sensor
         :return: the api response
         """
         return self.call_api(Command.SET_STATE_SENSOR,
                              {
-                                 UrlParam.NUMBER: sensor_id,
+                                 UrlParam.NUMBER: sensor_number,
                                  UrlParam.VALUE: value
                              })
 
