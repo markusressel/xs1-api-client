@@ -60,7 +60,7 @@ setup(
     author='Markus Ressel',
     author_email='mail@markusressel.de',
     url='https://github.com/markusressel/xs1-api-client',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
     # python_requires='>=3.4',
     classifiers=[
         DEVELOPMENT_STATUS,
@@ -69,7 +69,8 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
     ],
     install_requires=install_requirements(),
     tests_require=test_requirements()
