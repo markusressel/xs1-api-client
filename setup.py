@@ -4,9 +4,12 @@ from setuptools import setup, find_packages
 
 VERSION_NUMBER = "3.0.0"
 
-GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
-GIT_BRANCH = GIT_BRANCH.rstrip()  # remove unnecessary whitespace
+try:
+    GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
+    GIT_BRANCH = GIT_BRANCH.rstrip()  # remove unnecessary whitespace
+except:
+    GIT_BRANCH = 'master'
 
 if GIT_BRANCH == "master":
     DEVELOPMENT_STATUS = "Development Status :: 5 - Production/Stable"
