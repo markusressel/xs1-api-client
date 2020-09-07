@@ -2,7 +2,7 @@ import subprocess
 
 from setuptools import setup, find_packages
 
-VERSION_NUMBER = "3.0.0"
+VERSION_NUMBER = "3.0.1"
 
 try:
     GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
