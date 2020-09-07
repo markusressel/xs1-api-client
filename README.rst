@@ -4,7 +4,7 @@
 xs1-api-client |pypi_version|
 =============================
 
-A python 3.4+ library for accessing actuator and sensor data on the the
+A python 3.5+ library for accessing actuator and sensor data on the the
 EZcontrol® XS1 Gateway using its HTTP API.
 
 Build Status

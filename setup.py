@@ -4,9 +4,12 @@ from setuptools import setup, find_packages
 
 VERSION_NUMBER = "3.0.0"
 
-GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
-GIT_BRANCH = GIT_BRANCH.rstrip()  # remove unnecessary whitespace
+try:
+    GIT_BRANCH = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    GIT_BRANCH = GIT_BRANCH.decode()  # convert to standard string
+    GIT_BRANCH = GIT_BRANCH.rstrip()  # remove unnecessary whitespace
+except:
+    GIT_BRANCH = 'master'
 
 if GIT_BRANCH == "master":
     DEVELOPMENT_STATUS = "Development Status :: 5 - Production/Stable"
@@ -60,16 +63,16 @@ setup(
     author='Markus Ressel',
     author_email='mail@markusressel.de',
     url='https://github.com/markusressel/xs1-api-client',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests', '*.tests', '*.tests.*']),
     # python_requires='>=3.4',
     classifiers=[
         DEVELOPMENT_STATUS,
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
     ],
     install_requires=install_requirements(),
     tests_require=test_requirements()
