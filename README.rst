@@ -13,29 +13,16 @@ Build Status
 .. |build_master| image:: https://travis-ci.org/markusressel/xs1-api-client.svg?branch=master
     :target: https://travis-ci.org/markusressel/xs1-api-client/branches
     
-.. |build_beta| image:: https://travis-ci.org/markusressel/xs1-api-client.svg?branch=beta
-    :target: https://travis-ci.org/markusressel/xs1-api-client/branches
-    
-.. |build_dev| image:: https://travis-ci.org/markusressel/xs1-api-client.svg?branch=dev
-    :target: https://travis-ci.org/markusressel/xs1-api-client/branches
-    
-    
 .. |codebeat_master| image:: https://codebeat.co/badges/f11a5607-2193-4e86-b924-fc4b1698ec8f
     :target: https://codebeat.co/projects/github-com-markusressel-xs1-api-client-master
     
-.. |codebeat_beta| image:: https://codebeat.co/badges/913b9f89-1ab4-4865-b472-ca2fbeb53388
-    :target: https://codebeat.co/projects/github-com-markusressel-xs1-api-client-beta
-    
-.. |codebeat_dev| image:: https://codebeat.co/badges/dc91633f-bf08-4314-8da4-31cae22a8706
-    :target: https://codebeat.co/projects/github-com-markusressel-xs1-api-client-dev
-    
-+--------------------+------------------+-----------------+
-| Master             | Beta             | Dev             |
-+====================+==================+=================+
-| |build_master|     | |build_beta|     | |build_dev|     |
-+--------------------+------------------+-----------------+
-| |codebeat_master|  | |codebeat_beta|  | |codebeat_dev|  |
-+--------------------+------------------+-----------------+
++--------------------+
+| Master             |
++====================+
+| |build_master|     |
++--------------------+
+| |codebeat_master|  |
++--------------------+
 
 Home Assistant
 ==============
